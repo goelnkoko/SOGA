@@ -2,10 +2,14 @@ package primos.soga.user;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import primos.soga.amizade.Amizade;
+import primos.soga.pedidoamizade.PedidoAmizade;
 import primos.soga.perfil.Perfil;
+import primos.soga.publicacao.Publicacao;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Data

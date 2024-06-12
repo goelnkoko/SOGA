@@ -2,9 +2,9 @@ package primos.soga.comentario;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import primos.soga.publicacao.Publicacao;
 import primos.soga.user.User;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -30,5 +30,4 @@ public class Comentario {
 
     private LocalDateTime dataCriacao;
     private LocalDateTime dataAtualizacao;
-}
 }

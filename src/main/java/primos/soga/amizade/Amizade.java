@@ -2,9 +2,9 @@ package primos.soga.amizade;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import primos.soga.amizade.enums.AmizadeStatus;
 import primos.soga.user.User;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.UUID;
 

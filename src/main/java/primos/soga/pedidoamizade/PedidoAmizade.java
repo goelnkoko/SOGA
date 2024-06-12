@@ -5,7 +5,6 @@ import lombok.Data;
 import primos.soga.pedidoamizade.enums.PedidoAmizadeStatus;
 import primos.soga.user.User;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
