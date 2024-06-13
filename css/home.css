@@ -1,0 +1,91 @@
+* {
+    font-family: 'Open Sans', Helvetica, Cambria, sans-serif;
+    font-weight: 600;
+    color: #fff;
+}
+
+body {
+    background-color: black;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.feed {
+    width: 55%;
+    padding: 30px;
+    box-sizing: border-box;
+    max-height: 100vh;
+    border-right: 1px solid #333;
+}
+
+.publicar, .posts {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: 2px solid #333;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 20px 0px;
+}
+
+.publicar {
+    flex-direction: row;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 0px;
+}
+
+.user-photo {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.user-photo img {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+}
+
+.post-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-grow: 1;
+}
+
+.post-content textarea {
+    padding: 20px;
+    border-radius: 20px;
+    background-color: #3333333b;
+    overflow-y: hidden;
+    resize: none;
+}
+
+.publicar button {
+    display: flex;
+    text-decoration: none;
+    border: none;
+    background-color: #7a131300;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    gap: 3px;
+}
+
+.publicar button p {
+    margin: 0;
+    padding: 3px;
+}
+
+.publicar .icons {
+    padding: 3px 20px;
+    display: flex;
+    justify-content: space-between;
+}

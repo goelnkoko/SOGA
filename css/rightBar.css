@@ -1,0 +1,56 @@
+.rightBar {
+    width: 25%;
+    padding: 10px;
+    box-sizing: border-box;
+    height: 100vh;
+    border-left: 1px solid #333;
+}
+
+.bloco {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#pesquisa input {
+    width: 100%;
+    border-radius: 10px;
+    padding: 7px;
+    text-align: center;
+    font-size: 15px;
+    background-color: #eee;
+}
+
+.rightBar .user-profile .user-profile-profile {
+    display: flex;
+    gap: 10px;
+}
+
+.rightBar .user-profile  {
+    background-color: #33333300;
+    margin: 20px 20px;
+    justify-content: space-between;
+}
+
+.rightBar .user-profile img {
+    width: 40px;
+    height: 40px;
+    border: none;
+}
+
+.user-profile button {
+    background-color: transparent;
+    border: 1px solid #111;
+    color: #12444F;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0px 0px 5px rgb(0, 46, 34);
+}
+
+.user-profile button:active {
+    transform: scale(0.98);
+    box-shadow: 0px 0px 5px rgb(0, 46, 34);
+}
