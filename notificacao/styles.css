@@ -51,46 +51,57 @@ nav ul li {
 nav ul li a {
     display: block;
     width: 100%;
-    padding: 15px 20px;
-    color: white;
-    text-decoration: none;
+    background-color: #09a8b9ab;
+
 }
 
-nav ul li a:hover, .active {
-    background-color: #09a8b9ab;
+
+h2{
+    padding: auto;
 }
 
 .content {
     flex: 1;
     background-color: #1E1E1E;
     color: white;
-    padding: 20px;
+    padding: 50px;
 }
 
-.notifications {
-    background-color: #232323;
-    padding: 20px;
+.notifications  {
+    background-color: #10101079;
+    padding: 70px;
     border-radius: 5px;
-}
+    
+ }
 
-.notifications h2 {
-    margin-top: 0;
-}
 
-.new-notifications, .old-notifications {
-    margin-top: 20px;
-}
-
-.notification {
+.notification  {
     display: flex;
     align-items: center;
     padding: 10px 0;
 }
 
-.user-icon {
-    width: 40px;
-    height: 40px;
-    background-color: #2A2A2A;
-    border-radius: 50%;
-    margin-right: 10px;
+
+.old-notifications  :hover, .old-notifications :active{
+    width: 100%;
+    background-color: #09a8b9ab;
+    border-radius: 10px;
+
+    
+}
+
+.new-notifications :hover, .old-notifications :active{
+    width: 100%;
+    background-color: #09a8b9ab;
+    border-radius: 10px;
+}
+
+h2{
+    
+        position: absolute; /* Posicionamento absoluto em relação ao contêiner */
+        top: 0; /* Alinhamento ao topo */
+        left: 5%; /* Alinhamento à esquerda */
+        padding: 50px; /* Espaçamento interno opcional */
+   
+       
 }
