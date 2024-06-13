@@ -13,6 +13,7 @@ window.addEventListener('scroll', function() {
     rightBar.style.height = 'auto';
     feed.style.height = 'auto';
 });
+
 document.addEventListener('DOMContentLoaded', function() {
     const leftBar = document.querySelector('.leftBar');
     const rightBar = document.querySelector('.rightBar');
@@ -26,104 +27,111 @@ document.addEventListener('DOMContentLoaded', function() {
     const thumbnails = document.getElementById('thumbnails');
     const sendButton = document.getElementById('send-button');
     const postContent = document.getElementById('post');
+    const postsContainer = document.getElementById('posts-container');
 
     leftBar.style.height = '100vh';
     rightBar.style.height = '100vh';
 
     const width = leftBar.offsetWidth;
-    console.log(width);
-    feed.style.marginLeft = width + 'px';
+    feed.style.marginLeft = `${width}px`;
+    feed.style.marginRight = `${width}px`;
     rightBar.style.left = width + feed.offsetWidth + 'px';
 
     const menu_home_size = menu_home.offsetWidth;
     logo.style.width = menu_home_size + 'px';
     menu_profile.style.width = (menu_home_size * 1.1) + 'px';
 
-    // Drag and Drop
-    dropZone.addEventListener('dragover', function(e) {
-        e.preventDefault();
-        dropZone.classList.add('drag-over');
+    logo.addEventListener('click', () => {
+        window.location.href = "../html/home.html";
     });
 
-    dropZone.addEventListener('dragleave', function() {
-        dropZone.classList.remove('drag-over');
+    menu_home.addEventListener('click', () => {
+        window.location.href = "../html/home.html";
     });
 
-    dropZone.addEventListener('drop', function(e) {
-        e.preventDefault();
-        dropZone.classList.remove('drag-over');
-        const files = e.dataTransfer.files;
-        handleFiles(files);
+    menu_profile.addEventListener('click', () => {
+        window.location.href = "../html/profile.html";
     });
 
-    // File input click
-    uploadButton.addEventListener('click', function() {
+    uploadButton.addEventListener('click', () => {
         fileInput.click();
     });
 
-    fileInput.addEventListener('change', function() {
-        const files = fileInput.files;
-        handleFiles(files);
+    fileInput.addEventListener('change', (event) => {
+        const files = event.target.files;
+        handleFileUploads(files);
     });
 
-    function handleFiles(files) {
-        for (let i = 0; i < files.length; i++) {
-            const file = files[i];
+    sendButton.addEventListener('click', () => {
+        // Aqui você pode enviar a postagem para o backend
+        const postText = postContent.value;
+        const images = Array.from(thumbnails.querySelectorAll('img')).map(img => img.src);
+        createPost(postText, images);
+    });
+
+    function handleFileUploads(files) {
+        for (let file of files) {
             const reader = new FileReader();
-
-            reader.onload = function(e) {
-                const thumbnail = document.createElement('div');
-                thumbnail.classList.add('thumbnail');
-
-                const img = document.createElement('img');
-                img.src = e.target.result;
-
-                const removeBtn = document.createElement('button');
-                removeBtn.classList.add('remove');
-                removeBtn.textContent = '×';
-                removeBtn.addEventListener('click', function() {
-                    thumbnails.removeChild(thumbnail);
-                });
-
-                const progress = document.createElement('div');
-                progress.classList.add('progress');
-
-                thumbnail.appendChild(img);
-                thumbnail.appendChild(removeBtn);
-                thumbnail.appendChild(progress);
+            reader.onload = function(event) {
+                const thumbnail = createThumbnail(event.target.result);
                 thumbnails.appendChild(thumbnail);
-
-                // Simular o progresso do carregamento, já que não sabemos não simular
-                setTimeout(() => {
-                    progress.style.width = '100%';
-                }, 200);
-
-            };
-
+            }
             reader.readAsDataURL(file);
         }
     }
 
-    // Enviar a publicação no Backend
-    sendButton.addEventListener('click', function() {
-        const formData = new FormData();
-        formData.append('content', postContent.value);
+    function createThumbnail(src) {
+        const thumbnail = document.createElement('div');
+        thumbnail.classList.add('thumbnail');
 
-        const files = fileInput.files;
-        for (let i = 0; i < files.length; i++) {
-            formData.append('images[]', files[i]);
-        }
+        const img = document.createElement('img');
+        img.src = src;
 
-        fetch('URL_DA_SUA_API', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Success:', data);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
+        const removeButton = document.createElement('button');
+        removeButton.classList.add('remove');
+        removeButton.textContent = '×';
+        removeButton.addEventListener('click', () => {
+            thumbnail.remove();
         });
-    });
+
+        thumbnail.appendChild(img);
+        thumbnail.appendChild(removeButton);
+
+        return thumbnail;
+    }
+
+    function createPost(text, images) {
+        const postTemplate = `
+            <div class="post">
+                <div class="post-user-profile">
+                    <a href="../perfil/perfil.html">
+                        <img src="../img/gyomei-chorando.jpeg" alt="Foto do Gyomei">
+                        <div id="profile-content">
+                            <span>Nkumbo</span>
+                            <p>SOGA Hater</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="post-content">
+                    <p>${text}</p>
+                    ${images.map(image => `<img src="${image}" alt="Post Image">`).join('')}
+                </div>
+                <div class="icons">
+                    <button><span class="material-symbols-outlined material-style">thumb_up</span></button>
+                    <button><span class="material-symbols-outlined material-style">comment</span></button>
+                    <button><span class="material-symbols-outlined material-style">share</span></button>
+                </div>
+            </div>
+        `;
+
+        postsContainer.insertAdjacentHTML('beforeend', postTemplate);
+
+        postContent.value = '';
+        thumbnails.innerHTML = '';
+    }
 });
+
+function adjustTextarea(textarea) {
+    textarea.style.height = 'auto';
+    textarea.style.height = (textarea.scrollHeight) + 'px';
+}

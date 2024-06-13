@@ -59,6 +59,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="feed">
             <div class="publicar" id="drop-zone">
                 <div class="user-photo">
@@ -70,99 +71,18 @@
                     <div class="icons">
                         <button id="upload-button">
                             <span class="material-symbols-outlined">image</span>
-                            <p>Midea</p>
+                            <p>Media</p>
                         </button>
                         <input type="file" id="file-input" multiple style="display:none;" accept="image/*,video/*">
-                        <button>
-                            <span class="material-symbols-outlined">smart_display</span>
-                            <p>Outro</p>
-                        </button>
                         <button id="send-button"><span class="material-symbols-outlined">send</span></button>
                     </div>
                 </div>
-            </div>            
-            
-
-            <div class="posts">
-                <div class="post">
-                    <div class="post-user-profile">
-                        <a href="../perfil/perfil.html">
-                            <img src="../img/gyomei-chorando.jpeg" alt="Foto do Gyomei">
-                            <div id="profile-content">
-                                <span>Pedro</span>
-                                <p>Administrador</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="post-content">
-                        <p>Post 1: Exemplo de conteúdo para teste.</p>
-                    </div>
-                    <div class="icons">
-                        <button><span class="material-symbols-outlined material-style">thumb_up</span></button>
-                        <button><span class="material-symbols-outlined material-style">comment</span></button>
-                        <button><span class="material-symbols-outlined material-style">share</span></button>
-                    </div>
-                </div>
-                <div class="post">
-                    <div class="post-user-profile">
-                        <a href="#">
-                            <img src="../img/gyomei-chorando.jpeg" alt="Foto do Gyomei">
-                            <div id="profile-content">
-                                <span>Pedro</span>
-                                <p>Administrador</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="post-content">
-                        <p>Alguém do grupo engravidou, mas não quer falar, está a espera de ser apanhado. Eu sei quem é, mas também não vou falar.</p>
-                        <img src="../img/gyomei-chorando.jpeg" alt="">
-                    </div>
-                    <div class="icons">
-                        <button><span class="material-symbols-outlined material-style">thumb_up</span></button>
-                        <button><span class="material-symbols-outlined material-style">comment</span></button>
-                        <button><span class="material-symbols-outlined material-style">share</span></button>
-                    </div>
-                </div>
-                <div class="post">
-                    <div class="post-user-profile">
-                        <a href="#">
-                            <img src="../img/gyomei-chorando.jpeg" alt="Foto do Gyomei">
-                            <div id="profile-content">
-                                <span>Pedro</span>
-                                <p>Administrador</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="post-content">
-                        <p>Post 3: Exemplo de conteúdo para teste.</p>
-                    </div>
-                    <div class="icons">
-                        <button><span class="material-symbols-outlined material-style">thumb_up</span></button>
-                        <button><span class="material-symbols-outlined material-style">comment</span></button>
-                        <button><span class="material-symbols-outlined material-style">share</span></button>
-                    </div>
-                </div>
-                <div class="post">
-                    <div class="post-user-profile">
-                        <a href="#">
-                            <img src="../img/gyomei-chorando.jpeg" alt="Foto do Gyomei">
-                            <div id="profile-content">
-                                <span>Pedro</span>
-                                <p>Administrador</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="post-content">
-                        <p>Post 4: Exemplo de conteúdo para teste.</p>
-                    </div>
-                    <div class="icons">
-                        <button><span class="material-symbols-outlined material-style">thumb_up</span></button>
-                        <button><span class="material-symbols-outlined material-style">comment</span></button>
-                        <button><span class="material-symbols-outlined material-style">share</span></button>
-                    </div>
-                </div>
+            </div>
+            <div class="posts" id="posts-container">
+                <!-- Publicações serão inseridas aqui -->
             </div>
         </div>
+
         <div class="rightBar">
             <div class="bloco" id="pesquisa">
                 <input type="text" name="pesquisa" id="pesquisa" placeholder="Pesquisar">
