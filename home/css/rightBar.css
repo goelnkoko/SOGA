@@ -4,6 +4,10 @@
     box-sizing: border-box;
     height: 100vh;
     border-left: 1px solid #333;
+    position: fixed;
+    right: 0;
+    height: 100vh;
+    min-height: 100vh;
 }
 
 .bloco {
@@ -26,7 +30,7 @@
     gap: 10px;
 }
 
-.rightBar .user-profile  {
+.rightBar .user-profile {
     background-color: #33333300;
     margin: 20px 20px;
     justify-content: space-between;
@@ -41,13 +45,13 @@
 .user-profile button {
     background-color: transparent;
     border: 1px solid #111;
-    color: #12444F;
+    color: #07c9f4;
     font-size: 12px;
     font-weight: 600;
     padding: 5px 10px;
     border-radius: 20px;
     cursor: pointer;
-    box-shadow: 0px 0px 5px rgb(0, 46, 34);
+    box-shadow: 0px 0px 5px rgb(9, 157, 118);
 }
 
 .user-profile button:active {
