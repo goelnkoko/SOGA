@@ -7,7 +7,9 @@ function loadHTML(element, file) {
             throw new Error('Network response was not ok.');
         })
         .then(data => {
-            document.querySelector(element).innerHTML = data;
+            if(document.querySelector(element) !== null){
+                document.querySelector(element).innerHTML = data;
+            }
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);

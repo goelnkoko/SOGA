@@ -1,5 +1,10 @@
+.leftBar a {
+    text-decoration: none;
+    color: #fff;
+}
 
 .leftBar {
+    top: 0;
     left: 0;
     width: 22%;
     padding: 10px;
@@ -8,6 +13,10 @@
     min-height: 100vh;
     border-right: 1px solid hsl(0, 0%, 20%);
     position: fixed;
+    font-family: 'Open Sans', Helvetica, Cambria, sans-serif;
+    font-weight: 600;
+    color: #fff;
+    background-color: #000;
 }
 
 #logo {
