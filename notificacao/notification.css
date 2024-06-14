@@ -4,6 +4,18 @@ body {
     font-family: Arial, sans-serif;
 }
 
+/*Estilizar o ícone do menu principal*/
+#notifications span.material-style {
+    animation: none;
+    font-variation-settings: 'FILL' 1, 'wght' 700;
+    font-size: 25px;
+}
+
+#notifications p {
+    font-weight: 700;
+}
+
+
 .sidebar {
     width: 250px;
     background-color: #141414;
@@ -55,11 +67,6 @@ nav ul li a {
 
 }
 
-
-h2{
-    padding: auto;
-}
-
 .content {
     flex: 1;
     background-color: #1E1E1E;
@@ -86,8 +93,6 @@ h2{
     width: 100%;
     background-color: #09a8b9ab;
     border-radius: 10px;
-
-    
 }
 
 .new-notifications :hover, .old-notifications :active{
@@ -97,11 +102,6 @@ h2{
 }
 
 h2{
-    
-        position: absolute; /* Posicionamento absoluto em relação ao contêiner */
-        top: 0; /* Alinhamento ao topo */
-        left: 5%; /* Alinhamento à esquerda */
-        padding: 50px; /* Espaçamento interno opcional */
-   
-       
+    position: absolute;
+    padding: 10px;
 }

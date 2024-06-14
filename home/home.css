@@ -20,12 +20,14 @@ body {
 #home span.material-style {
     animation: none;
     font-variation-settings: 'FILL' 1, 'wght' 700;
-    font-size: 28px;
+    font-size: 25px;
 }
 
 #home p {
     font-weight: 700;
 }
+
+/***/
 
 .container {
     display: flex;
@@ -240,26 +242,4 @@ body {
     height: 5px;
     background: green;
     transition: width 0.5s;
-}
-
-@media (max-width: 1100px) {
-    .leftBar {
-        width: fit-content;
-    }
-    .rightBar {
-        display: none;
-    }
-
-    #profile-left {
-        width: fit-content;
-    }
-    #profile-left #profile-content {
-        display: none;
-        margin: 0;
-        padding: 0;
-    }
-
-    .menu-item p {
-        display: none;
-    }
 }

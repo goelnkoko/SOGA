@@ -12,8 +12,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const postContent = document.getElementById('post');
     const postsContainer = document.getElementById('posts-container');
 
-    console.log("Repetiu");
-
     uploadButton.addEventListener('click', () => {
         fileInput.click();
     });

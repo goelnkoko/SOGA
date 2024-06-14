@@ -1,43 +1,16 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-   
 }
 
 .container {
     display: flex;
-    height: 200vh;
-}
-
-.sidebar {
-    width: 250px;
-    background-color: #f4f4f4;
-    padding: 10px;
-}
-
-.logo {
-    font-size: 48px;
-    margin: 0 0 40px 0;
-}
-
-.sidebar nav ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.sidebar nav ul li {
-    margin-bottom: 20px;
-}
-
-.sidebar nav ul li a {
-    text-decoration: none;
-    color: black;
-    font-size: 18px;
 }
 
 .main-content {
     flex: 1;
     padding: 40px;
+    margin: 0 auto;
 }
 
 .profile-header {
@@ -51,7 +24,7 @@ body {
     height: 100px;
     border-radius: 50%;
     margin-right: 20px;
-    
+    object-fit: cover;
 }
 
 .username {

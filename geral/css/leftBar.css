@@ -1,3 +1,7 @@
+body {
+    margin-left: 320px;
+}
+
 .leftBar a {
     text-decoration: none;
     color: #fff;
@@ -6,7 +10,7 @@
 .leftBar {
     top: 0;
     left: 0;
-    width: 22%;
+    width: 319px;
     padding: 10px;
     box-sizing: border-box;
     height: 100vh;
@@ -20,6 +24,7 @@
 }
 
 #logo {
+    max-width: 261px;
     text-align: center;
     padding: 30px 50px;
     box-sizing: border-box;
@@ -36,6 +41,7 @@
 }
 
 .user-profile {
+    max-width: 231px;
     display: flex;
     flex-direction: row;
     gap: 10px;
@@ -51,7 +57,7 @@
 
 .user-profile img {
     width: 25%;
-    height: 25%;
+    height: 100%;
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid #1daccc;
@@ -85,7 +91,6 @@
     width: fit-content;
     color: white;
     padding: 20px 0px;
-    /* background-color: #12444F; */
     margin: 0 auto;
 }
 
@@ -130,5 +135,64 @@ span.material-style {
     }
     100% {
         font-variation-settings: 'wght' 100;
+    }
+}
+
+/* Nível 1: Máximo 1200px */
+@media (max-width: 1200px) {
+    body {
+        margin-left: 300px;
+    }
+
+    .leftBar {
+        width: 300px;
+    }
+}
+
+/* Nível 2: Máximo 1100px */
+@media (max-width: 1100px) {
+    body {
+        margin-left: 270px;
+    }
+
+    .leftBar {
+        width: 270px;
+    }
+}
+
+/* Nível 3: Máximo 960px */
+@media (max-width: 960px) {
+    body {
+        margin-left: 250px;
+        background-color: #111;
+    }
+
+    .leftBar, .rightBar {
+        width: 250px;
+    }
+}
+
+/* Nível 4: Máximo 768px */
+@media (max-width: 768px) {
+    body {
+        margin-left: 220px;
+        background-color: #222;
+    }
+
+    .leftBar {
+        width: 220px;
+    }
+}
+
+/* Nível 5: Máximo 480px */
+@media (max-width: 480px) {
+    body {
+        margin-left: 0;
+        background-color: #333;
+    }
+
+    .leftBar {
+        width: 100%;
+        position: relative;
     }
 }
