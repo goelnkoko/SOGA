@@ -1,18 +1,31 @@
 body {
+    display: flex;
     margin: 0;
-    padding: 10;
+    padding: 10px;
     background-color: #121212;
     color: white;
     font-family: 'Arial', sans-serif;
-cursor: pointer;
+    cursor: pointer;
 }
+
+/*Estilizar o ícone do menu principal*/
+#settings span.material-style {
+    animation: none;
+    font-variation-settings: 'FILL' 1, 'wght' 700;
+    font-size: 25px;
+}
+
+#settings p {
+    font-weight: 700;
+}
+
 
 .menu {
     width: 600px;
     background-color: #1c1c1c;
     border-radius: 8px;
-    padding: 100px;
-    margin: 10px auto;
+    padding: 30px 100px;
+    margin: 30px auto;
     border: 3px solid rgba(8, 188, 238, 0.411);
 }
 

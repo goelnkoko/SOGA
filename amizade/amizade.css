@@ -1,0 +1,16 @@
+body {
+    display: flex;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/*Estilizar o ícone do menu principal*/
+#friends span.material-style {
+    animation: none;
+    font-variation-settings: 'FILL' 1, 'wght' 700;
+    font-size: 25px;
+}
+
+#friends p {
+    font-weight: 700;
+}

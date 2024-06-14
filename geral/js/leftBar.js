@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
 
     const logo = document.querySelector('#logo');
-    const menu_home = document.querySelector('#menu');
+    const menu_home = document.querySelector('#left-menu');
     const menu_profile = document.querySelector('.user-profile');
 
     // const widthLeft = leftBar.offsetWidth;
