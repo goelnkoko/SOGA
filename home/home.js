@@ -23,27 +23,38 @@ document.addEventListener('DOMContentLoaded', function() {
 
     sendButton.addEventListener('click', () => {
         const postText = postContent.value;
-        const images = Array.from(thumbnails.querySelectorAll('img')).map(img => img.src);
-        createPost(postText, images);
+        const media = Array.from(thumbnails.querySelectorAll('img, video')).map(media => {
+            return {
+                type: media.tagName.toLowerCase(),
+                src: media.src
+            };
+        });
+        createPost(postText, media);
     });
 
     function handleFileUploads(files) {
         for (let file of files) {
             const reader = new FileReader();
             reader.onload = function(event) {
-                const thumbnail = createThumbnail(event.target.result);
-                thumbnails.appendChild(thumbnail);
+                const media = createMediaThumbnail(event.target.result, file.type);
+                thumbnails.appendChild(media);
             }
             reader.readAsDataURL(file);
         }
     }
 
-    function createThumbnail(src) {
+    function createMediaThumbnail(src, type) {
         const thumbnail = document.createElement('div');
         thumbnail.classList.add('thumbnail');
 
-        const img = document.createElement('img');
-        img.src = src;
+        let media;
+        if (type.startsWith('image')) {
+            media = document.createElement('img');
+        } else if (type.startsWith('video')) {
+            media = document.createElement('video');
+            media.controls = true;
+        }
+        media.src = src;
 
         const removeButton = document.createElement('button');
         removeButton.classList.add('remove');
@@ -52,27 +63,48 @@ document.addEventListener('DOMContentLoaded', function() {
             thumbnail.remove();
         });
 
-        thumbnail.appendChild(img);
+        thumbnail.appendChild(media);
         thumbnail.appendChild(removeButton);
 
         return thumbnail;
     }
 
-    function createPost(text, images) {
+    function createPost(text, media) {
+        let mediaContent = '';
+
+        if (media.length === 1) {
+            mediaContent = `<div class="single-media">${createMediaElement(media[0])}</div>`;
+        } else if (media.length === 2) {
+            mediaContent = `
+                <div class="double-media">
+                    <div class="media-left">${createMediaElement(media[0])}</div>
+                    <div class="media-right">${createMediaElement(media[1])}</div>
+                </div>`;
+        } else if (media.length > 2) {
+            mediaContent = `
+                <div class="multi-media">
+                    <div class="media-left">${createMediaElement(media[0])}</div>
+                    <div class="media-right">${createMediaElement(media[1])}</div>
+                    <div class="more-media">
+                        <button onclick="viewMoreMedia(${media.length - 2})">+${media.length - 2}</button>
+                    </div>
+                </div>`;
+        }
+
         const postTemplate = `
             <div class="post">
                 <div class="post-user-profile">
                     <a href="../perfil/perfil.html">
                         <img src="../img/gyomei-chorando.jpeg" alt="Foto do Gyomei">
                         <div id="profile-content">
-                            <span>Pedro</span>
-                            <p>Administrador</p>
+                            <span>Gyomei</span>
+                            <p>Hashira da Pedra</p>
                         </div>
                     </a>
                 </div>
                 <div class="post-content">
                     <p>${text}</p>
-                    ${images.map(image => `<img src="${image}" alt="Post Image">`).join('')}
+                    ${mediaContent}
                 </div>
                 <div class="icons">
                     <button><span class="material-symbols-outlined material-style">thumb_up</span></button>
@@ -86,5 +118,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
         postContent.value = '';
         thumbnails.innerHTML = '';
+    }
+
+    function createMediaElement(media) {
+        if (media.type === 'img') {
+            return `<img src="${media.src}" alt="Post Image">`;
+        } else if (media.type === 'video') {
+            return `<video controls src="${media.src}"></video>`;
+        }
+    }
+
+    window.viewMoreMedia = function(count) {
+        alert(`View ${count} more media items`);
+        // Implement the logic to show more media items in a modal or new view
     }
 });

@@ -136,9 +136,9 @@ body {
     margin-bottom: 10px;
 }
 
-.post img {
+.post img, .post video {
     width: 100%;
-    border-radius: 10px;
+    /*border-radius: 10px;*/
 }
 
 .post-user-profile {
@@ -213,7 +213,7 @@ body {
     overflow: hidden;
 }
 
-.thumbnail img {
+.thumbnail img, .thumbnail video {
     max-width: 100%;
     max-height: 100%;
 }
@@ -242,4 +242,64 @@ body {
     height: 5px;
     background: green;
     transition: width 0.5s;
+}
+
+.single-media {
+    display: flex;
+    justify-content: center;
+}
+
+.single-media img, .single-media video {
+    width: 100%;
+    height: auto;
+}
+
+.double-media {
+    display: flex;
+    justify-content: space-between;
+}
+
+.double-media .media-left, .double-media .media-right {
+    width: 48%;
+}
+
+.double-media img, .double-media video {
+    height: 100%;
+    object-fit: cover;
+}
+
+.multi-media {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.multi-media .media-left, .multi-media .media-right {
+    width: 42%;
+}
+
+.multi-media img, .multi-media video {
+    height: 100%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.multi-media .more-media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 13%;
+    height: inherit;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #131313;
+}
+
+.multi-media .more-media button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5em;
+    font-weight: bold;
+    cursor: pointer;
 }

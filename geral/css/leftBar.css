@@ -192,7 +192,6 @@ span.material-style {
     }
 
     .leftBar {
-        width: 100%;
-        position: relative;
+        display: none;
     }
 }
