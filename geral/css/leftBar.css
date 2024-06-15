@@ -1,15 +1,30 @@
+body {
+    margin-left: 320px;
+}
+
+.leftBar a {
+    text-decoration: none;
+    color: #fff;
+}
 
 .leftBar {
-    width: 22%;
+    top: 0;
+    left: 0;
+    width: 319px;
     padding: 10px;
     box-sizing: border-box;
     height: 100vh;
     min-height: 100vh;
     border-right: 1px solid hsl(0, 0%, 20%);
     position: fixed;
+    font-family: 'Open Sans', Helvetica, Cambria, sans-serif;
+    font-weight: 600;
+    color: #fff;
+    background-color: #000;
 }
 
 #logo {
+    max-width: 261px;
     text-align: center;
     padding: 30px 50px;
     box-sizing: border-box;
@@ -26,12 +41,12 @@
 }
 
 .user-profile {
+    max-width: 231px;
     display: flex;
     flex-direction: row;
     gap: 10px;
     align-items: center;
-    margin: 0px 20px;
-    padding: 0px 10px;
+    padding: 0 10px;
     background-color: #12444F;
     border-radius: 25px;
     overflow: hidden;
@@ -42,7 +57,7 @@
 
 .user-profile img {
     width: 25%;
-    height: 25%;
+    height: 100%;
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid #1daccc;
@@ -50,10 +65,10 @@
 
 .user-profile span, .user-profile p {
     color: white;
-    font-weight: 300px;
+    font-weight: 300;
     font-family: Arial, Helvetica, sans-serif;
     padding: 2px;
-    margin: 0px;
+    margin: 0;
     box-sizing: border-box;
     flex-grow: 1;
     min-width: 0;
@@ -67,28 +82,27 @@
 
 .user-profile p {
     font-size: 0.7em;
-    font-weight: 100px;
+    font-weight: 300;
     color: #aaa;
     font-family: Arial, Helvetica, sans-serif;
 }
 
-#menu {
+#left-menu {
     width: fit-content;
     color: white;
     padding: 20px 0px;
-    /* background-color: #12444F; */
     margin: 0 auto;
 }
 
-.menu-item {
+.left-menu-item {
     width: fit-content;
-    margin: 5px 20px;
+    margin: 0px 20px;
     padding: 10px;
     align-items: center;
     cursor: pointer;
 }
 
-.menu-item a {
+.left-menu-item a {
     width: fit-content;
     display: flex;
     flex-direction: row;
@@ -96,19 +110,19 @@
     gap: 10px;
 }
 
-
-.menu-item p {
-    margin: 0px;
+.left-menu-item p {
+    margin: 0;
+    font-weight: 350;
 }
 
-.menu-item:hover {
+.left-menu-item:hover {
     background-color: #1f1f1f;
     border-radius: 15px;
 }
 
 span.material-style {
     font-size: 25px;
-    font-variation-settings: 'OPSZ' 40;
+    font-variation-settings: 'opsz' 48;
     animation: pulse 3s infinite;
 }
 
@@ -121,5 +135,63 @@ span.material-style {
     }
     100% {
         font-variation-settings: 'wght' 100;
+    }
+}
+
+/* Nível 1: Máximo 1200px */
+@media (max-width: 1200px) {
+    body {
+        margin-left: 300px;
+    }
+
+    .leftBar {
+        width: 300px;
+    }
+}
+
+/* Nível 2: Máximo 1100px */
+@media (max-width: 1100px) {
+    body {
+        margin-left: 270px;
+    }
+
+    .leftBar {
+        width: 270px;
+    }
+}
+
+/* Nível 3: Máximo 960px */
+@media (max-width: 960px) {
+    body {
+        margin-left: 250px;
+        background-color: #111;
+    }
+
+    .leftBar, .rightBar {
+        width: 250px;
+    }
+}
+
+/* Nível 4: Máximo 768px */
+@media (max-width: 768px) {
+    body {
+        margin-left: 220px;
+        background-color: #222;
+    }
+
+    .leftBar {
+        width: 220px;
+    }
+}
+
+/* Nível 5: Máximo 480px */
+@media (max-width: 480px) {
+    body {
+        margin-left: 0;
+        background-color: #333;
+    }
+
+    .leftBar {
+        display: none;
     }
 }

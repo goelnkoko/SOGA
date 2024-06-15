@@ -1,19 +1,41 @@
 body {
+    display: flex;
     margin: 0;
-    padding: 10;
+    padding: 10px;
     background-color: #121212;
     color: white;
     font-family: 'Arial', sans-serif;
+<<<<<<< HEAD:definições/styles.css
 cursor: pointer;
 
+=======
+    cursor: pointer;
+>>>>>>> f7e85f17d314265e3ea13521aa9458e6de9f40a9:definicoes/definicoes.css
 }
+
+/*Estilizar o ícone do menu principal*/
+#settings span.material-style {
+    animation: none;
+    font-variation-settings: 'FILL' 1, 'wght' 700;
+    font-size: 25px;
+}
+
+#settings p {
+    font-weight: 700;
+}
+
 
 .menu {
     width: 400px;
     background-color: #1c1c1c;
     border-radius: 8px;
+<<<<<<< HEAD:definições/styles.css
     padding: px;
     margin: 12px auto;
+=======
+    padding: 30px 100px;
+    margin: 30px auto;
+>>>>>>> f7e85f17d314265e3ea13521aa9458e6de9f40a9:definicoes/definicoes.css
     border: 3px solid rgba(8, 188, 238, 0.411);
 }
 

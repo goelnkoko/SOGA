@@ -1,129 +1,156 @@
 function adjustTextarea(el) {
     el.style.height = 'auto';
-    el.style.height = (el.scrollHeight) + 'px';
+    el.style.height = (el.scrollHeight - '40') + 'px';
 }
 
-window.addEventListener('scroll', function() {
-    const leftBar = document.querySelector('.leftBar');
-    const rightBar = document.querySelector('.rightBar');
-    const feed = document.querySelector('.feed');
+const fileInput = document.getElementById('file-input');
+const uploadButton = document.getElementById('upload-button');
+const thumbnails = document.getElementById('thumbnails');
+const sendButton = document.getElementById('send-button');
+const postContent = document.getElementById('post');
+const postsContainer = document.getElementById('posts-container');
 
-    // Remove fixed heights and allow full content height
-    leftBar.style.height = 'auto';
-    rightBar.style.height = 'auto';
-    feed.style.height = 'auto';
+var likeStatus = false;
+
+uploadButton.addEventListener('click', () => {
+    fileInput.click();
 });
-document.addEventListener('DOMContentLoaded', function() {
-    const leftBar = document.querySelector('.leftBar');
-    const rightBar = document.querySelector('.rightBar');
-    const feed = document.querySelector('.feed');
-    const logo = document.querySelector('#logo');
-    const menu_home = document.querySelector('#menu');
-    const menu_profile = document.querySelector('.user-profile');
-    const dropZone = document.getElementById('drop-zone');
-    const fileInput = document.getElementById('file-input');
-    const uploadButton = document.getElementById('upload-button');
-    const thumbnails = document.getElementById('thumbnails');
-    const sendButton = document.getElementById('send-button');
-    const postContent = document.getElementById('post');
 
-    leftBar.style.height = '100vh';
-    rightBar.style.height = '100vh';
+fileInput.addEventListener('change', (event) => {
+    const files = event.target.files;
+    handleFileUploads(files);
+});
 
-    const width = leftBar.offsetWidth;
-    console.log(width);
-    feed.style.marginLeft = width + 'px';
-    rightBar.style.left = width + feed.offsetWidth + 'px';
-
-    const menu_home_size = menu_home.offsetWidth;
-    logo.style.width = menu_home_size + 'px';
-    menu_profile.style.width = (menu_home_size * 1.1) + 'px';
-
-    // Drag and Drop
-    dropZone.addEventListener('dragover', function(e) {
-        e.preventDefault();
-        dropZone.classList.add('drag-over');
+sendButton.addEventListener('click', () => {
+    const postText = postContent.value;
+    const media = Array.from(thumbnails.querySelectorAll('img, video')).map(media => {
+        return {
+            type: media.tagName.toLowerCase(),
+            src: media.src
+        };
     });
+    createPost(postText, media);
+});
 
-    dropZone.addEventListener('dragleave', function() {
-        dropZone.classList.remove('drag-over');
-    });
-
-    dropZone.addEventListener('drop', function(e) {
-        e.preventDefault();
-        dropZone.classList.remove('drag-over');
-        const files = e.dataTransfer.files;
-        handleFiles(files);
-    });
-
-    // File input click
-    uploadButton.addEventListener('click', function() {
-        fileInput.click();
-    });
-
-    fileInput.addEventListener('change', function() {
-        const files = fileInput.files;
-        handleFiles(files);
-    });
-
-    function handleFiles(files) {
-        for (let i = 0; i < files.length; i++) {
-            const file = files[i];
-            const reader = new FileReader();
-
-            reader.onload = function(e) {
-                const thumbnail = document.createElement('div');
-                thumbnail.classList.add('thumbnail');
-
-                const img = document.createElement('img');
-                img.src = e.target.result;
-
-                const removeBtn = document.createElement('button');
-                removeBtn.classList.add('remove');
-                removeBtn.textContent = '×';
-                removeBtn.addEventListener('click', function() {
-                    thumbnails.removeChild(thumbnail);
-                });
-
-                const progress = document.createElement('div');
-                progress.classList.add('progress');
-
-                thumbnail.appendChild(img);
-                thumbnail.appendChild(removeBtn);
-                thumbnail.appendChild(progress);
-                thumbnails.appendChild(thumbnail);
-
-                // Simular o progresso do carregamento, já que não sabemos não simular
-                setTimeout(() => {
-                    progress.style.width = '100%';
-                }, 200);
-
-            };
-
-            reader.readAsDataURL(file);
+function handleFileUploads(files) {
+    for (let file of files) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const media = createMediaThumbnail(event.target.result, file.type);
+            thumbnails.appendChild(media);
         }
+        reader.readAsDataURL(file);
+    }
+}
+
+function createMediaThumbnail(src, type) {
+    const thumbnail = document.createElement('div');
+    thumbnail.classList.add('thumbnail');
+
+    let media;
+    if (type.startsWith('image')) {
+        media = document.createElement('img');
+    } else if (type.startsWith('video')) {
+        media = document.createElement('video');
+        media.controls = true;
+    }
+    media.src = src;
+
+    const removeButton = document.createElement('button');
+    removeButton.classList.add('remove');
+    removeButton.textContent = '×';
+    removeButton.addEventListener('click', () => {
+        thumbnail.remove();
+    });
+
+    thumbnail.appendChild(media);
+    thumbnail.appendChild(removeButton);
+
+    return thumbnail;
+}
+
+function createPost(text, media) {
+    let mediaContent = '';
+
+    if (media.length === 1) {
+        mediaContent = `<div class="single-media">${createMediaElement(media[0])}</div>`;
+    } else if (media.length === 2) {
+        mediaContent = `
+            <div class="double-media">
+                <div class="media-left">${createMediaElement(media[0])}</div>
+                <div class="media-right">${createMediaElement(media[1])}</div>
+            </div>`;
+    } else if (media.length > 2) {
+        mediaContent = `
+            <div class="multi-media">
+                <div class="media-left">${createMediaElement(media[0])}</div>
+                <div class="media-right">${createMediaElement(media[1])}</div>
+                <div class="more-media">
+                    <button onclick="viewMoreMedia(${media.length - 2})">+${media.length - 2}</button>
+                </div>
+            </div>`;
     }
 
-    // Enviar a publicação no Backend
-    sendButton.addEventListener('click', function() {
-        const formData = new FormData();
-        formData.append('content', postContent.value);
+    const postTemplate = `
+        <div class="post">
+            <div class="post-user-profile">
+                <a href="../perfil/perfil.html">
+                    <img src="../img/gyomei-chorando.jpeg" alt="Foto do Gyomei">
+                    <div id="profile-content">
+                        <span>Gyomei</span>
+                        <p>Hashira da Pedra</p>
+                    </div>
+                </a>
+            </div>
+            <div class="post-content">
+                <p>${text}</p>
+                ${mediaContent}
+            </div>
+            <div class="icons">
+<!--                <button id="like"><span class="material-symbols-outlined material-style">thumb_up</span></button>-->
+                <button onclick="updateLikeStatus()" id="like" class="unliked"><span class="material-symbols-outlined material-style">sentiment_sad</span></button>
+                <button id="comment"><span class="material-symbols-outlined material-style">comment</span></button>
+                <button id="share"><span class="material-symbols-outlined material-style">share</span></button>
+            </div>
+        </div>
+    `;
 
-        const files = fileInput.files;
-        for (let i = 0; i < files.length; i++) {
-            formData.append('images[]', files[i]);
-        }
+    postsContainer.insertAdjacentHTML('beforeend', postTemplate);
 
-        fetch('URL_DA_SUA_API', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Success:', data);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-    });
-});
+    postContent.value = '';
+    thumbnails.innerHTML = '';
+}
+
+function createMediaElement(media) {
+    if (media.type === 'img') {
+        return `<img src="${media.src}" alt="Post Image">`;
+    } else if (media.type === 'video') {
+        return `<video controls src="${media.src}"></video>`;
+    }
+}
+
+window.viewMoreMedia = function(count) {
+    alert(`View ${count} more media items`);
+    // Implement the logic to show more media items in a modal or new view
+}
+
+//Função para controlar os likes
+// like.onclick = () => {
+//     if (!likeStatus) {
+//         like.style.fontVariationSettings = `'FILL' 1`;
+//         like.style.color = '#0095b6';
+//         likeStatus = true;
+//     } else {
+//         like.style.fontVariationSettings = `'FILL' 0`;
+//         like.style.color = '#fff';
+//         likeStatus = false;
+//     }
+// }
+
+window.updateLikeStatus = () => {
+    const like = document.getElementById('like');
+
+    console.log("Like was clicked: " + like);
+    like.classList.toggle('liked');
+    like.classList.toggle('unliked');
+};
