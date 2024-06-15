@@ -5,26 +5,30 @@ body {
     color: white;
     font-family: 'Arial', sans-serif;
 cursor: pointer;
+
 }
 
 .menu {
-    width: 600px;
+    width: 400px;
     background-color: #1c1c1c;
     border-radius: 8px;
-    padding: 100px;
-    margin: 10px auto;
+    padding: px;
+    margin: 12px auto;
     border: 3px solid rgba(8, 188, 238, 0.411);
 }
 
-.menu-item {
+.menu-item  {
     display: flex;
     align-items: center;
-    padding: 50px;
+    padding: 40px;
     border-bottom: 1px solid #333;
+    color: aliceblue;
 }
+
 
 .menu-item:last-child {
     border-bottom: none;
+    
 }
 
 .menu-item i {
@@ -35,3 +39,11 @@ cursor: pointer;
 .menu-item span {
     font-size: 16px;
 }
+ .btn-1 {
+    background-color: #1c1c1c ;
+    color:white;
+    border: #1c1c1c;
+    font-size: 16px;
+    cursor: pointer
+ }
+

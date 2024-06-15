@@ -82,7 +82,7 @@ h2{
 }
 
 
-.old-notifications  :hover, .old-notifications :active{
+.old-notifications  :hover , .old-notifications :active{
     width: 100%;
     background-color: #09a8b9ab;
     border-radius: 10px;
