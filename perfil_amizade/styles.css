@@ -1,0 +1,128 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #000000;
+    margin: 0;
+    font-family: Arial, sans-serif;
+ text-align: center;
+
+}
+
+.profile-card {
+    background-color: #000000;
+    color: white;
+    width: 1000px;
+    border-radius: 10px ;
+    overflow: hidden;
+   
+  border:2px solid rgba(8, 188, 238, 0.411) ;
+}
+
+.profile-header {
+    padding: 100px;
+}
+
+.profile-picture  {
+    background-color: #1f94c6;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+
+  
+}
+
+.profile-name {
+    margin: 10px 0 5px 0;
+    font-size: 24px;
+}
+
+.profile-email {
+    color: #aaa;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.profile-title {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+.profile-location,
+.profile-birthday,
+.profile-institute {
+    margin: 10px 0;
+    font-size: 20px;
+}
+
+.profile-location i,
+.profile-birthday i,
+.profile-institute i {
+    margin-right: px;
+}
+
+.profile-stats {
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.profile-footer {
+    border-top: 2px solid #13cbe7bd;
+    padding: 10px;
+}
+
+.profile-button {
+    background-color: #16b0cfb1;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+     
+}
+
+.profile-actions {
+    border-top: 1px solid #333;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+.action-button   {
+    background-color: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+
+    
+
+}
+
+.action-button i {
+    margin-right: 5px;
+ 
+}
+
+.action-button:hover {
+    
+    background-color: #0c99d6d9;
+}
+
+.profile-info{
+text-align: left;
+padding: 3%;
+    
+}
+.profile-button{
+    border-top: 2px solid #13cbe7bd;
+
+}
+
+.profile-stats{
+    font-size: 18px;
+ 
+}
