@@ -1,0 +1,40 @@
+document.addEventListener('DOMContentLoaded', function() {
+
+    const logo = document.querySelector('#logo');
+    const menu_home = document.querySelector('#left-menu');
+    const menu_profile = document.querySelector('.user-profile');
+
+    // const widthLeft = leftBar.offsetWidth;
+    logo.addEventListener('click', () => {
+        window.location.href = "../home/home.html";
+    });
+
+    menu_home.addEventListener('click', () => {
+        window.location.href = "../home/home.html";
+    });
+
+    menu_profile.addEventListener('click', () => {
+        window.location.href = "../perfil/perfil.html";
+    });
+
+    fetch('/logged-user')
+        .then(response=>response.json())
+        .then(data => {
+            console.log(data);
+
+            const profileLeft = document.getElementById('profile-left');
+
+            profileLeft.innerHTML = `
+                <img src="{{url('assets//img/gyomei-chorando.jpeg')}}" alt="Foto do Gyomei">
+                <div id="profile-content">
+                    <span>${data.name}</span>
+                    <p>@${data.username}</p>
+                </div>
+            `;
+
+            profileLeft.addEventListener('click', () => {
+                window.location.href = "#";
+            })
+        })
+
+});

@@ -1,0 +1,98 @@
+body {
+    margin-right: 320px;
+}
+
+.rightBar {
+    width: 320px;
+    position: fixed;
+    right: 0;
+    top: 0;
+    padding: 10px;
+    box-sizing: border-box;
+    height: 100vh;
+    border-left: 1px solid #333;
+    min-height: 100vh;
+}
+
+.bloco {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#pesquisa input {
+    width: 100%;
+    border-radius: 10px;
+    padding: 7px;
+    text-align: center;
+    font-size: 15px;
+    background-color: #eee;
+}
+
+.rightBar .user-profile .user-profile-profile {
+    display: flex;
+    gap: 10px;
+}
+
+.rightBar .user-profile {
+    background-color: #33333300;
+    margin: 20px 20px;
+    justify-content: space-between;
+}
+
+.rightBar .user-profile img {
+    width: 40px;
+    height: 40px;
+    border: none;
+}
+
+.user-profile button {
+    background-color: transparent;
+    border: 1px solid #111;
+    color: #07c9f4;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0px 0px 5px rgb(9, 157, 118);
+}
+
+.user-profile button:active {
+    transform: scale(0.98);
+    box-shadow: 0px 0px 5px rgb(0, 46, 34);
+}
+
+/* Nível 1: Máximo 1200px */
+@media (max-width: 1200px) {
+    body {
+        margin-right: 300px;
+    }
+
+    .rightBar {
+        width: 300px;
+    }
+}
+
+/* Nível 2: Máximo 1100px */
+@media (max-width: 1100px) {
+    body {
+        margin-right: 270px;
+    }
+
+    .rightBar {
+        width: 270px;
+    }
+}
+
+/* Nível 3: Máximo 960px */
+@media (max-width: 960px) {
+    body {
+        margin-right: 0;
+        background-color: #111;
+    }
+
+    .rightBar {
+        display: none;
+    }
+}
