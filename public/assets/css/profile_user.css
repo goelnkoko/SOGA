@@ -1,0 +1,109 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #000000;
+  
+    color: white;
+    
+}
+
+.profile-card {
+    width: 1000px;
+    background-color: #020000;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #13cbe7bd ;
+   
+}
+
+.header {
+    background-color: #2aa6c27d;
+    padding: 20px;
+    position: relative;
+}
+
+.profile-pic {
+    width: 100px;
+    height: 100px;
+    background-color: #2A2A2A;
+    border-radius: 50%;
+    margin: 0 auto;
+    
+}
+
+.edit-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color:#00fff78b;
+    padding: 10px;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+}
+
+.profile-info {
+    padding: 20px;
+    border-top: 2px solid #13cbe7bd;
+    
+  
+}
+
+.profile-info h2 {
+    margin: 10px 0 5px;
+}
+
+.profile-info p {
+    margin: 5px 0;
+}
+
+.profile-info p i {
+    margin-right: 10px;
+}
+
+.profile-info p span {
+    display: inline-block;
+    margin: 5px 0;
+}
+
+.edit-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color:#00fff78b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    
+}
+
+.profile-tabs {
+    
+    background-color: #000000;
+    border-top: 1px solid #000000;
+}
+
+.tab {
+    flex: 1;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    ;
+}
+
+.tab:hover {
+    background-color: #00fff78b;
+    border-top: 2px solid #13cbe7bd;
+}
+
+.tab i {
+    margin-right: 5px;
+}
+
+.profile-tabs{
+    border-top: 2px solid #13cbe7bd;
+}

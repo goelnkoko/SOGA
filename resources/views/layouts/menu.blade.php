@@ -7,23 +7,23 @@
 <div class="leftBar">
     <div id="logo"><a href="../home/home.html"><img src="{{url('assets//img/logo.png')}}" alt=""></a></div>
     <div class="user-profile" id="profile-left">
-{{--            Vamos adicionar informacoes do perfil aqui com JS--}}
+        {{-- Vamos adicionar informacoes do perfil aqui com JS --}}
     </div>
     <div id="left-menu">
         <div class="left-menu-item" id="home">
-            <a href="../home/home.html">
+            <a href="/home">
                 <span class="material-symbols-outlined material-style">home</span>
                 <p>Página Inicial</p>
             </a>
         </div>
         <div class="left-menu-item" id="message">
-            <a href="../chat/chat.html">
+            <a href="/chat">
                 <span class="material-symbols-outlined material-style">message</span>
                 <p>Chat</p>
             </a>
         </div>
         <div class="left-menu-item" id="friends">
-            <a href="../amizade/amizade.html">
+            <a href="/friends">
                 <span class="material-symbols-outlined material-style">sports_martial_arts</span>
                 <p>Amizades</p>
             </a>
