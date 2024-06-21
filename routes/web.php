@@ -1,9 +1,14 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
+Route::get('/', function (){
+    return view('auth.login');
+})->name('login');
+
+Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
 
@@ -28,8 +33,6 @@ Route::get('/profile_user', function () {
 })->name('profile_user');
 
 
-
-
 Route::middleware('auth')->get('/logged-user', [UserController::class, 'loggedUser'])->name('loggedUser');
 
 Route::post('/login', [UserController::class, 'login'])->name('login');
@@ -37,3 +40,10 @@ Route::post('/login', [UserController::class, 'login'])->name('login');
 Route::post('/register', [UserController::class,'register'])->name('register');
 
 Route::resource('/users', UserController::class);
+
+
+//Post Routes
+
+//Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
+Route::post('/posts', [PostController::class, 'store'])->name('posts.store')->middleware('web');
+
