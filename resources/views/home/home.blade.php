@@ -22,7 +22,7 @@
             <div class="user-photo">
                 <img src="{{ url('assets/img/obanai-iguro.png') }}" alt="Foto do Gyomei">
             </div>
-            <form action="{{ route('posts.store') }}" method="POST" class="post-content">
+            <form id="post-form" class="post-content">
                 @csrf
                 <textarea name="content" id="post" cols="30" rows="1" placeholder="Escreva uma postagem, haha, tosse!" oninput="adjustTextarea(this)"></textarea>
                 <div id="thumbnails"></div>

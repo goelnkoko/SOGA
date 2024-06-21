@@ -22,15 +22,15 @@ Route::get('/password-recover', function () {
 
 Route::get('/home', function () {
     return view('home.home');
-})->name('home');
+})->name('home')->middleware('auth');
 
 Route::get('/profile', function () {
     return view('profile.profile');
-})->name('profile');
+})->name('profile')->middleware('auth');
 
 Route::get('/profile_user', function () {
     return view('profile.profile_user');
-})->name('profile_user');
+})->name('profile_user')->middleware('auth');
 
 
 Route::middleware('auth')->get('/logged-user', [UserController::class, 'loggedUser'])->name('loggedUser');
@@ -46,4 +46,4 @@ Route::resource('/users', UserController::class);
 
 //Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
 Route::post('/posts', [PostController::class, 'store'])->name('posts.store')->middleware('web');
-
+Route::get('/posts', [PostController::class, 'index'])->name('posts.index')->middleware('web');

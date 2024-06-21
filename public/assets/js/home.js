@@ -8,9 +8,9 @@ document.addEventListener("DOMContentLoaded", function() {
     const fileInput = document.getElementById('file-input');
     const uploadButton = document.getElementById('upload-button');
     const thumbnails = document.getElementById('thumbnails');
-    const sendButton = document.getElementById('send-button');
-    const postContent = document.getElementById('post');
+    const postForm = document.getElementById('post-form');
     const postsContainer = document.getElementById('posts-container');
+    const postContent = document.getElementById('post');
 
     uploadButton.addEventListener('click', () => {
         fileInput.click();
@@ -21,18 +21,15 @@ document.addEventListener("DOMContentLoaded", function() {
         handleFileUploads(files);
     });
 
-    sendButton.addEventListener('click', () => {
+    postForm.addEventListener('submit', (event) => {
+        event.preventDefault();
         const postText = postContent.value;
-        const media = Array.from(thumbnails.querySelectorAll('img, video')).map(media => {
-            return {
-                type: media.tagName.toLowerCase(),
-                src: media.src
-            };
-        });
-        createPost(postText, media);
+        const files = fileInput.files;
+        createPost(postText, files);
     });
 
     function handleFileUploads(files) {
+        thumbnails.innerHTML = '';
         for (let file of files) {
             const reader = new FileReader();
             reader.onload = function(event) {
@@ -69,27 +66,60 @@ document.addEventListener("DOMContentLoaded", function() {
         return thumbnail;
     }
 
-    function createPost(text, media) {
-        let mediaContent = '';
-
-        if (media.length === 1) {
-            mediaContent = `<div class="single-media">${createMediaElement(media[0])}</div>`;
-        } else if (media.length === 2) {
-            mediaContent = `
-                <div class="double-media">
-                    <div class="media-left">${createMediaElement(media[0])}</div>
-                    <div class="media-right">${createMediaElement(media[1])}</div>
-                </div>`;
-        } else if (media.length > 2) {
-            mediaContent = `
-                <div class="multi-media">
-                    <div class="media-left">${createMediaElement(media[0])}</div>
-                    <div class="media-right">${createMediaElement(media[1])}</div>
-                    <div class="more-media">
-                        <button onclick="viewMoreMedia(${media.length - 2})">+${media.length - 2}</button>
-                    </div>
-                </div>`;
+    function createPost(text, files) {
+        const formData = new FormData();
+        formData.append('content', text);
+        for (let file of files) {
+            formData.append('media[]', file);
         }
+
+        fetch('/posts', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+            },
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert(data.error);
+                } else {
+                    loadPosts();
+                    console.log(data)
+                    postContent.value = '';
+                    thumbnails.innerHTML = '';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
+    function loadPosts() {
+        fetch('/posts')
+            .then(response => response.json())
+            .then(posts => {
+                postsContainer.innerHTML = '';
+                posts.forEach(post => {
+                    displayPost(post);
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    function displayPost(post) {
+        const mediaContent = post.media ? JSON.parse(post.media).map(mediaPath => {
+            const mediaUrl = `/storage/${mediaPath}`;
+            const type = mediaPath.split('.').pop();
+            if (['jpeg', 'jpg', 'png', 'gif'].includes(type)) {
+                return `<img src="${mediaUrl}" alt="Post Image">`;
+            } else if (['mp4', 'avi', 'mkv'].includes(type)) {
+                return `<video controls src="${mediaUrl}"></video>`;
+            }
+        }).join('') : '';
+
+        console.log(post);
 
         const postTemplate = `
             <div class="post">
@@ -97,17 +127,16 @@ document.addEventListener("DOMContentLoaded", function() {
                     <a href="../perfil/perfil.html">
                         <img src="../img/gyomei-chorando.jpeg" alt="Foto do Gyomei">
                         <div id="profile-content">
-                            <span>Gyomei</span>
-                            <p>Hashira da Pedra</p>
+                            <span>${post.user.name}</span>
+                            <p>${timeAgo(post.created_at)}</p>
                         </div>
                     </a>
                 </div>
                 <div class="post-content">
-                    <p>${text}</p>
+                    <p>${post.content}</p>
                     ${mediaContent}
                 </div>
                 <div class="icons">
-    <!--                <button id="like"><span class="material-symbols-outlined material-style">thumb_up</span></button>-->
                     <button onclick="updateLikeStatus()" id="like" class="unliked"><span class="material-symbols-outlined material-style">sentiment_sad</span></button>
                     <button id="comment"><span class="material-symbols-outlined material-style">comment</span></button>
                     <button id="share"><span class="material-symbols-outlined material-style">share</span></button>
@@ -116,43 +145,55 @@ document.addEventListener("DOMContentLoaded", function() {
         `;
 
         postsContainer.insertAdjacentHTML('beforeend', postTemplate);
-
-        postContent.value = '';
-        thumbnails.innerHTML = '';
     }
 
-    function createMediaElement(media) {
-        if (media.type === 'img') {
-            return `<img src="${media.src}" alt="Post Image">`;
-        } else if (media.type === 'video') {
-            return `<video controls src="${media.src}"></video>`;
-        }
-    }
+    // Chamada da função que processa os posts na página principal
+    loadPosts();
 
-    window.viewMoreMedia = function(count) {
-        alert(`View ${count} more media items`);
-        // Implement the logic to show more media items in a modal or new view
-    }
-
-    //Função para controlar os likes
-    // like.onclick = () => {
-    //     if (!likeStatus) {
-    //         like.style.fontVariationSettings = `'FILL' 1`;
-    //         like.style.color = '#0095b6';
-    //         likeStatus = true;
-    //     } else {
-    //         like.style.fontVariationSettings = `'FILL' 0`;
-    //         like.style.color = '#fff';
-    //         likeStatus = false;
-    //     }
-    // }
-
+    //Função para simular o efeito do like, ainda não está terminada
     window.updateLikeStatus = () => {
         const like = document.getElementById('like');
-
-        console.log("Like was clicked: " + like);
         like.classList.toggle('liked');
         like.classList.toggle('unliked');
     };
+
+    //Função para calcular quanto tempo passou desde que a publicação foi feita
+    function timeAgo(timestamp){
+        const now = new Date();
+        const publishDate = new Date(timestamp);
+        const interval = Math.floor((now - publishDate)/1000);
+
+        if(interval < 60) {
+            return `há ${interval} segundos`;
+        }
+
+        const minutesAgo = Math.floor(interval/60);
+        if(minutesAgo < 60) {
+            return `há ${minutesAgo} minutos`;
+        }
+
+        const hoursAgo = Math.floor(minutesAgo/60);
+        if(hoursAgo < 24) {
+            return `há ${hoursAgo} horas`;
+        }
+
+        const daysAgo = Math.floor(hoursAgo/24);
+        if(daysAgo < 15) {
+            return `há ${daysAgo} dias`;
+        }
+
+        const weeksAgo = Math.floor(daysAgo/7);
+        if(weeksAgo < 4) {
+            return `há ${weeksAgo} semanas`;
+        }
+
+        const monthsAgo = Math.floor(weeksAgo/2);
+        if(monthsAgo < 12) {
+            return `há ${monthsAgo} mêses`;
+        }
+
+        const yearsAgo = Math.floor(monthsAgo/12);
+        return `há ${yearsAgo} anos`;
+    }
 
 });
