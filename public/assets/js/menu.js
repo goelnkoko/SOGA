@@ -20,7 +20,6 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch('/logged-user')
         .then(response => response.json())
         .then(data => {
-            console.log(data);
 
             const profileLeft = document.getElementById('profile-left');
 

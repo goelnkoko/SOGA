@@ -14,39 +14,40 @@
 </head>
 
 <body>
-@extends('layouts.menu')
+    @extends('layouts.menu')
 
-<div class="container">
-    <div class="feed">
-        <div class="publicar" id="drop-zone">
-            <div class="user-photo">
-                <img src="{{ url('assets/img/obanai-iguro.png') }}" alt="Foto do Gyomei">
-            </div>
-            <form id="post-form" class="post-content">
-                @csrf
-                <textarea name="content" id="post" cols="30" rows="1" placeholder="Escreva uma postagem, haha, tosse!" oninput="adjustTextarea(this)"></textarea>
-                <div id="thumbnails"></div>
-                <div class="icons">
-                    <button id="upload-button" type="button">
-                        <span class="material-symbols-outlined">image</span>
-                        <p>Media</p>
-                    </button>
-                    <input type="file" id="file-input" multiple style="display:none;" accept="image/*,video/*">
-                    <button type="submit" id="send-button"><span class="material-symbols-outlined">send</span></button>
+    <div class="container">
+        <div class="feed">
+            <div class="publicar" id="drop-zone">
+                <div class="user-photo">
+                    <img src="{{ url('assets/img/obanai-iguro.png') }}" alt="Foto do Gyomei">
                 </div>
-            </form>
-        </div>
+                <form id="post-form" class="post-content">
+                    @csrf
+                    <textarea name="content" id="post" cols="30" rows="1" placeholder="Escreva uma postagem, haha, tosse!" oninput="adjustTextarea(this)"></textarea>
+                    <div id="thumbnails"></div>
+                    <div class="icons">
+                        <button id="upload-button" type="button">
+                            <span class="material-symbols-outlined">image</span>
+                            <p>Media</p>
+                        </button>
+                        <input type="file" id="file-input" multiple style="display:none;" accept="image/*,video/*">
+                        <button type="submit" id="send-button"><span class="material-symbols-outlined">send</span></button>
+                    </div>
+                </form>
+            </div>
 
-        <div class="posts" id="posts-container">
-            <!-- Publicações serão inseridas aqui -->
+            <div class="posts" id="posts-container">
+                <!-- Publicações serão inseridas aqui -->
+            </div>
         </div>
     </div>
-</div>
 
-@extends('layouts.rightbar')
+    @extends('layouts.rightbar')
 
-<script src="{{ url('assets/js/menu.js') }}"></script>
-<script src="{{ url('assets/js/rightbar.js') }}"></script>
-<script src="{{ url('assets/js/home.js') }}"></script>
+    <script src="{{ url('assets/js/menu.js') }}"></script>
+    <script src="{{ url('assets/js/rightbar.js') }}"></script>
+    <script src="{{ url('assets/js/home.js') }}"></script>
+    <script src="{{ url('assets/js/friend.js') }}"></script>
 </body>
 </html>

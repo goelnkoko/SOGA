@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('friend', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->foreignUuid('user1_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreignUuid('user2_id')->references('id')->on('users')->onDelete('cascade');
+            $table->id();
+            $table->foreignId('user1_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('user2_id')->constrained('users')->onDelete('cascade');
             $table->enum('status', ['ACTIVE', 'BLOCKED', 'SUSPENDED']);
             $table->timestamp('connection_date')->useCurrent();
             $table->timestamps();

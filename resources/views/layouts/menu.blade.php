@@ -30,13 +30,13 @@
         </div>
 
         <div class="left-menu-item" id="notifications">
-            <a href="../notificacao/notificacoes.html">
+            <a href="/notificacao">
                 <span class="material-symbols-outlined material-style">notifications</span>
                 <p>Notificações</p>
             </a>
         </div>
         <div class="left-menu-item" id="settings">
-            <a href="../definicoes/definicoes.html">
+            <a href="/definicoes">
                 <span class="material-symbols-outlined material-style">settings</span>
                 <p>Definições</p>
             </a>

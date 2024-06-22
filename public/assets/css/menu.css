@@ -10,7 +10,7 @@ body {
 .leftBar {
     top: 0;
     left: 0;
-    width: 319px;
+    width: 320px;
     padding: 10px;
     box-sizing: border-box;
     height: 100vh;
@@ -41,7 +41,7 @@ body {
 }
 
 .user-profile {
-    max-width: 231px;
+    width: 231px;
     display: flex;
     flex-direction: row;
     gap: 10px;

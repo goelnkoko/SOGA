@@ -13,7 +13,10 @@
 
     </div>
     <div class="bloco" id="friend-request">
+        <h3>Solicitações de amizade</h3>
+
         <!-- Solicitações de amizade -->
+
     </div>
     <div class="bloco" id="notifications">
         <!-- Notificações -->

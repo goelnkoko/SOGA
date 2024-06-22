@@ -119,8 +119,6 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }).join('') : '';
 
-        console.log(post);
-
         const postTemplate = `
             <div class="post">
                 <div class="post-user-profile">

@@ -12,10 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('friend_requests', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreignUuid('recipient_id')->references('id')->on('users')->onDelete('cascade');
-            $table->text('message')->nullable();
+            $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('recipient_id')->constrained('users')->onDelete('cascade');
             $table->enum('status', ['PENDING', 'ACCEPTED', 'REJECTED']);
             $table->timestamp('request_date')->useCurrent();
             $table->timestamps();
