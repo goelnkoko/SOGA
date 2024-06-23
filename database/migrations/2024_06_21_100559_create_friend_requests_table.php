@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('recipient_id')->constrained('users')->onDelete('cascade');
             $table->enum('status', ['PENDING', 'ACCEPTED', 'REJECTED']);
-            $table->timestamp('request_date')->useCurrent();
             $table->timestamps();
         });
     }

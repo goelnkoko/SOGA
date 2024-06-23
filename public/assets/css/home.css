@@ -93,6 +93,10 @@ body {
     resize: none;
 }
 
+.post-content textarea:focus {
+    outline: none;
+}
+
 .post-content p {
     font-size: 12px;
     font-weight: 100;

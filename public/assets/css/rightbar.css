@@ -40,6 +40,12 @@ body {
     background-color: #eee;
 }
 
+#pesquisa:focus {
+    outline: none;
+    border: none;
+}
+
+
 .rightBar .user-profile .user-profile-profile {
     display: flex;
     gap: 10px;

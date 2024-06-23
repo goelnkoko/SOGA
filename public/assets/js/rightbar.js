@@ -4,24 +4,27 @@ document.addEventListener('DOMContentLoaded', function(){
     fetch('/users')
         .then(response => response.json())
         .then(data => {
+
             const profileSuggestions = document.getElementById('profile-suggestions');
 
             for (let i = 0; i < 3 && i < data.length; i++) {
                 const user = data[i];
-
+                console.log(user);
                 const userProfile = document.createElement('div');
-                userProfile.classList.add('user-profile right');
+                userProfile.classList.add('user-profile');
 
                 userProfile.innerHTML = `
-                <div class="user-profile-profile">
-                    <img src="assets/img/rengoku.png" alt="Foto da Mitsuri">
-                    <div id="profile-content">
-                        <span>${user.name}</span>
-                        <p>@${user.username}</p>
+                    <div class="user-profile-profile">
+                        <img src="assets/img/rengoku.png" alt="Foto da Mitsuri">
+                        <div id="profile-content">
+                            <span>${user.name}</span>
+                            <p>@${user.username}</p>
+                        </div>
                     </div>
-                </div>
-                <button class="send-request" onclick="sendFriendRequest('${user.id}')">Conectar</button>
-            `;
+                    <button onclick="sendFriendRequest(${user.id}, this)">Conectar</button>
+                `;
+
+                profileSuggestions.appendChild(userProfile);
             }
         })
         .catch(error => {

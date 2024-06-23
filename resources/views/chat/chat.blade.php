@@ -14,6 +14,9 @@
     <div class="chat-user-friend">
         <div class="leftbar">
             <div class="chat-header friends-list"><h4>Conexões</h4></div>
+            <div class="search">
+                <input type="text" name="pesquisa" id="pesquisa" placeholder="Pesquisar">
+            </div>
             <div class="online-list">
                 <div class="online">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">

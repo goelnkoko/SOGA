@@ -7,6 +7,8 @@ use App\Models\Friend;
 use App\Models\FriendRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Mockery\Exception;
 
 class FriendRequestController extends Controller
 {
@@ -26,20 +28,42 @@ class FriendRequestController extends Controller
         return response()->json(['message' => 'You are not allowed to send friend request'], 403);
     }
 
+    public function acceptRequest($id): \Illuminate\Http\JsonResponse
+    {
+        try {
+            $friendRequest = FriendRequest::findOrFail($id);
 
-    public function acceptRequest($id) {
-        $friendRequest = FriendRequest::findOrFail($id);
-        $friendRequest->update(['status' => 'ACCEPTED']);
+            // Verificar se o pedido já não foi aceito/rejeitado
+            if ($friendRequest->status !== 'PENDING') {
+                return response()->json(['message' => 'Friend request is not pending'], 400);
+            }
 
-        //Criar amizade
-        Friend::create([
-            'user1_id' => $friendRequest->user_id,
-            'user2_id' => $friendRequest->recipient_id,
-            'status' => 'ACTIVE',
-        ]);
+            // Atualizar o status do pedido para 'ACCEPTED'
+            $friendRequest->update(['status' => 'ACCEPTED']);
 
-        return response()->json(['message' => 'Friend request accepted successfully']);
+            Log::info("Aceitou ".$friendRequest);
+
+            // Criar a amizade
+            $friend = Friend::create([
+                'user1_id' => $friendRequest->user_id,
+                'user2_id' => $friendRequest->recipient_id,
+                'status' => 'ACTIVE',
+            ]);
+
+            Log::info("Passou da cricação ".$friend);
+
+            // Verificar se a amizade foi criada com sucesso
+            if ($friend) {
+                return response()->json(['message' => 'Friend request accepted successfully']);
+            } else {
+                return response()->json(['message' => 'Failed to create friendship'], 500);
+            }
+        } catch (Exception $e) {
+            Log::error('Error accepting friend request: ' . $e->getMessage());
+            return response()->json(['message' => 'An error occurred'], 500);
+        }
     }
+
 
     public function rejectRequest($id)
     {

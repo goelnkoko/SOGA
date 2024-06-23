@@ -47,7 +47,7 @@
 
     <script src="{{ url('assets/js/menu.js') }}"></script>
     <script src="{{ url('assets/js/rightbar.js') }}"></script>
-    <script src="{{ url('assets/js/home.js') }}"></script>
     <script src="{{ url('assets/js/friend.js') }}"></script>
+    <script src="{{ url('assets/js/home.js') }}"></script>
 </body>
 </html>

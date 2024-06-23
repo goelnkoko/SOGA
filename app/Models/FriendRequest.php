@@ -13,8 +13,7 @@ class FriendRequest extends Model
     protected $fillable = [
         'user_id',
         'recipient_id',
-        'status',
-        'request_date'
+        'status'
     ];
 
     public function user(): BelongsTo

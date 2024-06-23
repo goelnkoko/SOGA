@@ -36,12 +36,10 @@ Route::get('/profile_user', function () {
 
 
 Route::middleware('auth')->get('/logged-user', [UserController::class, 'loggedUser'])->name('loggedUser');
-
 Route::post('/login', [UserController::class, 'login'])->name('login');
-
 Route::post('/register', [UserController::class,'register'])->name('register');
-
 Route::resource('/users', UserController::class);
+Route::get('/non-friends', [UserController::class, 'getNonFriends'])->name('getNonFriends')->middleware('auth');
 
 
 //Post Routes
@@ -50,11 +48,13 @@ Route::resource('/users', UserController::class);
 Route::post('/posts', [PostController::class, 'store'])->name('posts.store')->middleware('web');
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index')->middleware('web');
 
+
+//Friend Routes
 Route::middleware('auth')->group(function () {
     Route::post('/friend-requests', [\App\Http\Controllers\FriendRequestController::class, 'sendRequest']);
     Route::get('/friend-requests', [\App\Http\Controllers\FriendRequestController::class, 'index']);
-    Route::post('/friend-requests/{id}/accept', [\App\Http\Controllers\FriendRequestController::class, 'acceptRequest']);
-    Route::post('/friend-requests/{id}/reject', [\App\Http\Controllers\FriendRequestController::class, 'rejectRequest']);
+    Route::patch('/friend-requests/{id}/accept', [\App\Http\Controllers\FriendRequestController::class, 'acceptRequest']);
+    Route::patch('/friend-requests/{id}/reject', [\App\Http\Controllers\FriendRequestController::class, 'rejectRequest']);
 
     Route::get('/friends', [\App\Http\Controllers\FriendController::class, 'index']);
     Route::patch('/friends/{id}', [\App\Http\Controllers\FriendController::class, 'updateStatus']);
