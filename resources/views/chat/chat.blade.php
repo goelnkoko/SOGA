@@ -17,82 +17,61 @@
             <div class="search">
                 <input type="text" name="pesquisa" id="pesquisa" placeholder="Pesquisar">
             </div>
-            <div class="online-list">
-                <div class="online">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-                    </svg>
-                    <p>Goel nkoko</p>
+            <div class="connections-list">
+
+                <div class="connection">
+                    <div class="connection-photo">
+                        <img src="assets/img/karina.jpg" alt="Foto da Karina">
+                    </div>
+                    <div class="connection-info">
+                        <span>Karina Aespa</span>
+                        <p>Cucu querido, tenho 4 ingressos para vc para o nosso próximo show</p>
+                        <p class="last-message-time">10:55</p>
+                    </div>
                 </div>
-                <h6>online agora</h6>
 
-            </div>
-            <div class="online-list">
-                <div class="online">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-                    </svg>
-                    <p>Goel nkoko</p>
-
+                <div class="connection">
+                    <div>
+                        <img src="assets/img/winter.jpg" alt="Foto da Winter">
+                    </div>
+                    <div class="connection-info">
+                        <span>Winter Aespa</span>
+                        <p>Quer ensaiar a nossa próxima coreografia comigo? </p>
+                        <p class="last-message-time">10:55</p>
+                    </div>
                 </div>
-                <h6>online há 16 min</h6>
-            </div>
-            <div class="online-list">
-                <div class="online">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-                    </svg>
-                    <p>Goel nkoko</p>
-
-                </div>
-                <h6>online há 1h</h6>
-            </div>
-             <div class="online-list">
-                <div class="online">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-                    </svg>
-                    <p>Goel nkoko</p>
-
-                </div>
-                <h6>online agora</h6>
-
 
             </div>
         </div>
 
-
         <div class="chat-container">
             <div class="chat-header friend-profile">
-                <div><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-                  </svg></div>
-                <div><h4>Gyomei Himejima</h4></div>
+                <div id="profile-photo"><img src="assets/img/ningning.jpg" alt="Foto da Ningning"></div>
+                <div><h4>Ningning Aespa</h4></div>
             </div>
             <div class="chat-messages">
                 <div class="message user">
-                    <div class="message-text">Hey Rafa, tudo bem?</div>
+                    <div class="message-text">Oi fofa, tudo bem? 🥰</div>
                     <div class="message-times">10:30 AM</div>
                 </div>
                 <div class="message friend">
-                    <div class="message-text">tudo bem, apenas vivendo o meu sonho, e tu?</div>
+                    <div class="message-text">Estou óptima e tu? muito ansiosa para te ver 😋</div>
                     <div class="message-times">10:35 AM</div>
                 </div>
                 <div class="message user">
-                    <div class="message-text">Hey Rafa, tudo bem com a tia?</div>
+                    <div class="message-text">Também. <br>Que tal nos encontrarmos em Bangkok depois das minhas provas? 😀</div>
                     <div class="message-times">10:30 AM</div>
                 </div>
                 <div class="message friend">
-                    <div class="message-text">tudo bem, apenas vivendo o meu sonho, e tu?</div>
+                    <div class="message-text">Óptimo! Estou com a agenda livre e vou te ensinar umas coreografias bem fixes 😁😁</div>
+                    <div class="message-times">10:35 AM</div>
+                </div>
+                <div class="message user">
+                    <div class="message-text">Marcado!! Te amo muito, docinha! ❤️❤️</div>
                     <div class="message-times">10:35 AM</div>
                 </div>
                 <div class="message friend">
-                    <div class="message-text">tudo bem, apenas vivendo o meu sonho, e tu?</div>
+                    <div class="message-text">Eu te amo mais ainda, meu pequeno príncipe! 😘❤️</div>
                     <div class="message-times">10:35 AM</div>
                 </div>
             </div>

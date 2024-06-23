@@ -8,6 +8,7 @@ body{
     justify-content: center;
     align-items: center;
     background: #000000;
+    flex-direction: row;
 }
 
 .chat-container{
@@ -31,9 +32,9 @@ body{
 }
 
 .chat-header h4 {
-    padding: 4px 0;
+    padding: 7px 0;
     margin: 0;
-    height: 40px;
+    height: 50px;
     text-align: center;
     width: 100%;
 }
@@ -68,7 +69,7 @@ body{
 .user{
     background-color:#12444F;
     margin-left: auto;
-    text-align: right;
+    text-align: left;
 }
 
 .friend {
@@ -117,8 +118,8 @@ body{
 
 .leftbar{
     color: #fff;
-    width: 50%;
-    max-width: 50%;
+    min-width: 32%;
+    max-width: 32%;
     height: 100vh;
     padding: 0;
 }
@@ -154,7 +155,7 @@ body{
 }
 
 .search {
-    margin: 10px 16px;
+    margin: 10px 15px;
     background-color: #12444F;
     border-radius: 16px;
 }
@@ -171,4 +172,92 @@ body{
 .search #pesquisa:focus {
     outline: none;
     border: none;
+}
+
+
+
+
+
+
+
+
+.connections-list {
+    padding: 20px;
+}
+
+.connection {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow: hidden;
+    box-sizing: border-box;
+    cursor: pointer;
+    margin: 0;
+    background-color: #000000;
+    justify-content: space-between;
+}
+
+.connection .connection-photo {
+    width: 20%;
+}
+
+.connection .connection-info {
+    border-bottom: 0.5px solid #333;
+    width: 80%;
+}
+
+.connection img {
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.connection span, .connection p {
+    color: white;
+    font-weight: 300;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 2px;
+    margin: 0;
+    box-sizing: border-box;
+    flex-grow: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.connection span {
+    font-size: 1em;
+}
+
+.connection p {
+    width: 100%;
+    font-size: 0.7em;
+    font-weight: 300;
+    color: #aaa;
+    font-family: Arial, Helvetica, sans-serif;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-sizing: border-box;
+}
+
+
+#profile-photo {
+    width: 50px;
+    height: 50px;
+}
+
+#profile-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.last-message-time {
+    padding: 12px;
+    text-align: right;
 }
