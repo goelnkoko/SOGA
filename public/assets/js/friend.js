@@ -1,3 +1,13 @@
+//Função para capturar a resposta
+async function handleFetchResponse(response) {
+    if (!response.ok) {
+        const errorData = await response.json();
+        const errorMessage = errorData.message || errorData.error || `HTTP error! status: ${response.status}`;
+        throw new Error(errorMessage);
+    }
+    return response.json();
+}
+
 // Function to send a friend request
 const sendFriendRequest = async (recipientId, button) => {
 
@@ -13,15 +23,12 @@ const sendFriendRequest = async (recipientId, button) => {
         .then(response => response.json())
         .then(data => {
 
-
-
             if (data.error) {
                 alert(data.error);
             }
             else {
-                // alert(data.message);
-                button.innerHTML = 'Cancelar';
-                button.disabled = true; // Desabilita o botão após a solicitação ser enviada
+                fetchNonFriends();
+                console.log("Request sent successfully");
             }
         })
         .catch(error => {
@@ -40,6 +47,11 @@ const acceptFriendRequest = async (requestId) => {
                 'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
             }
         });
+
+        fetchFriendsRequest();
+
+        const data = await handleFetchResponse(response);
+        console.log('Accept friend request:', data);
     } catch (error) {
         console.error('Error accepting friend request:', error);
     }
@@ -56,6 +68,11 @@ const rejectFriendRequest = async (requestId) => {
                 'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
             }
         });
+
+        fetchFriendsRequest();
+
+        const data = await handleFetchResponse(response);
+        console.log('Reject friend request:', data);
     } catch (error) {
         console.error('Error rejecting friend request:', error);
     }

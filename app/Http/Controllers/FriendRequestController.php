@@ -73,10 +73,14 @@ class FriendRequestController extends Controller
         return response()->json(['message' => 'Friend request rejected successfully']);
     }
 
-    public function index()
+    public function peddingRequests()
     {
-        $requests = FriendRequest::where('recipient_id', Auth::id())->with('user')->get();
+        $requests = FriendRequest::where('recipient_id', Auth::id())
+            ->where('status', 'PENDING')
+            ->with('user')
+            ->get();
 
         return response()->json($requests);
     }
+
 }

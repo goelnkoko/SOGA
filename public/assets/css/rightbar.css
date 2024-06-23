@@ -27,6 +27,18 @@ body {
     transition: transform 0.3s ease-in-out;
 }
 
+#profile-suggestions {
+    display: none;
+}
+
+#friend-request {
+    display: none;
+}
+
+#notifications {
+    display: none;
+}
+
 .bloco h3 {
     text-align: center;
 }

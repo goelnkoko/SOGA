@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Friend;
+use App\Models\FriendRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -150,5 +152,36 @@ class UserController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+    public function getNonFriends()
+    {
+        $authUserId = Auth::id();
+
+        // Get friends
+        $friends = Friend::where(function($query) use ($authUserId) {
+            $query->where('user1_id', $authUserId)
+                ->orWhere('user2_id', $authUserId);
+        })->pluck('user1_id', 'user2_id')->toArray();
+
+        // Get friend requests sent or received
+        $friendRequests = FriendRequest::where(function($query) use ($authUserId) {
+            $query->where('user_id', $authUserId)
+                ->orWhere('recipient_id', $authUserId);
+        })->pluck('user_id', 'recipient_id')->toArray();
+
+        // Merge all ids
+        $excludedUserIds = array_merge(
+            array_keys($friends),
+            array_values($friends),
+            array_keys($friendRequests),
+            array_values($friendRequests),
+            [$authUserId] // Exclude the auth user itself
+        );
+
+        // Get users that are not friends, and have not sent or received friend requests
+        $users = User::whereNotIn('id', $excludedUserIds)->get();
+
+        return response()->json($users);
     }
 }

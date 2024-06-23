@@ -9,14 +9,11 @@
         <input type="text" name="pesquisa" id="pesquisa" placeholder="Pesquisar">
     </div>
     <div class="bloco" id="profile-suggestions">
-        <h3>Pessoas que talvez conheças</h3>
 
     </div>
     <div class="bloco" id="friend-request">
-        <h3>Solicitações de amizade</h3>
 
         <!-- Solicitações de amizade -->
-
     </div>
     <div class="bloco" id="notifications">
         <!-- Notificações -->

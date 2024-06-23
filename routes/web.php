@@ -52,11 +52,11 @@ Route::get('/posts', [PostController::class, 'index'])->name('posts.index')->mid
 //Friend Routes
 Route::middleware('auth')->group(function () {
     Route::post('/friend-requests', [\App\Http\Controllers\FriendRequestController::class, 'sendRequest']);
-    Route::get('/friend-requests', [\App\Http\Controllers\FriendRequestController::class, 'index']);
+    Route::get('/friend-requests', [\App\Http\Controllers\FriendRequestController::class, 'peddingRequests']);
     Route::patch('/friend-requests/{id}/accept', [\App\Http\Controllers\FriendRequestController::class, 'acceptRequest']);
     Route::patch('/friend-requests/{id}/reject', [\App\Http\Controllers\FriendRequestController::class, 'rejectRequest']);
 
-    Route::get('/friends', [\App\Http\Controllers\FriendController::class, 'index']);
+    Route::get('/friends', [\App\Http\Controllers\FriendController::class, 'getFriends']);
     Route::patch('/friends/{id}', [\App\Http\Controllers\FriendController::class, 'updateStatus']);
 });
 

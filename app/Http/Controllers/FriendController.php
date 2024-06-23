@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class FriendController extends Controller
 {
-    public function index()
+    public function getFriends()
     {
         $friendships = Friend::where('user1_id', Auth::id())
             ->orWhere('user2_id', Auth::id())
