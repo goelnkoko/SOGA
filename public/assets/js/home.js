@@ -10,6 +10,19 @@ const postForm = document.getElementById('post-form');
 const postsContainer = document.getElementById('posts-container');
 const postContent = document.getElementById('post');
 
+const fetchLoggedInUser = async () => {
+    try {
+        const response = await fetch('/logged-user');
+        const data = await response.json();
+
+        console.log("Aqui esta os dados buscados: " + data.id);
+        return data.id;
+    } catch (error) {
+        console.error('Erro ao buscar usuário logado:', error);
+        return 0;
+    }
+}
+
 uploadButton.addEventListener('click', () => fileInput.click());
 
 fileInput.addEventListener('change', event => handleFileUploads(event.target.files));
@@ -104,7 +117,11 @@ const displayPost = post => {
         }
     }).join('') : '';
 
+    let authUserId;
 
+    (async () => { authUserId = await fetchLoggedInUser(); })();
+
+    console.log("Aqui estao os id: " + authUserId + " - " + post.user.id);
 
     const postTemplate = `
             <div class="post">
@@ -121,17 +138,27 @@ const displayPost = post => {
                                 <p>${timeAgo(post.created_at)}</p>
                             </div>
                         </a>
-                        <div class="more-options">
+                        <div class="more-options" onclick="showPostMenu(${post.id}, event)">
                             <span class="material-symbols-outlined material-style">more_vert</span>
                         </div>
-                        <div class="menu">
+
+
+                        <div class="menu" id="menu-${post.id}">
                             <ul>
-                                <li><a href="#">Seguir</a></li>
-                                <li><a href="#">Editar</a></li>
-                                <li><a href="#">Eliminar</a></li>
-                                <li><a href="#">Ver perfil</a></li>
+                                ${
+                                    authUserId === post.user.id ? `
+                                        <li onclick="editPostContent(${post.id})">Editar</li>
+                                        <li onclick="removePost(${post.id})">Eliminar</li>
+                                    ` : `
+                                        <li onclick="sendFriendRequest(${post.user.id}, this)">Seguir</li>
+                                        <li onclick="hidePost(${post.id})">Ocultar</li>
+                                    `
+    }
+                                <li><a href="/profile?userId=${post.user.id}">Ver perfil</a></li>
                             </ul>
                         </div>
+
+
                     </div>
                     <div class="post-content">
                         <p>${post.content === null ? '' : post.content}</p>
@@ -178,15 +205,31 @@ const timeAgo = timestamp => {
     return `${yearsAgo} as`;
 };
 
+const showPostMenu = (postId, event) => {
+    event.stopPropagation();
+    const menu = document.getElementById(`menu-${postId}`);
+
+    document.querySelectorAll('.menu').forEach(menu => {     // Fecha todos os menus antes de abrir o menu selecionado
+        menu.style.display = 'none';
+    });
+
+    menu.style.display = 'block';
+}
+
+window.addEventListener('click', function (event) {
+    if (!event.target.closest('.more-options') && !event.target.closest('.menu')) {   // Fecha todos os menus quando clicar fora, a menos que o clique seja no botão "more-options" ou no próprio menu
+        document.querySelectorAll('.menu').forEach(menu => {
+            menu.style.display = 'none';
+        });
+    }
+});
+
 window.updateLikeStatus = () => {
     const like = document.getElementById('like');
     like.classList.toggle('liked');
     like.classList.toggle('unliked');
 };
 
-
 document.addEventListener("DOMContentLoaded", () => {
     loadPosts();
 });
-
-

@@ -29,6 +29,7 @@ const sendFriendRequest = async (recipientId, button) => {
             else {
                 fetchNonFriends();
                 console.log("Request sent successfully");
+                button.innerHTML = "Não seguir";
             }
         })
         .catch(error => {

@@ -6,15 +6,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // const widthLeft = leftBar.offsetWidth;
     logo.addEventListener('click', () => {
-        window.location.href = "../home/home.html";
+        window.location.href = "/home";
     });
 
     menu_home.addEventListener('click', () => {
-        window.location.href = "../home/home.html";
+        window.location.href = "/home";
     });
 
     menu_profile.addEventListener('click', () => {
-        window.location.href = "../perfil/perfil.html";
+        window.location.href = "/profile";
     });
 
     fetch('/logged-user')
@@ -38,6 +38,4 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => {
             console.error('Error fetching user data:', error);
         });
-
-
 });
