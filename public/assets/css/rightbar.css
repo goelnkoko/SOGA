@@ -119,7 +119,6 @@ body {
 @media (max-width: 960px) {
     body {
         margin-right: 0;
-        background-color: #111;
     }
 
     .rightBar {

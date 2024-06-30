@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // ID do usuário que criou o post
-            $table->string('content');
+            $table->string('content')->nullable();
             $table->json('media')->nullable(); // Coluna para armazenar as mídias
             $table->timestamps();
         });

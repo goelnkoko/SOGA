@@ -1,13 +1,13 @@
 * {
     font-family: 'Open Sans', Helvetica, Cambria, sans-serif;
     font-weight: 600;
-    color: #fff;
+    color: rgb(231, 233, 234);
     scrollbar-color: rgb(62, 65, 68) rgb(22, 24, 28);
 }
 
 a {
     text-decoration: none;
-    color: #fff;
+    color: rgb(231, 233, 234);
 }
 
 body {
@@ -16,7 +16,13 @@ body {
     padding: 0;
 }
 
-/*Estilizar o ícone do menu principal*/
+.more-options {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
 #home span.material-style {
     animation: none;
     font-variation-settings: 'FILL' 1, 'wght' 700;
@@ -27,14 +33,12 @@ body {
     font-weight: 700;
 }
 
-/***/
-
 .container {
     display: flex;
     min-height: 100vh;
 }
 
-.leftBar, .feed, .rightBar, .publicar, .post, .post-content, .icons, .thumbnail {
+.leftBar, .feed, .rightBar, .publicar, .post, .post-content, .icons, .thumbnail, .medias {
     box-sizing: border-box;
 }
 
@@ -43,14 +47,15 @@ body {
     padding: 30px;
 }
 
-/*Área de publicação*/
 .publicar, .post {
+    position: relative;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    gap: 5px;
     border: 2px solid #333;
     border-radius: 20px;
-    padding: 30px;
-    margin: 20px 30px;
+    margin: 20px 30px 0;
+    padding: 20px 20px 0;
 }
 
 .publicar {
@@ -78,7 +83,6 @@ body {
 }
 
 .post-content {
-    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -98,9 +102,13 @@ body {
 }
 
 .post-content p {
-    font-size: 12px;
-    font-weight: 100;
+    font-size: 16px;
+    font-weight: 400;
     margin: 0;
+    padding-top: 0;
+    font-family: TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    text-overflow: unset;
+    color: rgb(231, 233, 234);
 }
 
 .icons {
@@ -110,12 +118,8 @@ body {
     padding: 0;
 }
 
-.post .post-content, .post .icons {
-    padding-left: 60px;
-}
-
 .post .icons {
-    margin: 10px 20px;
+    margin: 3px 20px;
 }
 
 .icons button {
@@ -134,37 +138,45 @@ body {
 }
 
 .post {
+    position: relative;
     background-color: #000000b1;
     border-radius: 20px;
-    padding: 30px 30px 0;
     margin-bottom: 10px;
 }
 
 .post img, .post video {
     width: 100%;
-    /*border-radius: 10px;*/
 }
 
-.post-user-profile {
+.post-header {
     width: 100%;
-    height: 50px;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
-.post-user-profile img {
+.post-left img {
     width: 50px;
     height: 50px;
     border-radius: 50%;
 }
 
-.post-user-profile a {
+.post-header a {
     display: flex;
     flex-direction: row;
     gap: 10px;
 }
 
-.post-user-profile #profile-content span, .post-user-profile #profile-content p {
-    color: #fff;
-    font-weight: 300;
+.post-header #post-header-info {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.post-header #post-header-info span,
+.post-header #post-header-info p {
+    font-weight: 600;
     font-family: Arial, Helvetica, sans-serif;
     padding: 2px;
     margin: 0;
@@ -172,24 +184,32 @@ body {
     min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-size: 1em;
 }
 
-.post-user-profile #profile-content p {
-    font-size: 0.7em;
-    font-weight: 100;
-    color: #aaa;
+.post-header #post-header-info p {
+    font-weight: 200;
+    color: #4a5568;
 }
 
-.icons span.material-style {
+.post-content .medias {
+    border-radius: 15px;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.icons span.material-style, .more-options span.material-style {
     font-size: 25px;
     font-weight: 100;
     font-variation-settings: 'OPSZ' 40;
-    padding: 5px;
+    padding: 7px;
     margin: 0;
     animation: none;
 }
 
-.icons span.material-style:hover {
+.icons span.material-style:hover, .more-options span.material-style:hover {
     background-color: #0095b64f;
     color: #0095b6;
     border-radius: 50%;
@@ -210,7 +230,7 @@ body {
     margin: 5px;
     width: 100px;
     height: 100px;
-    border: 1px solid #ccc;
+    border: 1px solid rgb(231, 233, 234);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -227,7 +247,6 @@ body {
     top: 5px;
     right: 5px;
     background: rgba(0, 0, 0, 0.5);
-    color: #fff;
     border: none;
     border-radius: 50%;
     width: 20px;
@@ -254,8 +273,9 @@ body {
 }
 
 .single-media img, .single-media video {
-    width: 100%;
-    height: auto;
+    width: 50%;
+    height: 50%;
+    border-radius: 100%;
 }
 
 .double-media {
@@ -285,7 +305,6 @@ body {
 .multi-media img, .multi-media video {
     height: 100%;
     object-fit: cover;
-    margin-bottom: 10px;
 }
 
 .multi-media .more-media {
@@ -302,7 +321,6 @@ body {
 .multi-media .more-media button {
     background: none;
     border: none;
-    color: white;
     font-size: 1.5em;
     font-weight: bold;
     cursor: pointer;
@@ -311,15 +329,45 @@ body {
 .liked span.material-style {
     font-variation-settings: 'FILL' 1;
     color: #0095b6;
-    /*text-shadow: 1px 1px 2px #0095b6;*/
     font-size: 30px;
-    padding: 0;
 }
 
 .unliked span.material-style {
     font-variation-settings: 'FILL' 0;
-    color: #fff;
     font-size: 30px;
+}
+
+
+
+/*Menu*/
+
+.menu {
+    display: none;
+    position: absolute;
+    top: 30px;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.menu ul {
+    list-style: none;
+    margin: 0;
     padding: 0;
+}
+
+.menu li {
+    padding: 10px 20px;
+}
+
+.menu li a {
+    text-decoration: none;
+    color: black;
+    display: block;
+}
+
+.menu li a:hover {
+    background-color: #f0f0f0;
 }
 

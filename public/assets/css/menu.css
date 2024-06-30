@@ -164,7 +164,6 @@ span.material-style {
 @media (max-width: 960px) {
     body {
         margin-left: 250px;
-        background-color: #111;
     }
 
     .leftBar, .rightBar {
@@ -176,7 +175,6 @@ span.material-style {
 @media (max-width: 768px) {
     body {
         margin-left: 220px;
-        background-color: #222;
     }
 
     .leftBar {
@@ -188,7 +186,6 @@ span.material-style {
 @media (max-width: 480px) {
     body {
         margin-left: 0;
-        background-color: #333;
     }
 
     .leftBar {

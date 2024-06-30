@@ -46,7 +46,7 @@ Route::get('/non-friends', [UserController::class, 'getNonFriends'])->name('getN
 
 //Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
 Route::post('/posts', [PostController::class, 'store'])->name('posts.store')->middleware('web');
-Route::get('/posts', [PostController::class, 'index'])->name('posts.index')->middleware('web');
+Route::get('/posts', [PostController::class, 'showPosts'])->name('posts.index')->middleware('web');
 
 
 //Friend Routes
