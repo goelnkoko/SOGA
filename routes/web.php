@@ -32,7 +32,9 @@ Route::get('/profile_user', function () {
     return view('profile.profile_user');
 })->name('profile_user')->middleware('auth');
 
-
+Route::get('/definicoes', function () {
+    return view('auth.definicoes');
+})->name('definicoes');
 
 
 Route::middleware('auth')->get('/logged-user', [UserController::class, 'loggedUser'])->name('loggedUser');
@@ -40,6 +42,7 @@ Route::post('/login', [UserController::class, 'login'])->name('login');
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 Route::post('/register', [UserController::class,'register'])->name('register');
 Route::resource('/users', UserController::class);
+Route::post('/definicoes', [UserController::class, 'definicoes'])->name('definicoes');
 Route::get('/non-friends', [UserController::class, 'getNonFriends'])->name('getNonFriends')->middleware('auth');
 
 
