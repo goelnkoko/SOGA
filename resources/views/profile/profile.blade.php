@@ -10,12 +10,19 @@
 <body>
     @extends('layouts.menu')
     <div class="profile-card">
-        <div class="header">
-            <div class="profile-pic"></div>
+       
+        
+            <div class="profile-pic">
+            <img src="assets/img/mitsuri-fofina.png" alt="">
+            </div>
+
+            <div class= "edit-btn">   <button class="edit-button">Editar perfil</button>
+            </div>
             <div class="edit-icon">
                 <i class="fas fa-camera"></i>
+             
             </div>
-        </div>
+        
         <div class="profile-info">
             <h2>User</h2>
             <p>User@gmail.com</p>
@@ -24,7 +31,7 @@
             <p><i class="fas fa-gift"></i> Nascido(a) </p>
             <p><i class="fas fa-school"></i> Instituições Academicas</p>
            
-            <button class="edit-button">Editar perfil</button>
+      
         </div>
         <div class="profile-tabs">
             <div class="tab active" onclick="showTab('publicacoes')"><i class="fas fa-edit"></i> Publicações</div>

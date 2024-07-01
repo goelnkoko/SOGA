@@ -1,9 +1,9 @@
 body {
-    margin-right: 400px;
+    margin-right: 350px;
 }
 
 .rightBar {
-    width: 400px;
+    width: 350px;
     position: fixed;
     right: 0;
     top: 0;
@@ -48,8 +48,12 @@ body {
     padding: 7px;
     text-align: center;
     font-size: 15px;
-    background-color: #eee;
+    background-color: #0cadde7e;
+    outline: none;
+    border: none;
 }
+
+
 
 #pesquisa:focus {
     outline: none;

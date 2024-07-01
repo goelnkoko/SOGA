@@ -35,4 +35,22 @@ document.addEventListener('DOMContentLoaded', () => {
     videosButton.addEventListener('click', () => {
         alert('Vídeos functionality is not yet implemented.');
     });
+
+
+    const profileInfo = document.getElementById('profile-info');
+
+    const template = 
+    `
+            <h2>User</h2>
+            <p>User@gmail.com</p>
+            <p><i class="fas fa-briefcase"></i>Trabalho</p> 
+            <p><i class="fas fa-map-marker-alt"></i> Cidade/País</p>
+            <p><i class="fas fa-gift"></i> Nascido(a) </p>
+            <p><i class="fas fa-school"></i> Instituições Academicas</p>
+           
+            <button class="edit-button">Editar perfil</button>
+    `;
+
+    profileInfo.innerHTML = template;
+
 });
