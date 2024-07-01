@@ -107,17 +107,6 @@ body {
 /* Nível 2: Máximo 1100px */
 @media (max-width: 1100px) {
     body {
-        margin-right: 270px;
-    }
-
-    .rightBar {
-        width: 270px;
-    }
-}
-
-/* Nível 3: Máximo 960px */
-@media (max-width: 960px) {
-    body {
         margin-right: 0;
     }
 

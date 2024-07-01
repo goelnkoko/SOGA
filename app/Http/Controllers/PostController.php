@@ -79,4 +79,26 @@ class PostController extends Controller
             return response()->json(['error' => 'Falha ao criar o post. Por favor, tente novamente.'], 400);
         }
     }
+
+    public function removePost(Post $post): \Illuminate\Http\JsonResponse
+    {
+        try {
+
+            Log::info("Removing post object: " . $post->user_id);
+
+            if ($post->user_id !== Auth::id()) {
+                return response()->json(['error' => 'Você não tem permissão para deletar este post.'], 403);
+            }
+
+            $post->delete(); // Deletar o post
+
+            Log::info("Post deleted");
+
+            return response()->json(['message' => 'Post deletado com sucesso.'], 200);
+        } catch (Exception $e) {
+            Log::error('Erro ao deletar post: ' . $e->getMessage());
+            return response()->json(['error' => 'Falha ao deletar o post. Por favor, tente novamente.'], 400);
+        }
+    }
+
 }

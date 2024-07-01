@@ -37,6 +37,7 @@ Route::get('/profile_user', function () {
 
 Route::middleware('auth')->get('/logged-user', [UserController::class, 'loggedUser'])->name('loggedUser');
 Route::post('/login', [UserController::class, 'login'])->name('login');
+Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 Route::post('/register', [UserController::class,'register'])->name('register');
 Route::resource('/users', UserController::class);
 Route::get('/non-friends', [UserController::class, 'getNonFriends'])->name('getNonFriends')->middleware('auth');
@@ -47,7 +48,7 @@ Route::get('/non-friends', [UserController::class, 'getNonFriends'])->name('getN
 //Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
 Route::post('/posts', [PostController::class, 'store'])->name('posts.store')->middleware('web');
 Route::get('/posts', [PostController::class, 'showPosts'])->name('posts.index')->middleware('web');
-
+Route::delete('/posts/{post}', [PostController::class, 'removePost'])->middleware('auth');
 
 //Friend Routes
 Route::middleware('auth')->group(function () {

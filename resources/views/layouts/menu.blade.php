@@ -48,4 +48,7 @@
             </a>
         </div>
     </div>
+    <div id="logout">
+        <span class="material-symbols-outlined material-style">logout</span>
+    </div>
 </div>
