@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Profile;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -13,7 +15,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('users')->insert([
+        $users = [
             [
                 'name' => 'Nzinga Kazi',
                 'username' => 'nzingakazi',
@@ -104,6 +106,17 @@ class UsersTableSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-        ]);
+        ];
+
+        foreach ($users as $userData) {
+            $user = User::create($userData);
+
+            // Criar o perfil correspondente para cada usuário
+            Profile::create([
+                'user_id' => $user->id,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
     }
 }

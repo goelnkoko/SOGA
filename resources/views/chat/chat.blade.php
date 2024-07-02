@@ -74,6 +74,23 @@
                     <div class="message-text">Eu te amo mais ainda, meu pequeno príncipe! 😘❤️</div>
                     <div class="message-times">10:35 AM</div>
                 </div>
+                <div class="message user">
+                    <div class="message-text">Marcado!! Te amo muito, docinha! ❤️❤️</div>
+                    <div class="message-times">10:35 AM</div>
+                </div>
+                <div class="message friend">
+                    <div class="message-text">Eu te amo mais ainda, meu pequeno príncipe! 😘❤️</div>
+                    <div class="message-times">10:35 AM</div>
+                </div>
+                <div class="message user">
+                    <div class="message-text">Marcado!! Te amo muito, docinha! ❤️❤️</div>
+                    <div class="message-times">10:35 AM</div>
+                </div>
+                <div class="message friend">
+                    <div class="message-text">Eu te amo mais ainda, meu pequeno príncipe! 😘❤️</div>
+                    <div class="message-times">10:35 AM</div>
+                </div>
+
             </div>
             <form class="input-form">
                 <textarea id="message-text" name="story" rows="1" cols="33" placeholder="Mensagem"></textarea>

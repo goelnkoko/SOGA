@@ -3,6 +3,7 @@
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', function (){
     return view('auth.login');
@@ -31,8 +32,6 @@ Route::get('/profile', function () {
 Route::get('/profile_user', function () {
     return view('profile.profile_user');
 })->name('profile_user')->middleware('auth');
-
-
 
 
 Route::middleware('auth')->get('/logged-user', [UserController::class, 'loggedUser'])->name('loggedUser');
@@ -72,3 +71,29 @@ Route::middleware('auth')->group(function () {
 Route::get('/chat', function () {
     return view('chat.chat');
 })->name('chat')->middleware('auth');
+
+
+//Rotas para os perfies
+Route::middleware('auth')->group(function () {
+    Route::get('profiles/{id}', [ProfileController::class, 'show']);
+
+    Route::post('profiles/{id}/add-hobby', [ProfileController::class, 'addHobby']);
+    Route::post('profiles/{id}/remove-hobby', [ProfileController::class, 'removeHobby']);
+
+    Route::post('profiles/{id}/add-interest', [ProfileController::class, 'addInterest']);
+    Route::post('profiles/{id}/remove-interest', [ProfileController::class, 'removeInterest']);
+
+    Route::put('profiles/{id}', [ProfileController::class, 'updateProfile']);
+    Route::put('profiles/{id}/photo', [ProfileController::class, 'updatePhoto']);
+    Route::delete('profiles/{id}/photo', [ProfileController::class, 'removePhoto']);
+    Route::put('profiles/{id}/biography', [ProfileController::class, 'updateBiography']);
+
+    Route::post('profiles/{id}/add-education', [ProfileController::class, 'addEducation']);
+    Route::delete('profiles/{profileId}/remove-education/{educationId}', [ProfileController::class, 'removeEducation']);
+
+    Route::post('profiles/{id}/add-work', [ProfileController::class, 'addWork']);
+    Route::delete('profiles/{profileId}/remove-work/{workId}', [ProfileController::class, 'removeWork']);
+
+    Route::post('profiles/{id}/add-contact', [ProfileController::class, 'addContact']);
+    Route::delete('profiles/{profileId}/remove-contact/{contactId}', [ProfileController::class, 'removeContact']);
+});

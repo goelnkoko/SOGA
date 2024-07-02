@@ -4,17 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Friend;
 use App\Models\FriendRequest;
+use App\Models\User;
+use App\Models\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use App\Models\User;
-
 class UserController extends Controller
 {
-
     public function login(Request $request)
     {
-
         $request->validate([
             'username' => 'required',
             'password' => 'required'
@@ -36,42 +34,42 @@ class UserController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('home'); // Redireciona para a página desejada
+            return redirect()->intended('home');
         }
 
         return back()->withErrors([
-            'message' => 'As credenciais fornecidas não correspondem aos nossos registros.',
+            'message' => 'The provided credentials do not match our records.',
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function register(Request $request)
     {
-        // Validação dos dados do formulário
+        // Validate the form data
         $request->validate([
             'name' => 'required|string|max:255',
             'username' => 'required|string|max:40',
             'email' => 'nullable|string|max:255',
-            'telefone' => 'nullable|string|max:20',
+            'phone' => 'nullable|string|max:20',
             'password' => 'required|string|min:8',
         ]);
 
-        // Criação do usuário
+        // Create the user
         $user = User::create([
             'name' => $request->name,
             'username' => $request->username,
             'email' => $request->email,
-            'telefone' => $request->telefone,
-            'password' => bcrypt($request->password), // Criptografando a senha com bcrypt
+            'phone' => $request->phone,
+            'password' => bcrypt($request->password), // Encrypting the password with bcrypt
+        ]);
+
+        // Create the corresponding profile
+        $profile = Profile::create([
+            'user_id' => $user->id,
         ]);
 
         return redirect()->intended('login');
-        // | response()->json(['message' => 'Usuário criado com sucesso', 'user' => $user], 201)
     }
 
-    //Funcao para retornar o user logado
     public function loggedUser()
     {
         $user = auth()->user();
@@ -84,37 +82,23 @@ class UserController extends Controller
         return response()->json($users);
     }
 
-
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         $user = User::findOrFail($id);
         return response()->json($user);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $user = User::findOrFail($id);
         return view('users.edit', compact('user'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         $request->validate([
@@ -124,24 +108,19 @@ class UserController extends Controller
         ]);
 
         $user = User::findOrFail($id);
-
         $user->update($request->all());
 
         return redirect()->route('users.index')
-                         ->with('success', 'Usuario atualizado com sucesso');
-
+            ->with('success', 'User updated successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         $user = User::findOrFail($id);
         $user->delete();
 
         return redirect()->route('users.index')
-        ->with('success','Usuario deletado com sucesso');
+            ->with('success', 'User deleted successfully');
     }
 
     public function logout(Request $request)
@@ -180,7 +159,7 @@ class UserController extends Controller
         );
 
         // Get users that are not friends, and have not sent or received friend requests
-        $users = User::whereNotIn('id', $excludedUserIds)->get();
+        $users = User::whereNotIn('id', $excludedUserIds)->with('profile')->get();
 
         return response()->json($users);
     }
