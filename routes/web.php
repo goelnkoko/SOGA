@@ -102,3 +102,4 @@ Route::middleware('auth')->group(function () {
     Route::post('profiles/{id}/add-contact', [ProfileController::class, 'addContact']);
     Route::delete('profiles/{profileId}/remove-contact/{contactId}', [ProfileController::class, 'removeContact']);
 });
+
