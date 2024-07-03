@@ -26,8 +26,8 @@
             <div class="tab" onclick="showTab('videos')"><i class="fas fa-video"></i> Vídeos</div>
         </div>
 
-        
+
     </div>
-    <script src="{{url('assets/js/profile_user.js')}}"></script>
+    <script src="{{url('assets/js/profile.js')}}"></script>
 </body>
 </html>

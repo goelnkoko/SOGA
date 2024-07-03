@@ -3,19 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const logo = document.querySelector('#logo');
     const menu_home = document.querySelector('#left-menu');
     const menu_profile = document.querySelector('.user-profile');
-
-    // const widthLeft = leftBar.offsetWidth;
-    logo.addEventListener('click', () => {
-        window.location.href = "/home";
-    });
-
-    menu_home.addEventListener('click', () => {
-        window.location.href = "/home";
-    });
-
-    menu_profile.addEventListener('click', () => {
-        window.location.href = "/profile";
-    });
+    let userId = 0;
 
     fetch('/logged-user')
         .then(response => response.json())
@@ -31,8 +19,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             `;
 
+            userId = data.id;
+
+            logo.addEventListener('click', () => {
+                window.location.href = "/home";
+            });
+
+            menu_home.addEventListener('click', () => {
+                window.location.href = "/home";
+            });
+
+            menu_profile.addEventListener('click', (userId) => {
+                window.location.href = `/profile?userId=${userId}`;
+            });
+
             profileLeft.addEventListener('click', () => {
-                window.location.href = "/profile";
+                window.location.href = `/profile?userId=${userId}`;
             });
         })
         .catch(error => {

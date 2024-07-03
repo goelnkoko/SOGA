@@ -91,7 +91,6 @@ Route::middleware('auth')->group(function () {
     Route::put('profiles/{id}', [ProfileController::class, 'updateProfile']);
     Route::put('profiles/{id}/photo', [ProfileController::class, 'updatePhoto']);
     Route::delete('profiles/{id}/photo', [ProfileController::class, 'removePhoto']);
-    Route::put('profiles/{id}/biography', [ProfileController::class, 'updateBiography']);
 
     Route::post('profiles/{id}/add-education', [ProfileController::class, 'addEducation']);
     Route::delete('profiles/{profileId}/remove-education/{educationId}', [ProfileController::class, 'removeEducation']);

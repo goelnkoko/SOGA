@@ -11,10 +11,14 @@ class Profile extends Model
 
     protected $fillable = [
         'user_id',
+        'name',
         'photo',
         'biography',
         'hobbies',
+        'gender',
         'interests',
+        'birthdate',
+        'location'
     ];
 
     // Converte o campo hobbies para um array quando acessado

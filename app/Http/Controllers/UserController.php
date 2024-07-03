@@ -18,19 +18,7 @@ class UserController extends Controller
             'password' => 'required'
         ]);
 
-        $loginField = $request->input('username');
-        $password = $request->input('password');
-
-        $credentials = [];
-        if (filter_var($loginField, FILTER_VALIDATE_EMAIL)) {
-            $credentials = ['email' => $loginField];
-        } elseif (preg_match('/^[0-9]+$/', $loginField)) {
-            $credentials = ['telefone' => $loginField];
-        } else {
-            $credentials = ['username' => $loginField];
-        }
-
-        $credentials['password'] = $password;
+        $credentials = $request->only(['username', 'password']);
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
@@ -44,27 +32,26 @@ class UserController extends Controller
 
     public function register(Request $request)
     {
-        // Validate the form data
         $request->validate([
             'name' => 'required|string|max:255',
-            'username' => 'required|string|max:40',
-            'email' => 'nullable|string|max:255',
-            'phone' => 'nullable|string|max:20',
-            'password' => 'required|string|min:8',
+            'username' => 'required|string|max:40|unique:users,username',
+            'password' => 'required|string|min:8|confirmed',
+            'birthdate' => 'required|date',
+            'gender' => 'required|string|max:10',
+            'location' => 'nullable|string|max:50',
         ]);
 
-        // Create the user
         $user = User::create([
-            'name' => $request->name,
             'username' => $request->username,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'password' => bcrypt($request->password), // Encrypting the password with bcrypt
+            'password' => bcrypt($request->password),
         ]);
 
-        // Create the corresponding profile
-        $profile = Profile::create([
+        Profile::create([
             'user_id' => $user->id,
+            'name' => $request->name,
+            'birthdate' => $request->birthdate,
+            'gender' => $request->gender,
+            'location' => $request->location,
         ]);
 
         return redirect()->intended('login');

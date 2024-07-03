@@ -7,6 +7,7 @@ use App\Models\Education;
 use App\Models\Work;
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
@@ -17,9 +18,36 @@ class ProfileController extends Controller
         return response()->json($profile);
     }
 
+    public function updateProfile(Request $request, $id)
+    {
+
+        Log::info("Entrou");
+
+        $profile = Profile::findOrFail($id);
+
+        Log::info("Hora de atualizar o profile: " . $profile->id);
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'location' => 'nullable|string|max:50',
+            'biography' => 'nullable|string',
+            'gender' => 'required|string|max:10',
+        ]);
+
+        Log::info("Request criada com sucesso");
+
+        $profile->update($request->only(['name', 'location', 'biography', 'gender']));
+
+        Log::info("Update completo");
+
+        return response()->json(['message' => 'Profile updated successfully', 'profile' => $profile]);
+    }
+
+
     public function addHobby(Request $request, $id)
     {
         $profile = Profile::findOrFail($id);
+        $request->validate(['hobby' => 'required|string']);
         $profile->addHobby($request->hobby);
         return response()->json(['message' => 'Hobby added successfully', 'profile' => $profile]);
     }
@@ -27,6 +55,7 @@ class ProfileController extends Controller
     public function removeHobby(Request $request, $id)
     {
         $profile = Profile::findOrFail($id);
+        $request->validate(['hobby' => 'required|string']);
         $profile->removeHobby($request->hobby);
         return response()->json(['message' => 'Hobby removed successfully', 'profile' => $profile]);
     }
@@ -34,6 +63,7 @@ class ProfileController extends Controller
     public function addInterest(Request $request, $id)
     {
         $profile = Profile::findOrFail($id);
+        $request->validate(['interest' => 'required|string']);
         $profile->addInterest($request->interest);
         return response()->json(['message' => 'Interest added successfully', 'profile' => $profile]);
     }
@@ -41,42 +71,39 @@ class ProfileController extends Controller
     public function removeInterest(Request $request, $id)
     {
         $profile = Profile::findOrFail($id);
+        $request->validate(['interest' => 'required|string']);
         $profile->removeInterest($request->interest);
         return response()->json(['message' => 'Interest removed successfully', 'profile' => $profile]);
-    }
-
-    public function updateProfile(Request $request, $id)
-    {
-        $profile = Profile::findOrFail($id);
-        $profile->update($request->all());
-        return response()->json(['message' => 'Profile updated successfully', 'profile' => $profile]);
     }
 
     public function updatePhoto(Request $request, $id)
     {
         $profile = Profile::findOrFail($id);
+
+        Log::info('Request received:', ['request' => $request->all()]);
+        Log::info('Files received:', ['files' => $request->file()]);
+
         if ($request->hasFile('photo')) {
-            $filePath = $request->file('photo')->store('photos');
+            Log::info('File detected in request.');
+            $filePath = $request->file('photo')->store('photos', 'public');
             $profile->update(['photo' => $filePath]);
+
+            return response()->json(['message' => 'Photo updated successfully', 'profile' => $profile]);
         }
-        return response()->json(['message' => 'Photo updated successfully', 'profile' => $profile]);
+
+        Log::info('No file detected in request.');
+
+        return response()->json(['message' => 'Photo update failed', 'profile' => $profile]);
     }
 
     public function removePhoto($id)
     {
         $profile = Profile::findOrFail($id);
         if ($profile->photo) {
-            Storage::delete($profile->photo);
+            Storage::disk('public')->delete($profile->photo);
             $profile->update(['photo' => null]);
         }
         return response()->json(['message' => 'Photo removed successfully', 'profile' => $profile]);
-    }
-
-    public function updateBiography(Request $request, $id)
-    {
-        $profile = Profile::findOrFail($id);
-        $profile->update(['biography' => $request->biography]);
-        return response()->json(['message' => 'Biography updated successfully', 'profile' => $profile]);
     }
 
     public function addEducation(Request $request, $id)

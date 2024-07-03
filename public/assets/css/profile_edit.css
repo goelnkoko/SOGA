@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+DE+Grund:wght@100..400&family=Reddit+Mono:wght@200..900&display=swap');
+
+.edit-profile {
+    /*display: none;*/
+    position: absolute;
+    width: 70%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background-color: #000000;
+    font-family: "Reddit Mono", monospace;
+}
+
+.edit-field {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #12444F;
+}
+
+/*Estilos ligados ao edit profiles*/
+.edit-photo {
+
+}
+
+.edit-profile-photo {
+    position: absolute;
+    z-index: 4;
+    left: 50px;
+    bottom: -50px;
+    background-color: rgba(7, 73, 70, 0.63);
+    padding: 10px;
+    border-radius: 100%;
+    color: white;
+    cursor: pointer;
+}
+
+.simple {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.simple-left, .simple-right {
+    width: 45%;
+}
+
+.item {
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 7px;
+}
+
+.item input, .item textarea, .item select {
+    padding: 7px 12px;
+    background-color: #12444F;
+    color: #ddd;
+    outline: none;
+    border: none;
+    margin-top: 5px;
+    border-radius: 15px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.item input:focus {
+    outline: none;
+    border: none;
+}
+
+.item label {
+    font-size: 13px;
+    color: #304660;
+    margin-left: 12px;
+}
+
+
+/*Área dos botões*/
+.edit-btn {
+    padding: 7px 12px;
+    background-color: #ddd;
+    color: #12444F;
+    outline: none;
+    border: none;
+    border-radius: 15px;
+    float: right;
+    margin-right: 10px;
+}
+
+#simple-edit-btn {
+    margin-top: 10px;
+}
+
