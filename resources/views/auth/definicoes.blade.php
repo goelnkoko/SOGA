@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu</title>
+    <link rel="stylesheet" href="{{url('assets/css/definicoes.css')}}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="definicoes.css">
 </head>
 <body>
-
+@extends('layouts.menu')
     <leftBar></leftBar>
 
     <div class="menu">
@@ -16,14 +17,8 @@
             <i class="material-icons">help_outline</i>
             <span>Ajuda e Suporte</span>
         </div>
-        <div class="menu-item">
-            <i class="material-icons">language</i>
-            <span>Idioma</span>
-        </div>
-        <div class="menu-item">
-            <i class="material-icons">format_color_fill</i>
-            <span>Mudar a cor do fundo</span>
-        </div>
+       
+        
         <div class="menu-item">
             <i class="material-icons">person</i>
             <span>Ajuste do perfil</span>
@@ -40,5 +35,6 @@
 
     <script src="../geral/js/include.js"></script>
     <script src="../geral/css/leftBar.css"></script>
+   
 </body>
 </html>

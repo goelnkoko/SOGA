@@ -108,6 +108,8 @@ const displayPost = (post, authUserId) => {
     let mediaContent = '';
     let hiddenMediaContent = '';
 
+    console.log(post)
+
     if (post.media) {
         const mediaArray = JSON.parse(post.media);
         mediaArray.forEach((mediaPath, index) => {
@@ -182,7 +184,7 @@ const displayPost = (post, authUserId) => {
                     </div>
                 </div>
                 <div class="icons">
-                    <button onclick="updateLikeStatus()" id="like" class="unliked">
+                    <button onclick="updateLikeStatus(${post.id})" id="like-${post.id}" class="unliked">
                         <span class="material-symbols-outlined material-style">sentiment_sad</span>
                     </button>
                     <button id="comment">
@@ -264,11 +266,32 @@ const removePost = async (postId) => {
     }
 }
 
-window.updateLikeStatus = () => {
-    const like = document.getElementById('like');
+const updateLikeStatus = (postId) => {
+    const like = document.getElementById(`like-${postId}`);
+
     like.classList.toggle('liked');
     like.classList.toggle('unliked');
+
+    if (like.classList.contains('liked')) {
+        likePost(like);
+    } else {
+        unlikePost(like);
+    }
 };
+
+const likePost = (like) => {
+    
+    like.innerHTML='';
+    like.innerHTML=`<span class="material-symbols-outlined material-style"> sentiment_satisfied</span>`;
+}
+
+const unlikePost = (like) => {
+    
+    like.innerHTML='';
+    like.innerHTML=`<span class="material-symbols-outlined material-style"> sentiment_sad</span>`;
+}
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
     loadPosts();

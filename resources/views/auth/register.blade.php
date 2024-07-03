@@ -8,32 +8,29 @@
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-  <div class="wrapper">
+  <div class="wrapper-2">
     <form method="POST" action="{{route('register')}}">
       @csrf
       <h1>Criar sua conta</h1>
-      <div class="input-box">
+      <div class="input-box-2">
         <input name="name" type="text" placeholder="Nome" required>
-        <i class='bx bxs-user'></i>
-      </div>
-      <div class="input-box">
+       
+   
+     
         <input name="username" type="text" placeholder="Username" required>
-        <i class='bx bxs-username'></i>
-      </div>
-      <div class="input-box">
+        
+    
+     
         <input name="email" type="email" placeholder="Email" required>
-        <i class='bx bxs-e-mail'></i>
-      </div>
-      <div class="input-box">
-        <input name="phone" type="tel" placeholder="Telefone">
-        <i class='bx bxs-phone'></i>
-      </div>
-      <div class="input-box">
+        
+        <input name="phone" type="tel" placeholder="Data de nascimento">
+        <input name="phone" type="tel" placeholder="Genero">
+      
+     
         <input name="password" type="password" placeholder="Senha" required>
-        <i class='bx bxs-lock-alt' ></i>
-      </div> <div class="input-box">
+        
         <input name="confirm_password" type="password" placeholder=" Confirmar senha" required>
-        <i class='bx bxs-lock-alt' ></i>
+       
       </div>
 
 <div class="pp"> 
