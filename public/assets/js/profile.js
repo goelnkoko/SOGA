@@ -4,6 +4,16 @@ function getProfileId() {
     return urlParams.get('userId');
 }
 
+document.getElementById('edit-profile').onclick = () => {
+    const editProfile = document.querySelector('.edit-profile');
+    editProfile.style.display = 'block';
+}
+
+document.getElementById('back-profile').onclick = () => {
+    const editProfile = document.querySelector('.edit-profile');
+    editProfile.style.display = 'none';
+}
+
 const fetchProfile = async (userId) => {
 
     fetch(`/profiles/${userId}`)
@@ -55,13 +65,12 @@ const fetchProfile = async (userId) => {
         });
 }
 
-
-
 document.addEventListener('DOMContentLoaded', () => {
     const userId = getProfileId();
 
     if(userId){
         fetchProfile(userId);
+        document.querySelector('.edit-profile').style.display = 'none';
     } else {
         console.error('ID não encontrado na URL');
     }

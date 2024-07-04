@@ -32,7 +32,7 @@
                 <i class="fas fa-camera"></i>
             </div>
             <div class= "edit-btn">
-                <button class="edit-button">Editar perfil</button>
+                <button class="edit-button" id="edit-profile">Editar perfil</button>
             </div>
 
             <div class="profile-info">
@@ -48,7 +48,6 @@
         </div>
 
         <div class="profile-right">
-            <p>For a while</p>
         </div>
     </div>
 
@@ -56,6 +55,10 @@
     {{-- Código para edição do perfil --}}
     <div class="edit-profile">
         <div class="edit-photo">
+            <div class= "edit-btn">
+                <button class="edit-button" id="back-profile">Voltar ao perfil</button>
+            </div>
+
             <div class="profile-photo">
                 <div class="profile-pic" id="edit-profile-pic">
                     <!-- A imagem do perfil será adicionada aqui -->

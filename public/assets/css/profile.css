@@ -27,7 +27,6 @@ body {
 .profile-card {
     width: 70%;
     background-color: #020000;
-    padding: 10px;
     position: relative;
 }
 
@@ -51,7 +50,11 @@ body {
 .edit-button{
     position:absolute;
     top: 10px ;
-    right: 100px;
+    right: 70px;
+}
+
+#back-profile {
+    right: 20px;
 }
 
 .profile-pic {
@@ -144,9 +147,6 @@ body {
 .profile-info #left-info #ver-mais:hover p {
     text-decoration: underline;
 }
-
-
-
 
 
 

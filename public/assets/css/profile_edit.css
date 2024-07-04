@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Playwrite+DE+Grund:wght@100..400&family=Reddit+Mono:wght@200..900&display=swap');
 
 .edit-profile {
-    /*display: none;*/
+    display: none;
     position: absolute;
     width: 70%;
     top: 0;
@@ -171,13 +171,12 @@
 
 /*Education Items*/
 .edit-education {
-    width: 70%;
+    width: 80%;
 }
 
 .education-item {
     padding: 20px;
     font-size: 16px;
-    border: 1px solid #12444F33;
     font-family: Cambria, serif;
 }
 
