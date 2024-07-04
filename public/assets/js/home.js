@@ -17,8 +17,8 @@ const fetchLoggedInUser = async () => {
 
         document.querySelector('.user-photo').innerHTML = `<img src = "/storage/${data.profile.photo}" alt = "Foto do Gyomei" >`;
 
-        console.log("Aqui esta os dados buscados: " + data.id);
-        return data.id;
+        console.log("Aqui esta os dados buscados: " + data);
+        return data;
     } catch (error) {
         console.error('Erro ao buscar usuário logado:', error);
         return 0;
@@ -94,17 +94,18 @@ const createPost = (text, files) => {
 };
 
 const loadPosts = async () => {
-    const authUserId = await fetchLoggedInUser();
+    const data = await fetchLoggedInUser();
+
     fetch('/posts')
         .then(response => response.json())
         .then(posts => {
             postsContainer.innerHTML = '';
-            posts.forEach(post => displayPost(post, authUserId));
+            posts.forEach(post => displayPost(post, data));
         })
         .catch(error => console.error('Error:', error));
 };
 
-const displayPost = (post, authUserId) => {
+const displayPost = (post, loggedUser) => {
 
     let count = 0;
     let mediaContent = '';
@@ -162,7 +163,7 @@ const displayPost = (post, authUserId) => {
                     <div class="menu" id="menu-${post.id}">
                         <ul>
                             ${
-                                authUserId === post.user.id ? `
+                                loggedUser.id === post.user.id ? `
                                     <li onclick="editPostContent(${post.id})">Editar</li>
                                     <li onclick="removePost(${post.id})">Eliminar</li>
                                 ` : `
@@ -189,19 +190,52 @@ const displayPost = (post, authUserId) => {
                     <button onclick="updateLikeStatus(${post.id})" id="like-${post.id}" class="${post.user_liked ? 'liked' : 'unliked'}">
                         <span class="material-symbols-outlined material-style">${post.user_liked ? 'sentiment_satisfied' : 'sentiment_sad'}</span>
                     </button>
-                    <button id="comment">
+                    <button onclick="postComment(${post.id}, ${loggedUser.id})" id="comment">
                         <span class="material-symbols-outlined material-style">comment</span>
                     </button>
                     <button id="share">
                         <span class="material-symbols-outlined material-style">share</span>
                     </button>
                 </div>
+                ${commentArea(post, loggedUser)}
             </div>
         </div>
     `;
 
     postsContainer.insertAdjacentHTML('beforeend', postTemplate);
 };
+
+const commentArea = (post, user) => {
+    return `
+            <div class="comment-area" id="comment-area-${post.id}">
+                <div class="user-photo">
+                    <img src="/storage/${user.profile.photo}" alt="Foto do usuário">
+                </div>
+                <form id="post-form" class="comment-content">
+                    <textarea class="comment-text-area" name="content" id="post" cols="30" rows="1" oninput="adjustTextarea(this)"></textarea>
+                    <div class="icons comment-icons">
+                        <button id="upload-button" type="button">
+                            <span class="material-symbols-outlined">image</span>
+                        </button>
+                        <input type="file" id="file-input" multiple style="display:none;" accept="image/*,video/*">
+                        <button type="submit" id="send-button"><span class="material-symbols-outlined">send</span></button>
+                    </div>
+                </form>
+                <div id="thumbnails"></div>
+            </div>
+    `;
+}
+
+const postComment = (postId, user) => {
+
+    const commentAreaId = document.getElementById('comment-area-'+postId);
+
+    if (commentAreaId.style.display === 'flex') {
+        commentAreaId.style.display = 'none';
+    } else {
+        commentAreaId.style.display = 'flex';
+    }
+}
 
 const showHiddenMedia = (button) => {
     const hiddenMediaContainer = button.previousElementSibling;

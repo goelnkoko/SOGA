@@ -584,57 +584,46 @@ a {
     outline: none;
 }
 
-/* Adicionando estilos de transição e animação */
-@keyframes slide-in-left {
-    from {
-        transform: translateX(-100%);
-    }
-    to {
-        transform: translateX(0);
-    }
+
+.comment-area {
+    display: none;
+    width: 100%;
+    flex-direction: row;
+    gap: 10px;
+    margin-left: 50px;
+    margin-bottom: 10px;
 }
 
-@keyframes slide-out-left {
-    from {
-        transform: translateX(0);
-    }
-    to {
-        transform: translateX(100%);
-    }
+.comment-content {
+    width: 75%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: #3333333b;
 }
 
-@keyframes slide-in-right {
-    from {
-        transform: translateX(100%);
-    }
-    to {
-        transform: translateX(0);
-    }
+
+.comment-icons {
+    margin: 0 !important;
+    padding: 0;
 }
 
-@keyframes slide-out-right {
-    from {
-        transform: translateX(0);
-    }
-    to {
-        transform: translateX(-100%);
-    }
+.comment-text-area {
+    width: 100%;
+    outline: none;
+    border: none;
+    padding: 0;
+    border-radius: 0;
+    background-color: #33333300;
+    overflow-y: hidden;
+    resize: none;
 }
 
-.slide-enter {
-    animation: slide-in-left 0.5s forwards;
-}
-
-.slide-leave {
-    animation: slide-out-right 0.5s forwards;
-}
-
-.slide-enter-reverse {
-    animation: slide-in-right 0.5s forwards;
-}
-
-.slide-leave-reverse {
-    animation: slide-out-left 0.5s forwards;
+.comment-text-area:focus {
+    outline: none;
+    border: none;
 }
 
 

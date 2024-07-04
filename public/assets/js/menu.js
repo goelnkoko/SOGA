@@ -38,9 +38,28 @@ document.addEventListener('DOMContentLoaded', function() {
                 window.location.href = `/profile?userId=${userId}`;
             });
 
-            logout.addEventListener('click', () => {
-                window.location.href = `/logout`;
-            })
+            logout.addEventListener('click', function (event) {
+                event.preventDefault();
+
+                fetch('/logout', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            window.location.href = '/';
+                        } else {
+                            // Handle error
+                            console.error('Logout failed');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            });
 
 
         })

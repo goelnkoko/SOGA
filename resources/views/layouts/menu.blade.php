@@ -42,7 +42,7 @@
             </a>
         </div>
         <div class="left-menu-item" id="more">
-            <a href="#">
+            <a href="/profile">
                 <span class="material-symbols-outlined material-style">more_horiz</span>
                 <p>Mais</p>
             </a>
