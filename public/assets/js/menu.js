@@ -12,9 +12,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const profileLeft = document.getElementById('profile-left');
 
             profileLeft.innerHTML = `
-                <img src="assets/img/gyomei-chorando.jpeg" alt="Foto do Gyomei">
+                <img src="/storage/${data.profile.photo}" alt="Foto do Gyomei">
                 <div id="profile-content">
-                    <span>${data.name}</span>
+                    <span>${data.profile.name}</span>
                     <p>@${data.username}</p>
                 </div>
             `;

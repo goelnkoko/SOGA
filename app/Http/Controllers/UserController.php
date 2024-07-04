@@ -59,26 +59,22 @@ class UserController extends Controller
 
     public function loggedUser()
     {
-        $user = auth()->user();
+        $user = auth()->user()->load('profile');
         return response()->json($user);
     }
 
     public function index()
     {
-        $users = User::all()->except(Auth::id());
+        $users = User::with('profile')->get()->except(Auth::id());
         return response()->json($users);
-    }
-
-    public function store(Request $request)
-    {
-        //
     }
 
     public function show(string $id)
     {
-        $user = User::findOrFail($id);
+        $user = User::with('profile')->findOrFail($id);
         return response()->json($user);
     }
+
 
     public function edit(string $id)
     {

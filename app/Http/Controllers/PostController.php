@@ -31,7 +31,7 @@ class PostController extends Controller
         $friendIds[] = $userId;
 
         // Buscar posts dos amigos e do próprio usuário, ordenados por data de criação
-        $posts = Post::with(['user', 'likes'])
+        $posts = Post::with(['user.profile', 'likes'])
             ->whereIn('user_id', $friendIds)
             ->orderBy('created_at', 'desc')
             ->get()

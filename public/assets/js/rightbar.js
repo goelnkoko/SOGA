@@ -25,9 +25,9 @@ const fetchNonFriends = async () => {
 
                 userProfile.innerHTML = `
                     <div class="user-profile-profile">
-                        <img src="assets/img/rengoku.png" alt="Foto da Mitsuri">
+                        <img src="/storage/${user.profile.photo}" alt="Foto da Mitsuri">
                         <div id="profile-content">
-                            <span>${user.name}</span>
+                            <span>${user.profile.name}</span>
                             <p>@${user.username}</p>
                         </div>
                     </div>

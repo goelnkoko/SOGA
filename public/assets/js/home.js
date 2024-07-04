@@ -15,6 +15,8 @@ const fetchLoggedInUser = async () => {
         const response = await fetch('/logged-user');
         const data = await response.json();
 
+        document.querySelector('.user-photo').innerHTML = `<img src = "/storage/${data.profile.photo}" alt = "Foto do Gyomei" >`;
+
         console.log("Aqui esta os dados buscados: " + data.id);
         return data.id;
     } catch (error) {
@@ -142,13 +144,13 @@ const displayPost = (post, authUserId) => {
     const postTemplate = `
         <div class="post">
             <div class="post-left">
-                <a href="/profile?profile_id=${post.user.id}"><img src="assets/img/ningning.jpg" alt="Foto do Gyomei"></a>
+                <a href="/profile?profile_id=${post.user.profile.id}"><img src="/storage/${post.user.profile.photo}" alt="Pessoa linda"></a>
             </div>
             <div class="post-right">
                 <div class="post-header">
-                    <a href="/profile?profile_id=${post.user.id}">
+                    <a href="/profile?profile_id=${post.user.profile.id}">
                         <div id="post-header-info">
-                            <span>${post.user.name}</span>
+                            <span>${post.user.profile.name}</span>
                             <p>@${post.user.username}</p>
                             <p>·</p>
                             <p>${timeAgo(post.created_at)}</p>
@@ -168,7 +170,7 @@ const displayPost = (post, authUserId) => {
                                     <li onclick="hidePost(${post.id})">Ocultar</li>
                                 `
                             }
-                            <li><a href="/profile?userId=${post.user.id}">Ver perfil</a></li>
+                            <li><a href="/profile?userId=${post.user.profile.id}">Ver perfil</a></li>
                         </ul>
                     </div>
                 </div>

@@ -20,7 +20,7 @@
         <div class="feed">
             <div class="publicar" id="drop-zone">
                 <div class="user-photo">
-                    <img src="{{ url('assets/img/obanai-iguro.png') }}" alt="Foto do Gyomei">
+                    {{--Aqui será inserida a foto do user logado--}}
                 </div>
                 <form id="post-form" class="post-content">
                     @csrf
