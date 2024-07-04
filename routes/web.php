@@ -77,7 +77,6 @@ Route::get('/chat', function () {
     return view('chat.chat');
 })->name('chat')->middleware('auth');
 
-
 //Rotas para os perfies
 Route::middleware('auth')->group(function () {
     Route::get('profiles/{id}', [ProfileController::class, 'show']);
@@ -88,8 +87,10 @@ Route::middleware('auth')->group(function () {
     Route::post('profiles/{id}/add-interest', [ProfileController::class, 'addInterest']);
     Route::post('profiles/{id}/remove-interest', [ProfileController::class, 'removeInterest']);
 
+    Route::post('/profiles/{id}', [ProfileController::class, 'uploadProfilePhoto']);
+
     Route::put('profiles/{id}', [ProfileController::class, 'updateProfile']);
-    Route::put('profiles/{id}/photo', [ProfileController::class, 'updatePhoto']);
+    Route::put('profiles/{id}/photo', [ProfileController::class, 'updateProfilePhoto']);
     Route::delete('profiles/{id}/photo', [ProfileController::class, 'removePhoto']);
 
     Route::post('profiles/{id}/add-education', [ProfileController::class, 'addEducation']);

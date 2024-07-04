@@ -52,20 +52,21 @@ class ProfileController extends Controller
         return response()->json(['message' => 'Hobby added successfully', 'profile' => $profile]);
     }
 
-    public function removeHobby(Request $request, $id)
-    {
-        $profile = Profile::findOrFail($id);
-        $request->validate(['hobby' => 'required|string']);
-        $profile->removeHobby($request->hobby);
-        return response()->json(['message' => 'Hobby removed successfully', 'profile' => $profile]);
-    }
-
     public function addInterest(Request $request, $id)
     {
         $profile = Profile::findOrFail($id);
         $request->validate(['interest' => 'required|string']);
         $profile->addInterest($request->interest);
         return response()->json(['message' => 'Interest added successfully', 'profile' => $profile]);
+    }
+
+
+    public function removeHobby(Request $request, $id)
+    {
+        $profile = Profile::findOrFail($id);
+        $request->validate(['hobby' => 'required|string']);
+        $profile->removeHobby($request->hobby);
+        return response()->json(['message' => 'Hobby removed successfully', 'profile' => $profile]);
     }
 
     public function removeInterest(Request $request, $id)
@@ -76,24 +77,38 @@ class ProfileController extends Controller
         return response()->json(['message' => 'Interest removed successfully', 'profile' => $profile]);
     }
 
-    public function updatePhoto(Request $request, $id)
-    {
+    public function uploadProfilePhoto(Request $request, $id){
+
         $profile = Profile::findOrFail($id);
 
-        Log::info('Request received:', ['request' => $request->all()]);
-        Log::info('Files received:', ['files' => $request->file()]);
+        Log::info("Aqui vai alguns dados: ", ['files' => $request->all()]);
 
-        if ($request->hasFile('photo')) {
-            Log::info('File detected in request.');
-            $filePath = $request->file('photo')->store('photos', 'public');
-            $profile->update(['photo' => $filePath]);
+        $file = $request->file('imagem');
 
-            return response()->json(['message' => 'Photo updated successfully', 'profile' => $profile]);
+        if ($file) {
+            Log::info("Aqui vai alguns dados: ", [
+                'filename' => $file->getClientOriginalName(),
+                'mimeType' => $file->getClientMimeType(),
+                'size' => $file->getSize()
+            ]);
+
+            try {
+                $filePath = $file->store('photos', 'public');
+                $profile->update(['photo' => $filePath]);
+
+                return response()->json(['message' => 'Photo updated successfully', 'profile' => $profile
+                ]);
+            } catch (\Exception $e) {
+                Log::error("Erro ao armazenar o arquivo: " . $e->getMessage());
+
+                return response()->json(['message' => 'Erro ao atualizar a foto', 'error' => $e->getMessage()], 500);
+            }
+        } else {
+            Log::info("Nenhum arquivo foi enviado.");
+            return response()->json(['message' => 'Nenhum arquivo foi enviado']);
         }
 
-        Log::info('No file detected in request.');
 
-        return response()->json(['message' => 'Photo update failed', 'profile' => $profile]);
     }
 
     public function removePhoto($id)

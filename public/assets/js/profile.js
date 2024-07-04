@@ -13,14 +13,14 @@ const fetchProfile = async (userId) => {
             console.log(profile);
 
             const profilePhoto = document.querySelector('.profile-pic');
-            profilePhoto.innerHTML = `<img src="${profile.photo}" alt="">`;
+            profilePhoto.innerHTML = `<img src="/storage/${profile.photo}" alt="">`;
 
             const profileInfo = document.querySelector('.profile-info');
 
             profileInfo.innerHTML = `
                 <div id="left-info">
                     <div id="name">
-                        <span>${profile.user.name}</span>
+                        <span>${profile.name}</span>
                         <p>@${profile.user.username}</p>
                     </div>
 
@@ -52,7 +52,6 @@ const fetchProfile = async (userId) => {
 
             `;
             // profilePhoto.innerHTML = `<img src="${profile}" alt="">`
-
         });
 }
 
@@ -64,10 +63,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if(userId){
         fetchProfile(userId);
     } else {
-        console.error('ID da iniciativa não encontrado na URL');
+        console.error('ID não encontrado na URL');
     }
-
-
 });
 
 
