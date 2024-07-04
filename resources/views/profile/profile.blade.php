@@ -150,7 +150,7 @@
 
     </div>
 
-
+    <script src="{{ url('assets/js/menu.js') }}"></script>
     <script src="{{url('assets/js/profile.js')}}"></script>
     <script src="{{url('assets/js/profile-edit.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
