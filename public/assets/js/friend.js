@@ -16,7 +16,7 @@ const sendFriendRequest = async (recipientId, button) => {
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
         },
         body: JSON.stringify({ recipient_id: recipientId })
     })
@@ -29,7 +29,6 @@ const sendFriendRequest = async (recipientId, button) => {
             else {
                 fetchNonFriends();
                 console.log("Request sent successfully");
-                button.innerHTML = "Não seguir";
             }
         })
         .catch(error => {
