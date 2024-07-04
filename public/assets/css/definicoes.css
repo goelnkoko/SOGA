@@ -1,17 +1,16 @@
 body {
-    display: flex;
+    border-radius: 10%;
     margin: 0;
-    padding: 10px;
-    background-color: #121212;
+    padding: 5px;
+    background-color: #000000;
     color: white;
     font-family: 'Arial', sans-serif;
-
-cursor: pointer;
-
-
+    left: 50%;
     cursor: pointer;
 
 }
+
+
 
 /*Estilizar o ícone do menu principal*/
 #settings span.material-style {
@@ -21,30 +20,41 @@ cursor: pointer;
 }
 
 #settings p {
-    font-weight: 700;
+    font-weight: 70;
 }
 
 
 .menu {
-    width: 400px;
-    background-color: #1c1c1c;
-    border-radius: 8px;
-    padding: px;
-    margin: 12px auto;
-    padding: 30px 100px;
-    margin: 30px auto;
+    width: 500px;
+    background-color: #000000;
+    padding: 10 px;
+    border-radius: 5%;
+    padding: 50px 100px;
+    margin: 100px auto;
 
-    border: 3px solid rgba(8, 188, 238, 0.411);
+
+   
 }
 
 .menu-item  {
     display: flex;
-    align-items: center;
-    padding: 40px;
-    border-bottom: 1px solid #333;
+    padding: 50px;
     color: aliceblue;
+    border-radius: 10px;
+    transition: all .4s ease;
 }
 
+.menu-item :hover {
+    display: flex;
+    padding: 10px;
+    color: aliceblue;
+    border-radius: 1px;
+    background: #22b4ee;
+    border-radius: 34px;
+    color: #fff;
+    box-shadow: 0 0 60px #15a8b37c;
+    
+}
 
 .menu-item:last-child {
     border-bottom: none;

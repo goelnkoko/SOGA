@@ -6,8 +6,14 @@
   <title>Login Soga</title>
   <link rel="stylesheet" href="{{url('assets/css/autenticacao.css')}}">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  
 </head>
 <body>
+  <div class="ola">
+ 
+    
+
+  </div>
   <div class="wrapper">
     <form method="POST" action="{{route('login')}}">
         @csrf
