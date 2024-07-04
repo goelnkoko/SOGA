@@ -1,0 +1,22 @@
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 10px;
+}
+
+.friend-space {
+    background-color: #12444F;
+    border-radius: 15px;
+    box-shadow: 0 0 5px black;
+    width: 100%;
+    height: 46.5vh;
+    color: #ccc;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.friend-space h4 {
+    margin: 0;
+}

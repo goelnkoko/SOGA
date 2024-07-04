@@ -77,7 +77,7 @@ const fetchFriendsRequest = async () => {
                         </div>
                     </div>
                     <button id="confirmar" onclick="acceptFriendRequest(${request.id})">Confirmar</button>
-                    <button id="rejeitar" onclick="(${request.id})">Rejeitar</button>
+                    <button id="rejeitar" onclick="rejectFriendRequest(${request.id})">Rejeitar</button>
                 `;
 
                 friendRequest.appendChild(userProfile);

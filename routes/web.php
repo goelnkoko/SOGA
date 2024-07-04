@@ -35,7 +35,11 @@ Route::get('/profile_user', function () {
 
 Route::get('/definicoes', function () {
     return view('auth.definicoes');
-})->name('definicoes');
+})->name('definicoes')->middleware('auth');
+
+Route::get('/friend', function () {
+    return view('friend.friend');
+})->name('friend')->middleware('auth');
 
 
 Route::middleware('auth')->get('/logged-user', [UserController::class, 'loggedUser'])->name('loggedUser');

@@ -23,7 +23,7 @@
             </a>
         </div>
         <div class="left-menu-item" id="friends">
-            <a href="/friends">
+            <a href="/friend">
                 <span class="material-symbols-outlined material-style">sports_martial_arts</span>
                 <p>Amizades</p>
             </a>
@@ -47,8 +47,10 @@
                 <p>Mais</p>
             </a>
         </div>
+        <div class="left-menu-item" id="logout">
+            <span class="material-symbols-outlined material-style">logout</span>
+            <p> Logout</p>
+        </div>
     </div>
-    <div id="logout">
-        <span class="material-symbols-outlined material-style">logout</span>
-    </div>
+
 </div>

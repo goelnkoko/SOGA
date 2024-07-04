@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const logo = document.querySelector('#logo');
     const menu_home = document.querySelector('#left-menu');
     const menu_profile = document.querySelector('.user-profile');
+    const logout = document.querySelector('#logout');
     let userId = 0;
 
     fetch('/logged-user')
@@ -36,6 +37,12 @@ document.addEventListener('DOMContentLoaded', function() {
             profileLeft.addEventListener('click', () => {
                 window.location.href = `/profile?userId=${userId}`;
             });
+
+            logout.addEventListener('click', () => {
+                window.location.href = `/logout`;
+            })
+
+
         })
         .catch(error => {
             console.error('Error fetching user data:', error);
