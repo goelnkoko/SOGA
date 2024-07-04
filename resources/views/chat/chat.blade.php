@@ -57,53 +57,19 @@
                 <div class="message friend">
                     <div class="message-text">Estou óptima e tu? muito ansiosa para te ver 😋</div>
                     <div class="message-times">10:35 AM</div>
-                </div>
-                <div class="message user">
-                    <div class="message-text">Também. <br>Que tal nos encontrarmos em Bangkok depois das minhas provas? 😀</div>
-                    <div class="message-times">10:30 AM</div>
-                </div>
-                <div class="message friend">
-                    <div class="message-text">Óptimo! Estou com a agenda livre e vou te ensinar umas coreografias bem fixes 😁😁</div>
-                    <div class="message-times">10:35 AM</div>
-                </div>
-                <div class="message user">
-                    <div class="message-text">Marcado!! Te amo muito, docinha! ❤️❤️</div>
-                    <div class="message-times">10:35 AM</div>
-                </div>
-                <div class="message friend">
-                    <div class="message-text">Eu te amo mais ainda, meu pequeno príncipe! 😘❤️</div>
-                    <div class="message-times">10:35 AM</div>
-                </div>
-                <div class="message user">
-                    <div class="message-text">Marcado!! Te amo muito, docinha! ❤️❤️</div>
-                    <div class="message-times">10:35 AM</div>
-                </div>
-                <div class="message friend">
-                    <div class="message-text">Eu te amo mais ainda, meu pequeno príncipe! 😘❤️</div>
-                    <div class="message-times">10:35 AM</div>
-                </div>
-                <div class="message user">
-                    <div class="message-text">Marcado!! Te amo muito, docinha! ❤️❤️</div>
-                    <div class="message-times">10:35 AM</div>
-                </div>
-                <div class="message friend">
-                    <div class="message-text">Eu te amo mais ainda, meu pequeno príncipe! 😘❤️</div>
-                    <div class="message-times">10:35 AM</div>
-                </div>
-
+                
             </div>
             <form class="input-form">
                 <textarea id="message-text" name="story" rows="1" cols="33" placeholder="Mensagem"></textarea>
-                <div class="icons"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-images" viewBox="0 0 16 16">
-                    <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"/>
-                    <path d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2M14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1M2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1z"/>
-                  </svg>
+                <button id="btn-send" type="submit" class="button send-button"></button>
                 </div>
-                <button id="btn-send" type="submit" class="button send-button">></button>
+                
             </form>
         </div>
 
     </div>
+
+    
 
     <script src="script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
