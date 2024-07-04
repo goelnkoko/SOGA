@@ -43,9 +43,6 @@
         </div>
     </div>
 
-        
-    </div>
-
     @extends('layouts.rightbar')
 
     <script src="{{ url('assets/js/menu.js') }}"></script>

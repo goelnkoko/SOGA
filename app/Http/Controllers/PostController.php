@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Friend;
+use App\Models\Like;
 use App\Models\Post;
 use Exception;
 use Illuminate\Http\Request;
@@ -30,10 +31,13 @@ class PostController extends Controller
         $friendIds[] = $userId;
 
         // Buscar posts dos amigos e do próprio usuário, ordenados por data de criação
-        $posts = Post::with('user')
+        $posts = Post::with(['user', 'likes'])
             ->whereIn('user_id', $friendIds)
             ->orderBy('created_at', 'desc')
-            ->get();
+            ->get()
+            ->each(function ($post) use ($userId) {
+                $post->user_liked = $post->likes->contains('user_id', $userId);
+            });
 
         return response()->json($posts);
     }
@@ -100,5 +104,46 @@ class PostController extends Controller
             return response()->json(['error' => 'Falha ao deletar o post. Por favor, tente novamente.'], 400);
         }
     }
+
+    public function likePost($postId)
+    {
+        try {
+            $post = Post::findOrFail($postId);
+
+            $like = Like::firstOrCreate([
+                'user_id' => Auth::id(),
+                'post_id' => $postId,
+            ]);
+
+            return response()->json(['message' => 'Post liked successfully.', 'likes_count' => $post->likes()->count()], 200);
+        } catch (Exception $e) {
+            Log::error('Erro ao dar like no post: ' . $e->getMessage());
+            return response()->json(['error' => 'Falha ao dar like no post. Por favor, tente novamente.'], 400);
+        }
+    }
+
+    public function unlikePost($postId)
+    {
+        try {
+            $post = Post::findOrFail($postId);
+
+            $like = Like::where([
+                'user_id' => Auth::id(),
+                'post_id' => $postId,
+            ])->first();
+
+            if ($like) {
+                $like->delete();
+                return response()->json(['message' => 'Post unliked successfully.', 'likes_count' => $post->likes()->count()], 200);
+            } else {
+                return response()->json(['error' => 'Você não deu like neste post.'], 400);
+            }
+        } catch (Exception $e) {
+            Log::error('Erro ao tirar like no post: ' . $e->getMessage());
+            return response()->json(['error' => 'Falha ao tirar like no post. Por favor, tente novamente.'], 400);
+        }
+    }
+
+
 
 }

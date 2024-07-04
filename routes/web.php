@@ -49,10 +49,12 @@ Route::get('/non-friends', [UserController::class, 'getNonFriends'])->name('getN
 
 //Post Routes
 
-//Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
 Route::post('/posts', [PostController::class, 'store'])->name('posts.store')->middleware('web');
 Route::get('/posts', [PostController::class, 'showPosts'])->name('posts.index')->middleware('web');
 Route::delete('/posts/{post}', [PostController::class, 'removePost'])->middleware('auth');
+Route::post('/posts/{postId}/like', [PostController::class, 'likePost'])->middleware('auth');
+Route::post('/posts/{postId}/unlike', [PostController::class, 'unlikePost'])->middleware('auth');
+
 
 //Friend Routes
 Route::middleware('auth')->group(function () {

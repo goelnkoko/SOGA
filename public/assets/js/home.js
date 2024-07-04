@@ -184,8 +184,8 @@ const displayPost = (post, authUserId) => {
                     </div>
                 </div>
                 <div class="icons">
-                    <button onclick="updateLikeStatus(${post.id})" id="like-${post.id}" class="unliked">
-                        <span class="material-symbols-outlined material-style">sentiment_sad</span>
+                    <button onclick="updateLikeStatus(${post.id})" id="like-${post.id}" class="${post.user_liked ? 'liked' : 'unliked'}">
+                        <span class="material-symbols-outlined material-style">${post.user_liked ? 'sentiment_satisfied' : 'sentiment_sad'}</span>
                     </button>
                     <button id="comment">
                         <span class="material-symbols-outlined material-style">comment</span>
@@ -266,31 +266,46 @@ const removePost = async (postId) => {
     }
 }
 
-const updateLikeStatus = (postId) => {
+const updateLikeStatus = async (postId) => {
     const like = document.getElementById(`like-${postId}`);
+    const isLiked = like.classList.contains('liked');
 
-    like.classList.toggle('liked');
-    like.classList.toggle('unliked');
+    const response = await fetch(`/posts/${postId}/${isLiked ? 'unlike' : 'like'}`, {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+        }
+    });
 
-    if (like.classList.contains('liked')) {
-        likePost(like);
+    if (response.ok) {
+        const data = await response.json();
+
+        like.classList.toggle('liked');
+        like.classList.toggle('unliked');
+
+        if (like.classList.contains('liked')) {
+            likePost(like);
+        } else {
+            unlikePost(like);
+        }
+
+        // likesCount.innerText = data.likes_count;
+
+        document.getElementById(`likes-count-${postId}`).innerText = data.likes_count;
     } else {
-        unlikePost(like);
+        console.error('Failed to update like status.');
     }
 };
 
 const likePost = (like) => {
-    
-    like.innerHTML='';
-    like.innerHTML=`<span class="material-symbols-outlined material-style"> sentiment_satisfied</span>`;
+    like.innerHTML = '';
+    like.innerHTML = `<span class="material-symbols-outlined material-style"> sentiment_satisfied</span>`;
 }
 
 const unlikePost = (like) => {
-    
-    like.innerHTML='';
-    like.innerHTML=`<span class="material-symbols-outlined material-style"> sentiment_sad</span>`;
+    like.innerHTML = '';
+    like.innerHTML = `<span class="material-symbols-outlined material-style"> sentiment_sad</span>`;
 }
-
 
 
 document.addEventListener("DOMContentLoaded", () => {
