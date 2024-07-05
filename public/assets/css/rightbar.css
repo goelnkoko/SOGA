@@ -1,5 +1,6 @@
 body {
     margin-right: 350px;
+   
 }
 
 .rightBar {
@@ -14,6 +15,7 @@ body {
     min-height: 100vh;
     perspective: 1000px;
     background-color: #060606;
+   
 }
 
 .bloco {
@@ -24,6 +26,8 @@ body {
     box-shadow: 1px 1px 10px  #111;
     transform: translateZ(50px); /* Move a div para frente */
     transition: transform 0.3s ease-in-out;
+    
+
 }
 
 #profile-suggestions {
