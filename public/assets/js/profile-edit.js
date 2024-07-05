@@ -30,13 +30,10 @@ function fetchProfileData(userId) {
     fetch(`/profiles/${userId}`)
         .then(response => response.json())
         .then(data => {
-            console.log("Vindo do profile: " + data);
 
             const profilePhoto = document.getElementById('edit-profile-pic');
             const mediaUrl = `/storage/${data.photo}`;
             profilePhoto.innerHTML = `<img src="${mediaUrl}" alt="User Image">`;
-
-            console.log(mediaUrl);
 
             document.getElementById('edit-name').value = data.name;
             document.getElementById('edit-location').value = data.location;
@@ -50,7 +47,7 @@ function fetchProfileData(userId) {
             `;
 
             // Lists part hobby
-            const hobbies = document.getElementById('hobbies');
+            const hobbies = document.getElementById('edit-hobbies');
             let hobbyArray = JSON.parse(data.hobbies);
 
             hobbyArray.forEach(hobby => {
@@ -61,7 +58,7 @@ function fetchProfileData(userId) {
             });
 
             // Lists part interests
-            const interests = document.getElementById('interests');
+            const interests = document.getElementById('edit-interests');
             let interestArray = JSON.parse(data.interests);
 
             interestArray.forEach(interest => {

@@ -20,8 +20,6 @@ const fetchProfile = async (userId) => {
         .then(response => response.json())
         .then(profile => {
 
-            console.log(profile);
-
             const profilePhoto = document.querySelector('.profile-pic');
             profilePhoto.innerHTML = `<img src="/storage/${profile.photo}" alt="">`;
 
@@ -61,8 +59,100 @@ const fetchProfile = async (userId) => {
                 </div>
 
             `;
-            // profilePhoto.innerHTML = `<img src="${profile}" alt="">`
+            profileRight(profile, userId);
         });
+}
+
+const profileRight = async (profile, userId) => {
+
+    const profileInfo = document.querySelector('.profile-right');
+
+    console.log(profile)
+    // Lists part hobby
+    const hobbies = document.getElementById('hobbies');
+    let hobbyArray = JSON.parse(profile.hobbies);
+
+    hobbyArray.forEach(hobby => {
+        const li = document.createElement('li');
+        li.textContent = hobby;
+        hobbies.appendChild(li);
+    });
+
+    // Lists part interests
+    const interests = document.getElementById('interests');
+    let interestArray = JSON.parse(profile.interests);
+
+    interestArray.forEach(interest => {
+        const li = document.createElement('li');
+        li.textContent = interest;
+        interests.appendChild(li);
+    });
+
+    // Adicionar educação
+    const educations = document.getElementById('educations');
+    educations.innerHTML = '';
+
+    profile.educations.forEach(education => {
+        const educationItem = document.createElement('div');
+        educationItem.className = 'item education-item';
+
+        educationItem.innerHTML = `
+                    <span>${education.institution}</span>
+                    <div class="edit-curso">
+                        <p>${education.course}</p>
+                        <p>-</p>
+                        <p>Licenciatura</p>
+                    </div>
+                    <div class="education-dates">
+                        <p class="dates start-date">${education.startDate ? education.startDate : ''}</p>
+                        <p>${education.endDate ? '-' : ''}</p>
+                        <p class="dates end-date">${education.endDate ? education.endDate : ''}</p>
+                    </div>
+                    <p>${education.description ? education.description : ''}</p>
+                `;
+
+        educations.appendChild(educationItem);
+    });
+
+    // Adicionar trabalho
+    const works = document.getElementById('works');
+    works.innerHTML = '';
+
+    profile.works.forEach(work => {
+        const workItem = document.createElement('div');
+        workItem.className = 'item work-item';
+
+        workItem.innerHTML = `
+                    <span>${work.organization}</span>
+                    <div class="edit-curso">
+                        <p>${work.job}</p>
+                    </div>
+                    <div class="work-dates">
+                        <p class="dates start-date">${work.startDate ? work.startDate : ''}</p>
+                        <p>${work.endDate ? '-' : ''}</p>
+                        <p class="dates end-date">${work.endDate ? work.endDate : ''}</p>
+                    </div>
+                    <p>${work.description ? work.description : ''}</p>
+                `;
+
+        works.appendChild(workItem);
+    });
+
+    // Adicionar contactos
+    const contacts = document.getElementById('contacts');
+    contacts.innerHTML = '';
+
+    profile.contacts.forEach(contact => {
+        const contactItem = document.createElement('div');
+        contactItem.className = 'item contact-item';
+
+        contactItem.innerHTML = `
+                <span>${contact.type}</span>
+                <p>${contact.contact}</p>
+            `;
+
+        contacts.appendChild(contactItem);
+    });
 }
 
 document.addEventListener('DOMContentLoaded', () => {

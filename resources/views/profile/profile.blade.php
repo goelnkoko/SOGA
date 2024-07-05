@@ -27,7 +27,6 @@
                     {{--            A imagem do perfil será adicionado aqui--}}
                 </div>
             </div>
-
             <div class="edit-icon">
                 <i class="fas fa-camera"></i>
             </div>
@@ -48,6 +47,45 @@
         </div>
 
         <div class="profile-right">
+            <div class="edit-field lists">
+                <div class="item list-item">
+                    <h3>Hobbies</h3>
+                    <ul id="hobbies">
+                        {{--Aqui virá a lista de hobbies--}}
+                    </ul>
+                </div>
+                <div class="item list-item">
+                    <h3>Interesses</h3>
+                    <ul id="interests">
+                        {{--Aqui virá a lista dos interesses--}}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="edit-field big-items">
+                <div class="edit-education">
+                    <h3>Educação</h3>
+                    <div class="education-items" id="educations">
+                        {{--Aqui serão inseridos os itens da educação--}}
+                    </div>
+                </div>
+                <div class="edit-education">
+                    <h3>Trabalho</h3>
+                    <div class="education-items" id="works">
+                        {{--Aqui serão inseridos os itens da educação--}}
+                    </div>
+                </div>
+                <div class="edit-education">
+                    <h3>Contactos</h3>
+                    <div class="education-items" id="contacts">
+                        {{--Aqui serão inseridos os itens da educação--}}
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
         </div>
     </div>
 
@@ -110,7 +148,7 @@
         <div class="edit-field lists">
             <div class="item list-item">
                 <h3>Hobbies</h3>
-                <ul id="hobbies">
+                <ul id="edit-hobbies">
                     {{--Aqui virá a lista de hobbies--}}
                 </ul>
                 <input type="text" id="new-hobby" placeholder="Novo hobby">
@@ -118,7 +156,7 @@
             </div>
             <div class="item list-item">
                 <h3>Interesses</h3>
-                <ul id="interests">
+                <ul id="edit-interests">
                     {{--Aqui virá a lista dos interesses--}}
                 </ul>
                 <input type="text" id="new-interest" placeholder="Novo interesse">
