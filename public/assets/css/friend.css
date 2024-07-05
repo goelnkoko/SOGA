@@ -15,6 +15,7 @@
     color: #ccc;
     padding: 10px;
     box-sizing: border-box;
+    overflow-y: scroll;
 }
 
 .friend-space h4 {
@@ -72,7 +73,9 @@
 .user-request-profile .user-profile-profile {
     display: flex;
     gap: 10px;
+    
 }
+
 
 .user-request-profile button {
     background-color: transparent;
@@ -89,4 +92,17 @@
 .user-request-profile button:active {
     transform: scale(0.98);
     box-shadow: 0px 0px 5px rgb(0, 46, 34);
+}
+
+.user-Cancel-Button{
+    background-color: transparent;
+    border: 1px solid #111;
+    color: #07c9f4;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0px 0px 5px rgb(235, 5, 5);
+  
 }

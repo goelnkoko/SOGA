@@ -181,7 +181,7 @@ const fetchSentRequests = async () => {
                 userProfile.classList.add('user-request-profile');
 
                 userProfile.innerHTML = `
-                    <div class="user-profile-profile">
+                    <div class="user-profile-profile ">
                         <img src="/storage/${request.recipient.profile.photo}" alt="Foto da Mitsuri">
                         <div id="profile-content">
                             <span>${request.recipient.profile.name}</span>
