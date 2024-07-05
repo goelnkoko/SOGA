@@ -11,19 +11,14 @@
     font-family: "Reddit Mono", monospace;
 }
 
-.edit-field {
+.edit-profile .edit-field {
     width: 100%;
     padding: 20px;
     box-sizing: border-box;
     border-bottom: 1px solid #12444F;
 }
 
-/*Estilos ligados ao edit profiles*/
-.edit-photo {
-
-}
-
-.edit-profile-photo {
+.edit-profile .edit-profile-photo {
     position: absolute;
     z-index: 4;
     left: 50px;
@@ -35,23 +30,23 @@
     cursor: pointer;
 }
 
-.simple {
+.edit-profile .simple {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.simple-left, .simple-right {
+.edit-profile .simple-left, .edit-profile .simple-right {
     width: 45%;
 }
 
-.item {
+.edit-profile .item {
     width: 100%;
     box-sizing: border-box;
     margin-top: 7px;
 }
 
-.item input, .item textarea, .item select {
+.edit-profile .item input, .edit-profile .item textarea, .edit-profile .item select {
     padding: 7px 12px;
     background-color: #12444F;
     color: #ddd;
@@ -63,12 +58,12 @@
     box-sizing: border-box;
 }
 
-.item input:focus {
+.edit-profile .item input:focus {
     outline: none;
     border: none;
 }
 
-.item label {
+.edit-profile .item label {
     font-size: 13px;
     color: #304660;
     margin-left: 12px;
@@ -76,7 +71,7 @@
 
 
 /*Área dos botões*/
-.simple .edit-btn {
+.edit-profile .simple .edit-profile .edit-btn {
     padding: 7px 12px;
     background-color: #ddd;
     color: #12444F;
@@ -87,21 +82,20 @@
     margin-right: 10px;
 }
 
-#simple-edit-btn {
+.edit-profile #simple-edit-btn {
     margin-top: 10px;
 }
 
-.list-item {
-
+.edit-profile .list-item {
     width: 70%;
 }
 
-.list-item ul li {
+.edit-profile .list-item ul li {
     gap: 3px;
     margin-top: 10px;
 }
 
-.list-item .edit-btn, .add-education-header .edit-btn {
+.edit-profile .list-item .edit-btn, .edit-profile .add-education-header .edit-btn {
     padding: 3px 12px;
     background-color: #00000000;
     color: #12444F;
@@ -110,14 +104,14 @@
     margin-top: 7px;
 }
 
-.list-item .edit-btn:hover, .add-education-header .edit-btn:hover {
+.edit-profile .list-item .edit-btn:hover, .edit-profile .add-education-header .edit-btn:hover {
     background-color: rgba(18, 68, 79, 0.25);
     color: #137e93;
     border-radius: 15px;
 }
 
 /* Estilo do modal */
-.modal {
+.edit-profile . modal {
     display: none;
     position: fixed;
     z-index: 2;
@@ -129,7 +123,7 @@
     background-color: rgb(0,0,0);
 }
 
-.modal-content {
+.edit-profile .modal-content {
     background-color: #fefefe;
     margin: 100px auto;
     padding: 20px;
@@ -137,15 +131,15 @@
     width: fit-content;
 }
 
-.close {
+.edit-profile .close {
     color: #aaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
+.edit-profile .close:hover,
+.edit-profile .close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
@@ -166,52 +160,49 @@
 
 
 
-
-
-
 /*Education Items*/
-.edit-education {
+.edit-profile .edit-education {
     width: 80%;
 }
 
-.education-item {
+.edit-profile .education-item {
     padding: 20px;
     font-size: 16px;
     font-family: Cambria, serif;
 }
 
-.education-item p, .education-item span {
+.edit-profile .education-item p, .edit-profile .education-item span {
     margin: 5px;
     padding: 0;
 }
 
-.education-item span {
+.edit-profile .education-item span {
     font-weight: 800;
     font-size: 18px;
 }
 
-.education-dates, .edit-curso, .add-education-header {
+.edit-profile .education-dates, .edit-profile .edit-curso, .edit-profile .add-education-header {
     display: flex;
     flex-direction: row;
 }
 
-.add-education-header {
+.edit-profile .add-education-header {
     gap: 10px;
 }
 
-.add-education-header button, .add-education-header h4 {
+.edit-profile .add-education-header button, .edit-profile .add-education-header h4 {
     padding: 7px 12px;
     margin: 0;
 }
 
-.education-dates .dates {
+.edit-profile .education-dates .edit-profile .dates {
     display: flex;
     flex-direction: row;
     gap: 5px;
     align-items: center;
 }
 
-.education-dates label, .education-dates p {
+.edit-profile .education-dates label, .edit-profile .education-dates p {
     font-size: 14px;
     color: #1b7487;
 }
