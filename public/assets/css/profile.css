@@ -150,7 +150,6 @@ body {
 
 
 
-
 .profile-info #right-info {
     width: 30%;
     display: flex;
@@ -233,3 +232,162 @@ body {
     margin-top: 5%;
 }
 
+
+/*Parte direita*/
+.edit-profile {
+    display: none;
+    position: absolute;
+    width: 70%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background-color: #000000;
+    font-family: "Reddit Mono", monospace;
+}
+
+.edit-field {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #12444F;
+}
+
+
+.edit-profile-photo {
+    position: absolute;
+    z-index: 4;
+    left: 50px;
+    bottom: -50px;
+    background-color: rgba(7, 73, 70, 0.63);
+    padding: 10px;
+    border-radius: 100%;
+    color: white;
+    cursor: pointer;
+}
+
+.simple {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.simple-left, .simple-right {
+    width: 45%;
+}
+
+.item {
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 7px;
+}
+
+.item input, .item textarea, .item select {
+    padding: 7px 12px;
+    background-color: #12444F;
+    color: #ddd;
+    outline: none;
+    border: none;
+    margin-top: 5px;
+    border-radius: 15px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.item input:focus {
+    outline: none;
+    border: none;
+}
+
+.item label {
+    font-size: 13px;
+    color: #304660;
+    margin-left: 12px;
+}
+
+
+/*Área dos botões*/
+.simple .edit-btn {
+    padding: 7px 12px;
+    background-color: #ddd;
+    color: #12444F;
+    outline: none;
+    border: none;
+    border-radius: 15px;
+    float: right;
+    margin-right: 10px;
+}
+
+#simple-edit-btn {
+    margin-top: 10px;
+}
+
+.list-item {
+    width: 70%;
+}
+
+.list-item ul li {
+    gap: 3px;
+    margin-top: 10px;
+}
+
+.list-item .edit-btn, .add-education-header .edit-btn {
+    padding: 3px 12px;
+    background-color: #00000000;
+    color: #12444F;
+    outline: none;
+    border: none;
+    margin-top: 7px;
+}
+
+.list-item .edit-btn:hover, .add-education-header .edit-btn:hover {
+    background-color: rgba(18, 68, 79, 0.25);
+    color: #137e93;
+    border-radius: 15px;
+}
+
+/*Education Items*/
+.edit-education {
+    width: 80%;
+}
+
+.education-item {
+    padding: 20px;
+    font-size: 16px;
+    font-family: Cambria, serif;
+}
+
+.education-item p, .education-item span {
+    margin: 5px;
+    padding: 0;
+}
+
+.education-item span {
+    font-weight: 800;
+    font-size: 18px;
+}
+
+.education-dates, .edit-curso, .add-education-header {
+    display: flex;
+    flex-direction: row;
+}
+
+.add-education-header {
+    gap: 10px;
+}
+
+.add-education-header button, .add-education-header h4 {
+    padding: 7px 12px;
+    margin: 0;
+}
+
+.education-dates .dates {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+}
+
+.education-dates label, .education-dates p {
+    font-size: 14px;
+    color: #1b7487;
+}
