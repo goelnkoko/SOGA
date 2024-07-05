@@ -10,7 +10,7 @@ body {
     padding: 10px;
     box-sizing: border-box;
     height: 100vh;
-    border-left: 1px solid #333;
+    border-left: 1px solid #333333;
     min-height: 100vh;
     perspective: 1000px;
     background-color: #060606;
@@ -48,7 +48,7 @@ body {
     padding: 7px;
     text-align: center;
     font-size: 15px;
-    background-color: #0cadde7e;
+    background-color: #0cc6ff7e;
     outline: none;
     border: none;
 }

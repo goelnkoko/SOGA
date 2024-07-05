@@ -9,15 +9,21 @@
   
 </head>
 <body>
-  <div class="ola">
- 
+  
+ <div class="main">
     
+ <div class="left-side">
+      <h1>Soga</h1>
+      <p>Bem-vindo(a) às nossas redes sociais!</p>
+    </div>
 
-  </div>
   <div class="wrapper">
+   
+
+    <div class="right-side">
     <form method="POST" action="{{route('login')}}">
         @csrf
-      <h1>Login</h1>
+      <h1>SOGA</h1>
       <div class="input-box">
         <input name="username" type="text" placeholder="Email ou Numero de telefone" required>
         <i class='bx bxs-user'></i>
@@ -37,7 +43,11 @@
       <div class="register-link">
         <p>Ja tem uma conta? <a href="{{route('register')}}">Registrar-se</a></p>
       </div>
-    </form>
+    </form> 
   </div>
+  </div>
+</div>
+
+
 </body>
 </html>

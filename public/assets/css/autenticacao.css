@@ -24,6 +24,8 @@
     text-align: center;
     border: 2px  solid #00FFFF ;
     transition: border-color 0.3s, box-shadow 0.3s;
+  
+  
   }
 
 
@@ -286,3 +288,14 @@ text-align: center;
 
     border: 2px solid rgba(8, 188, 238, 0.411);
    } 
+
+  
+  .left-side {
+    text-align: center;
+    margin-right: 50px;
+    left: 50%;
+  }
+  .right-side {
+    max-width: 400px;
+    width: 100%;
+  }
