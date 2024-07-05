@@ -126,6 +126,24 @@ span.material-style {
     animation: pulse 3s infinite;
 }
 
+#logout {
+    width: fit-content;
+    position: absolute;
+    bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 20px;
+    margin: 0 15px;
+}
+
+#logout:hover {
+    background-color: #1f1f1f;
+    border-radius: 15px;
+}
+
 @keyframes pulse {
     0% {
         font-variation-settings: 'wght' 100;

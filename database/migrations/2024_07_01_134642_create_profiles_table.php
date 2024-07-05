@@ -13,9 +13,13 @@ return new class extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->string('photo')->nullable();
             $table->text('biography')->nullable();
             $table->json('hobbies')->nullable();
+            $table->date('birthdate');
+            $table->string('location')->nullable();
+            $table->string('gender');
             $table->json('interests')->nullable();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();

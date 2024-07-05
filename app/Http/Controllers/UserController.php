@@ -18,19 +18,7 @@ class UserController extends Controller
             'password' => 'required'
         ]);
 
-        $loginField = $request->input('username');
-        $password = $request->input('password');
-
-        $credentials = [];
-        if (filter_var($loginField, FILTER_VALIDATE_EMAIL)) {
-            $credentials = ['email' => $loginField];
-        } elseif (preg_match('/^[0-9]+$/', $loginField)) {
-            $credentials = ['telefone' => $loginField];
-        } else {
-            $credentials = ['username' => $loginField];
-        }
-
-        $credentials['password'] = $password;
+        $credentials = $request->only(['username', 'password']);
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
@@ -44,27 +32,26 @@ class UserController extends Controller
 
     public function register(Request $request)
     {
-        // Validate the form data
         $request->validate([
             'name' => 'required|string|max:255',
-            'username' => 'required|string|max:40',
-            'email' => 'nullable|string|max:255',
-            'phone' => 'nullable|string|max:20',
-            'password' => 'required|string|min:8',
+            'username' => 'required|string|max:40|unique:users,username',
+            'password' => 'required|string|min:8|confirmed',
+            'birthdate' => 'required|date',
+            'gender' => 'required|string|max:10',
+            'location' => 'nullable|string|max:50',
         ]);
 
-        // Create the user
         $user = User::create([
-            'name' => $request->name,
             'username' => $request->username,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'password' => bcrypt($request->password), // Encrypting the password with bcrypt
+            'password' => bcrypt($request->password),
         ]);
 
-        // Create the corresponding profile
-        $profile = Profile::create([
+        Profile::create([
             'user_id' => $user->id,
+            'name' => $request->name,
+            'birthdate' => $request->birthdate,
+            'gender' => $request->gender,
+            'location' => $request->location,
         ]);
 
         return redirect()->intended('login');
@@ -72,26 +59,22 @@ class UserController extends Controller
 
     public function loggedUser()
     {
-        $user = auth()->user();
+        $user = auth()->user()->load('profile');
         return response()->json($user);
     }
 
     public function index()
     {
-        $users = User::all()->except(Auth::id());
+        $users = User::with('profile')->get()->except(Auth::id());
         return response()->json($users);
-    }
-
-    public function store(Request $request)
-    {
-        //
     }
 
     public function show(string $id)
     {
-        $user = User::findOrFail($id);
+        $user = User::with('profile')->findOrFail($id);
         return response()->json($user);
     }
+
 
     public function edit(string $id)
     {
@@ -160,6 +143,24 @@ class UserController extends Controller
 
         // Get users that are not friends, and have not sent or received friend requests
         $users = User::whereNotIn('id', $excludedUserIds)->with('profile')->get();
+
+        return response()->json($users);
+    }
+
+    public function searchUsers(Request $request)
+    {
+        $request->validate([
+            'query' => 'required|string|min:1',
+        ]);
+
+        $query = $request->input('query');
+        $users = User::where('username', 'like', '%' . $query . '%')
+            ->orWhereHas('profile', function ($q) use ($query) {
+                $q->where('name', 'like', '%' . $query . '%')
+                    ->orWhere('email', 'like', '%' . $query . '%');
+            })
+            ->with('profile')
+            ->get();
 
         return response()->json($users);
     }

@@ -17,11 +17,10 @@
             <i class="material-icons">help_outline</i>
             <span>Ajuda e Suporte</span>
         </div>
-       
-        
+
         <div class="menu-item">
             <i class="material-icons">person</i>
-            <span>Ajuste do perfil</span>
+            </a><span>Ajuste do perfil</span>
         </div>
         <div class="menu-item">
             <i class="material-icons">swap_horiz</i>
@@ -33,8 +32,6 @@
         </div>
     </div>
 
-    <script src="../geral/js/include.js"></script>
-    <script src="../geral/css/leftBar.css"></script>
-   
+    <script src="{{ url('assets/js/menu.js') }}"></script>
 </body>
 </html>

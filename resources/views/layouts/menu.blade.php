@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="{{url('assets/css/menu.css')}}">
 
 <div class="leftBar">
-    <div id="logo"><a href="../home/home.html"><img src="{{url('assets//img/logo.png')}}" alt=""></a></div>
+    <div id="logo"><a href="/home"><img src="{{url('assets/img/logo.png')}}" alt=""></a></div>
     <div class="user-profile" id="profile-left">
         {{-- Vamos adicionar informacoes do perfil aqui com JS --}}
     </div>
@@ -23,32 +23,33 @@
             </a>
         </div>
         <div class="left-menu-item" id="friends">
-            <a href="/friends">
+            <a href="/friend">
                 <span class="material-symbols-outlined material-style">sports_martial_arts</span>
                 <p>Amizades</p>
             </a>
         </div>
-
         <div class="left-menu-item" id="notifications">
-            <a href="/notificacao">
+            <a href="/notification">
                 <span class="material-symbols-outlined material-style">notifications</span>
                 <p>Notificações</p>
             </a>
         </div>
         <div class="left-menu-item" id="settings">
-            <a href="/definicoes">
+            <a href="/definition">
                 <span class="material-symbols-outlined material-style">settings</span>
                 <p>Definições</p>
             </a>
         </div>
         <div class="left-menu-item" id="more">
-            <a href="#">
+            <a href="/profile">
                 <span class="material-symbols-outlined material-style">more_horiz</span>
                 <p>Mais</p>
             </a>
         </div>
+        <div class="left-menu-item" id="logout">
+            <span class="material-symbols-outlined material-style">logout</span>
+            <p> Logout</p>
+        </div>
     </div>
-    <div id="logout">
-        <span class="material-symbols-outlined material-style">logout</span>
-    </div>
+
 </div>

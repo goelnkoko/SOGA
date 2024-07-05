@@ -15,8 +15,10 @@ const fetchLoggedInUser = async () => {
         const response = await fetch('/logged-user');
         const data = await response.json();
 
-        console.log("Aqui esta os dados buscados: " + data.id);
-        return data.id;
+        document.querySelector('.user-photo').innerHTML = `<img src = "/storage/${data.profile.photo}" alt = "Foto do Gyomei" >`;
+
+        console.log("Aqui esta os dados buscados: " + data);
+        return data;
     } catch (error) {
         console.error('Erro ao buscar usuário logado:', error);
         return 0;
@@ -92,23 +94,22 @@ const createPost = (text, files) => {
 };
 
 const loadPosts = async () => {
-    const authUserId = await fetchLoggedInUser();
+    const data = await fetchLoggedInUser();
+
     fetch('/posts')
         .then(response => response.json())
         .then(posts => {
             postsContainer.innerHTML = '';
-            posts.forEach(post => displayPost(post, authUserId));
+            posts.forEach(post => displayPost(post, data));
         })
         .catch(error => console.error('Error:', error));
 };
 
-const displayPost = (post, authUserId) => {
+const displayPost = (post, loggedUser) => {
 
     let count = 0;
     let mediaContent = '';
     let hiddenMediaContent = '';
-
-    console.log(post)
 
     if (post.media) {
         const mediaArray = JSON.parse(post.media);
@@ -142,13 +143,13 @@ const displayPost = (post, authUserId) => {
     const postTemplate = `
         <div class="post">
             <div class="post-left">
-                <a href="/profile?profile_id=${post.user.id}"><img src="assets/img/ningning.jpg" alt="Foto do Gyomei"></a>
+                <a href="/profile?profile_id=${post.user.profile.id}"><img src="/storage/${post.user.profile.photo}" alt="Pessoa linda"></a>
             </div>
             <div class="post-right">
                 <div class="post-header">
-                    <a href="/profile?profile_id=${post.user.id}">
+                    <a href="/profile?profile_id=${post.user.profile.id}">
                         <div id="post-header-info">
-                            <span>${post.user.name}</span>
+                            <span>${post.user.profile.name}</span>
                             <p>@${post.user.username}</p>
                             <p>·</p>
                             <p>${timeAgo(post.created_at)}</p>
@@ -160,7 +161,7 @@ const displayPost = (post, authUserId) => {
                     <div class="menu" id="menu-${post.id}">
                         <ul>
                             ${
-                                authUserId === post.user.id ? `
+                                loggedUser.id === post.user.id ? `
                                     <li onclick="editPostContent(${post.id})">Editar</li>
                                     <li onclick="removePost(${post.id})">Eliminar</li>
                                 ` : `
@@ -168,7 +169,7 @@ const displayPost = (post, authUserId) => {
                                     <li onclick="hidePost(${post.id})">Ocultar</li>
                                 `
                             }
-                            <li><a href="/profile?userId=${post.user.id}">Ver perfil</a></li>
+                            <li><a href="/profile?userId=${post.user.profile.id}">Ver perfil</a></li>
                         </ul>
                     </div>
                 </div>
@@ -184,16 +185,18 @@ const displayPost = (post, authUserId) => {
                     </div>
                 </div>
                 <div class="icons">
-                    <button onclick="updateLikeStatus(${post.id})" id="like-${post.id}" class="unliked">
-                        <span class="material-symbols-outlined material-style">sentiment_sad</span>
+                    <button onclick="updateLikeStatus(${post.id})" id="like-${post.id}" class="${post.user_liked ? 'liked' : 'unliked'}">
+                        <span class="material-symbols-outlined material-style">${post.user_liked ? 'sentiment_satisfied' : 'sentiment_sad'}</span>
                     </button>
-                    <button id="comment">
+                    <button onclick="postComment(${post.id}, ${loggedUser.id})" id="comment">
                         <span class="material-symbols-outlined material-style">comment</span>
                     </button>
                     <button id="share">
                         <span class="material-symbols-outlined material-style">share</span>
                     </button>
                 </div>
+                ${commentArea(post, loggedUser)}
+                <div class="comment-container" id="comment-container-${post.id}"></div>
             </div>
         </div>
     `;
@@ -266,32 +269,220 @@ const removePost = async (postId) => {
     }
 }
 
-const updateLikeStatus = (postId) => {
+
+//Like area
+const updateLikeStatus = async (postId) => {
     const like = document.getElementById(`like-${postId}`);
+    const isLiked = like.classList.contains('liked');
 
-    like.classList.toggle('liked');
-    like.classList.toggle('unliked');
+    const response = await fetch(`/posts/${postId}/${isLiked ? 'unlike' : 'like'}`, {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+        }
+    });
 
-    if (like.classList.contains('liked')) {
-        likePost(like);
+    if (response.ok) {
+        const data = await response.json();
+
+        like.classList.toggle('liked');
+        like.classList.toggle('unliked');
+
+        if (like.classList.contains('liked')) {
+            likePost(like);
+        } else {
+            unlikePost(like);
+        }
+
+        // likesCount.innerText = data.likes_count;
+
+        document.getElementById(`likes-count-${postId}`).innerText = data.likes_count;
     } else {
-        unlikePost(like);
+        console.error('Failed to update like status.');
     }
 };
 
 const likePost = (like) => {
-    
-    like.innerHTML='';
-    like.innerHTML=`<span class="material-symbols-outlined material-style"> sentiment_satisfied</span>`;
+    like.innerHTML = '';
+    like.innerHTML = `<span class="material-symbols-outlined material-style"> sentiment_satisfied</span>`;
 }
 
 const unlikePost = (like) => {
-    
-    like.innerHTML='';
-    like.innerHTML=`<span class="material-symbols-outlined material-style"> sentiment_sad</span>`;
+    like.innerHTML = '';
+    like.innerHTML = `<span class="material-symbols-outlined material-style"> sentiment_sad</span>`;
 }
 
 
+//Comment Area
+const postComment = (postId, user) => {
+
+    const commentAreaId = document.getElementById('comment-area-'+postId);
+    const commentContainer = document.getElementById('comment-container-'+postId);
+
+    if (commentAreaId.style.display === 'flex') {
+        commentAreaId.style.display = 'none';
+        commentContainer.style.display = 'none';
+    } else {
+        commentAreaId.style.display = 'flex';
+        commentContainer.style.display = 'flex';
+    }
+}
+
+const commentArea = (post, user) => {
+    loadComments(post.id, user.id);
+    return `
+        <div class="comment-area" id="comment-area-${post.id}">
+            <div class="user-photo">
+                <img src="/storage/${user.profile.photo}" alt="Foto do usuário">
+            </div>
+            <form id="comment-form-${post.id}" class="comment-form-content" onsubmit="handleCommentSubmit(event, ${post.id})">
+                <div class="comment-content-area">
+                    <textarea class="comment-text-area" name="content" id="comment-text-${post.id}" cols="30" rows="1" oninput="adjustTextarea(this)"></textarea>
+                    <div class="icons comment-icons">
+                        <button id="upload-button-${post.id}" type="button" onclick="document.getElementById('file-input-${post.id}').click()">
+                            <span class="material-symbols-outlined">image</span>
+                        </button>
+                        <input type="file" id="file-input-${post.id}" multiple style="display:none;" accept="image/*,video/*" onchange="previewFiles(${post.id})">
+                        <button type="submit" id="send-comment-button-${post.id}"><span class="material-symbols-outlined">send</span></button>
+                    </div>
+                </div>
+                <div id="thumbnails-${post.id}" class="thumbnails"></div>
+            </form>
+        </div>
+    `;
+}
+
+const handleCommentSubmit = (event, postId) => {
+    event.preventDefault();
+
+    const form = document.getElementById(`comment-form-${postId}`);
+    const content = form.querySelector(`#comment-text-${postId}`).value;
+    const fileInput = form.querySelector(`#file-input-${postId}`);
+    const files = fileInput.files;
+
+    const media = [];
+    for (let i = 0; i < files.length; i++) {
+        media.push(files[i]);
+    }
+
+    saveComment(postId, content, media);
+}
+
+const previewFiles = (postId) => {
+    const fileInput = document.getElementById(`file-input-${postId}`);
+    const thumbnailsContainer = document.getElementById(`thumbnails-${postId}`);
+
+    const files = fileInput.files;
+    for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+            const type = file.type;
+            const src = e.target.result;
+            const thumbnail = createMediaThumbnail(src, type);
+            thumbnailsContainer.appendChild(thumbnail);
+        }
+
+        reader.readAsDataURL(file);
+    }
+}
+
+const loadComments = (postId, authUserId) => {
+    fetch(`/posts/${postId}/comments`)
+        .then(response => response.json())
+        .then(comments => {
+            comments.forEach(comment => displayComment(postId, comment, authUserId));
+        })
+        .catch(error => console.error('Erro ao carregar comentários:', error));
+};
+
+const displayComment = (postId, comment, authUserId) => {
+
+    let count = 0;
+    let mediaContent = '';
+    const commentsContainer = document.getElementById('comment-container-'+ postId);
+
+    if (comment.media) {
+        const mediaArray = JSON.parse(comment.media);
+        mediaArray.forEach(mediaPath => {
+            const mediaUrl = `/storage/${mediaPath}`;
+            const type = mediaPath.split('.').pop().toLowerCase();
+            mediaContent += ['jpeg', 'jpg', 'png', 'gif'].includes(type) ?
+                `<img src="${mediaUrl}" alt="Comment Image">` :
+                `<video controls src="${mediaUrl}"></video>`;
+
+            count++;
+        });
+    }
+
+    let mediaClass = '';
+    if (count === 1) {
+        mediaClass = 'single-media';
+    } else if (count === 2) {
+        mediaClass = 'double-media';
+    } else if (count === 4) {
+        mediaClass = 'four-media';
+    } else if (count >= 5) {
+        mediaClass = 'multi-media';
+    }
+
+    console.log(comment);
+
+    const commentTemplate = `
+        <div class="comment">
+            <div class="comment-left">
+                <a href="/profile?profile_id=${comment.user.id}"><img src="/storage/${comment.user.profile.photo}" alt="User Photo"></a>
+            </div>
+            <div class="comment-right">
+                <div class="comment-header">
+                    <a href="/profile?profile_id=${comment.user.id}">
+                        <div id="comment-header-info">
+                            <span>${comment.user.name}</span>
+                            <p>@${comment.user.username}</p>
+                            <p>·</p>
+                            <p>${timeAgo(comment.created_at)}</p>
+                        </div>
+                    </a>
+                    ${authUserId === comment.user.id ? `
+                        <button onclick="deleteComment(${comment.id})">Eliminar</button>
+                    ` : ''}
+                </div>
+                <div class="comment-content">
+                    <p>${comment.content || ''}</p>
+                    <div class="medias ${mediaClass}">
+                        ${mediaContent}
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    commentsContainer.insertAdjacentHTML('beforeend', commentTemplate);
+};
+
+const saveComment = (postId, content, media) => {
+    const formData = new FormData();
+    formData.append('post_id', postId);
+    formData.append('content', content);
+    media.forEach(file => formData.append('media[]', file));
+
+    fetch('/comments', {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+        },
+        body: formData
+    })
+        .then(response => response.json())
+        .then(comment => {
+            // displayComment(comment, authUserId);
+            document.getElementById(`comment-text-${postId}`).value = '';
+            document.getElementById(`file-input-${postId}`).value = '';
+            document.getElementById(`thumbnails-${postId}`).innerHTML = '';
+        })
+        .catch(error => console.error('Erro ao adicionar comentário:', error));
+};
 
 document.addEventListener("DOMContentLoaded", () => {
     loadPosts();

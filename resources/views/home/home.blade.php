@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
     <link rel="stylesheet" href="{{ url('assets/css/home.css') }}">
+    <link rel="stylesheet" href="{{ url('assets/css/comment.css') }}">
 </head>
 
 <body>
@@ -20,7 +21,7 @@
         <div class="feed">
             <div class="publicar" id="drop-zone">
                 <div class="user-photo">
-                    <img src="{{ url('assets/img/obanai-iguro.png') }}" alt="Foto do Gyomei">
+                    {{--Aqui será inserida a foto do user logado--}}
                 </div>
                 <form id="post-form" class="post-content">
                     @csrf
@@ -41,9 +42,6 @@
                 <!-- Publicações serão inseridas aqui -->
             </div>
         </div>
-    </div>
-
-        
     </div>
 
     @extends('layouts.rightbar')

@@ -38,7 +38,7 @@ a {
     min-height: 100vh;
 }
 
-.leftBar, .feed, .rightBar, .publicar, .post, .post-content, .icons, .thumbnail, .medias {
+.leftBar, .feed, .rightBar, .publicar, .post, .post-content, .icons, .thumbnail, .medias, .comment {
     box-sizing: border-box;
     font-family: "Playwrite ES Deco", cursive;
 
@@ -54,13 +54,12 @@ a {
     display: flex;
     flex-direction: row;
     gap: 5px;
-    border: 2px solid #333;
+    border: 1px solid #333;
     border-radius: 20px;
     margin: 5px 30px 0;
     padding: 20px 20px 0;
     background-color: #000000b1;
     font-family: "Playwrite ES Deco", cursive;
-
 }
 
 .publicar {
@@ -71,7 +70,7 @@ a {
     padding-bottom: 0;
 }
 
-.post-right {
+.post-right, .comment-right {
     width: 100%;
 }
 
@@ -584,57 +583,57 @@ a {
     outline: none;
 }
 
-/* Adicionando estilos de transição e animação */
-@keyframes slide-in-left {
-    from {
-        transform: translateX(-100%);
-    }
-    to {
-        transform: translateX(0);
-    }
+.comment-container {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    gap: 10px;
 }
 
-@keyframes slide-out-left {
-    from {
-        transform: translateX(0);
-    }
-    to {
-        transform: translateX(100%);
-    }
+.comment-area {
+    display: none;
+    width: 100%;
+    flex-direction: row;
+    gap: 10px;
+    margin-bottom: 10px;
 }
 
-@keyframes slide-in-right {
-    from {
-        transform: translateX(100%);
-    }
-    to {
-        transform: translateX(0);
-    }
+.comment-form-content {
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: #3333333b;
 }
 
-@keyframes slide-out-right {
-    from {
-        transform: translateX(0);
-    }
-    to {
-        transform: translateX(-100%);
-    }
+.comment-content-area {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
 }
 
-.slide-enter {
-    animation: slide-in-left 0.5s forwards;
+.comment-icons {
+    margin: 0 !important;
+    padding: 0;
 }
 
-.slide-leave {
-    animation: slide-out-right 0.5s forwards;
+.comment-text-area {
+    width: 100%;
+    outline: none;
+    border: none;
+    padding: 0;
+    border-radius: 0;
+    background-color: #33333300;
+    overflow-y: hidden;
+    resize: none;
 }
 
-.slide-enter-reverse {
-    animation: slide-in-right 0.5s forwards;
-}
-
-.slide-leave-reverse {
-    animation: slide-out-left 0.5s forwards;
+.comment-text-area:focus {
+    outline: none;
+    border: none;
 }
 
 

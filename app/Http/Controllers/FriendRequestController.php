@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Friend;
 use App\Models\FriendRequest;
 use Illuminate\Http\Request;
@@ -52,7 +51,6 @@ class FriendRequestController extends Controller
 
             Log::info("Passou da cricação ".$friend);
 
-            // Verificar se a amizade foi criada com sucesso
             if ($friend) {
                 return response()->json(['message' => 'Friend request accepted successfully']);
             } else {
@@ -63,7 +61,6 @@ class FriendRequestController extends Controller
             return response()->json(['message' => 'An error occurred'], 500);
         }
     }
-
 
     public function rejectRequest($id)
     {
@@ -77,10 +74,39 @@ class FriendRequestController extends Controller
     {
         $requests = FriendRequest::where('recipient_id', Auth::id())
             ->where('status', 'PENDING')
-            ->with('user')
+            ->with('user.profile')
             ->get();
 
         return response()->json($requests);
     }
+
+    public function sentRequests()
+    {
+        $requests = FriendRequest::where('user_id', Auth::id())
+            ->with('recipient.profile')
+            ->get();
+
+        return response()->json($requests);
+    }
+
+    public function deleteRequest($id)
+    {
+        try {
+            $friendRequest = FriendRequest::findOrFail($id);
+
+            // Verificar se o pedido pertence ao usuário autenticado
+            if ($friendRequest->user_id !== Auth::id()) {
+                return response()->json(['message' => 'You are not authorized to delete this request'], 403);
+            }
+
+            $friendRequest->delete();
+
+            return response()->json(['message' => 'Friend request deleted successfully']);
+        } catch (Exception $e) {
+            Log::error('Error deleting friend request: ' . $e->getMessage());
+            return response()->json(['message' => 'An error occurred'], 500);
+        }
+    }
+
 
 }
