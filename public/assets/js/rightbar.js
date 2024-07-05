@@ -53,11 +53,10 @@ const fetchFriendsRequest = async () => {
             friendRequest.innerHTML = '';
 
             if (data.length > 0) {
-                console.log("Entrou mesmo");
                 friendRequest.style.display = 'block';
             }
 
-            const h3 = document.createElement('h3');
+            const h3 = document.createElement('h4');
             h3.innerHTML = 'Solicitações de amizade';
             friendRequest.appendChild(h3);
 
@@ -65,15 +64,17 @@ const fetchFriendsRequest = async () => {
 
                 const request = data[i];
 
+                console.log(request);
+
                 const userProfile = document.createElement('div');
                 userProfile.classList.add('user-profile');
 
                 userProfile.innerHTML = `
                     <div class="user-profile-profile">
-                        <img src="assets/img/rengoku.png" alt="Foto da Mitsuri">
+                        <img src="/storage/${request.profile.photo}" alt="Foto da Mitsuri">
                         <div id="profile-content">
-                            <span>${request.user.name}</span>
-                            <p>@${request.user.username}</p>
+                            <span>${request.profile.name}</span>
+                            <p>@${request.username}</p>
                         </div>
                     </div>
                     <button id="confirmar" onclick="acceptFriendRequest(${request.id})">Confirmar</button>
@@ -84,7 +85,6 @@ const fetchFriendsRequest = async () => {
             }
         })
 }
-
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchNonFriends();

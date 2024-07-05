@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Friend;
 use App\Models\Like;
+use App\Models\Notification;
 use App\Models\Post;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +14,7 @@ use Illuminate\Support\Facades\Log;
 
 class PostController extends Controller
 {
-    public function showPosts()
+    public function getPosts()
     {
         // Id do usuário logado
         $userId = auth()->id();
@@ -43,7 +45,7 @@ class PostController extends Controller
     }
 
 
-    public function store(Request $request): \Illuminate\Http\JsonResponse
+    public function newPost(Request $request): \Illuminate\Http\JsonResponse
     {
 
         Log::info("Loading post creating 2");
@@ -84,7 +86,7 @@ class PostController extends Controller
         }
     }
 
-    public function removePost(Post $post): \Illuminate\Http\JsonResponse
+    public function removePostById(Post $post): \Illuminate\Http\JsonResponse
     {
         try {
 
@@ -114,6 +116,16 @@ class PostController extends Controller
                 'user_id' => Auth::id(),
                 'post_id' => $postId,
             ]);
+
+            $postOwnerId = $like->post->user_id;
+            $userProfile = User::find(Auth::id())->profile;
+
+            if ($postOwnerId !== Auth::id()) {
+                Notification::createNotification($postOwnerId, 'like', [
+                    'message' => $userProfile->name . ' curtiu seu post.',
+                    'post_id' => $like->post_id,
+                ]);
+            }
 
             return response()->json(['message' => 'Post liked successfully.', 'likes_count' => $post->likes()->count()], 200);
         } catch (Exception $e) {

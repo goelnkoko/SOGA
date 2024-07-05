@@ -146,4 +146,22 @@ class UserController extends Controller
 
         return response()->json($users);
     }
+
+    public function searchUsers(Request $request)
+    {
+        $request->validate([
+            'query' => 'required|string|min:1',
+        ]);
+
+        $query = $request->input('query');
+        $users = User::where('username', 'like', '%' . $query . '%')
+            ->orWhereHas('profile', function ($q) use ($query) {
+                $q->where('name', 'like', '%' . $query . '%')
+                    ->orWhere('email', 'like', '%' . $query . '%');
+            })
+            ->with('profile')
+            ->get();
+
+        return response()->json($users);
+    }
 }

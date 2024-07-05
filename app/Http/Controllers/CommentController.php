@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log;
 
 class CommentController extends Controller
 {
-    public function index($postId)
+    public function getCommentsByPostId($postId)
     {
         $comments = Comment::with('user.profile')
             ->where('post_id', $postId)
@@ -19,7 +19,7 @@ class CommentController extends Controller
         return response()->json($comments);
     }
 
-    public function store(Request $request)
+    public function newComment(Request $request)
     {
         $request->validate([
             'post_id' => 'required|exists:posts,id',
@@ -52,7 +52,7 @@ class CommentController extends Controller
         }
     }
 
-    public function destroy(Comment $comment)
+    public function removeComment(Comment $comment)
     {
         try {
             if ($comment->user_id !== Auth::id()) {

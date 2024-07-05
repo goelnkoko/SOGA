@@ -28,4 +28,22 @@ class FriendController extends Controller
 
         return response()->json(['message' => 'Friendship status updated successfully']);
     }
+
+    public function removeFriend($id)
+    {
+        try {
+            $friendship = Friend::findOrFail($id);
+
+            // Verificar se o usuário autenticado faz parte da amizade
+            if ($friendship->user1_id !== Auth::id() && $friendship->user2_id !== Auth::id()) {
+                return response()->json(['message' => 'You are not authorized to remove this friendship'], 403);
+            }
+
+            $friendship->delete();
+
+            return response()->json(['message' => 'Friendship removed successfully']);
+        } catch (Exception $e) {
+            return response()->json(['message' => 'An error occurred'], 500);
+        }
+    }
 }

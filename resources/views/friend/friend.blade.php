@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>Amizades</title>
 
     <link rel="stylesheet" href="{{url('assets/css/friend.css')}}">
@@ -15,7 +17,7 @@
         <div class="friend-space suggestions" id="profile-suggestions">
             <h4>Sugestões</h4>
         </div>
-        <div class="friend-space request-sent">
+        <div class="friend-space request-sent" id="sent-requests">
             <h4>Pedidos enviados</h4>
 
         </div>
@@ -31,6 +33,5 @@
 
     <script src="{{ url('assets/js/menu.js') }}"></script>
     <script src="{{ url('assets/js/friend.js') }}"></script>
-    <script src="{{ url('assets/js/rightbar.js') }}"></script>
 </body>
 </html>

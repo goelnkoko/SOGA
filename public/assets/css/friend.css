@@ -18,5 +18,75 @@
 }
 
 .friend-space h4 {
+    margin: 0 0 20px;
+}
+
+
+.user-request-profile {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    padding: 0 10px;
+    border-radius: 25px;
+    overflow: hidden;
+    cursor: pointer;
+    background-color: #00000000;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+.user-request-profile img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border: none;
+    border-radius: 50%;
+}
+
+
+.user-request-profile span, .user-request-profile p {
+    color: white;
+    font-weight: 300;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 2px;
     margin: 0;
+    box-sizing: border-box;
+    flex-grow: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.user-request-profile span {
+    font-size: 1em;
+}
+
+.user-request-profile p {
+    font-size: 0.7em;
+    font-weight: 300;
+    color: #aaa;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.user-request-profile .user-profile-profile {
+    display: flex;
+    gap: 10px;
+}
+
+.user-request-profile button {
+    background-color: transparent;
+    border: 1px solid #111;
+    color: #07c9f4;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0px 0px 5px rgb(9, 157, 118);
+}
+
+.user-request-profile button:active {
+    transform: scale(0.98);
+    box-shadow: 0px 0px 5px rgb(0, 46, 34);
 }
