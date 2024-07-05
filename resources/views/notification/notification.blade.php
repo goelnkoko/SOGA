@@ -22,14 +22,14 @@
     <div class="content">
         <div class="notifications">
             <div class="new-notifications">
-                <h3>Novas</h3>
+                <h3>Não lidas</h3>
                 <div class="notification">
                     <div class="user-icon"></div>
                     <p>User 4 gostou da tua publicação</p>
                 </div>
             </div>
             <div class="old-notifications">
-                <h3>Anteriores</h3>
+                <h3>Lidas</h3>
                 <div class="notification">
                     <div class="user-icon"></div>
                     <p>User 3 começou a seguir-te</p>
@@ -42,7 +42,8 @@
                     <div class="user-icon"></div>
                     <p>User 2 adicionou 2 vídeos novos</p>
                 </div>
-            </div></div>
+            </div>
+        </div>
     </div>
 
     @extends('layouts.rightbar')

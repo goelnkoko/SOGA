@@ -14,35 +14,30 @@
       <h1>Criar sua conta</h1>
       <div class="input-box-2">
         <input name="name" type="text" placeholder="Nome" required>
-       
-   
-     
+
         <input name="username" type="text" placeholder="Username" required>
-        
-    
-     
+
         <input name="email" type="email" placeholder="Email" required>
-        
-        <input name="phone" type="tel" placeholder="Data de nascimento">
-        <input name="phone" type="tel" placeholder="Genero">
-      
-     
+
+        <input name="gender" type="" placeholder="Genero">
+        <input name="gender" type="" placeholder="Genero">
+
         <input name="password" type="password" placeholder="Senha" required>
-        
+
         <input name="confirm_password" type="password" placeholder=" Confirmar senha" required>
-       
+
       </div>
 
-<div class="pp"> 
+<div class="pp">
     <p>Ao clicar em registar, voce aceita as nossas </p>
 </div>
 
 <div class="ppc">
     <p>Politicas de Privacidade e a Politica de Cookies</p>
 </div>
-      
+
 <button type="submit" class="btn">Criar</button>
-      
+
     </form>
   </div>
 </body>

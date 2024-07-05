@@ -97,7 +97,7 @@ class UserController extends Controller
             ->with('success', 'User updated successfully');
     }
 
-    public function destroy(string $id)
+    public function deleteAccount(string $id)
     {
         $user = User::findOrFail($id);
         $user->delete();

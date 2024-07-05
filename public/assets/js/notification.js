@@ -2,18 +2,38 @@ const fetchNotifications = () => {
     fetch('/notifications')
         .then(response => response.json())
         .then(notifications => {
-            const notificationsList = document.getElementById('notifications-list');
-            notificationsList.innerHTML = '';
+
+            const unreadNotifications = document.querySelector('.new-notifications');
+            unreadNotifications.innerHTML = '';
+
+            const readNotifications = document.querySelector('.old-notifications');
+            readNotifications.innerHTML = '';
+
+            const h3 = document.createElement('h3');
+            h3.textContent = 'Novas';
+            unreadNotifications.appendChild(h3);
+
+            const h4 = document.createElement('h3');
+            h4.textContent = 'Lidas';
+            readNotifications.appendChild(h4);
 
             notifications.forEach(notification => {
+                console.log(notification);
+
                 const notificationElement = document.createElement('div');
                 notificationElement.classList.add('notification');
                 notificationElement.innerHTML = `
-                    <p>${notification.type}: ${notification.data.message}</p>
-                    <button onclick="markAsRead(${notification.id})">Marcar como lida</button>
+                    <p>${notification.content.message}</p>
                     <button onclick="deleteNotification(${notification.id})">Eliminar</button>
                 `;
-                notificationsList.appendChild(notificationElement);
+
+                if (!notification.read){
+                    unreadNotifications.appendChild(notificationElement);
+                    markAsRead(notification.id);
+                } else {
+                    readNotifications.appendChild(notificationElement);
+                }
+
             });
         })
         .catch(error => console.error('Erro ao buscar notificações:', error));
@@ -48,3 +68,7 @@ const deleteNotification = (notificationId) => {
         })
         .catch(error => console.error('Erro ao eliminar notificação:', error));
 };
+
+document.addEventListener('DOMContentLoaded', () => {
+    fetchNotifications();
+});

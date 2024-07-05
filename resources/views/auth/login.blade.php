@@ -6,17 +6,16 @@
   <title>Login Soga</title>
   <link rel="stylesheet" href="{{url('assets/css/autenticacao.css')}}">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-  
+
 </head>
 <body>
   <div class="ola">
- 
-    
 
   </div>
   <div class="wrapper">
     <form method="POST" action="{{route('login')}}">
         @csrf
+
       <h1>Login</h1>
       <div class="input-box">
         <input name="username" type="text" placeholder="Email ou Numero de telefone" required>
@@ -26,9 +25,11 @@
         <input name="password" type="password" placeholder="Senha" required>
         <i class='bx bxs-lock-alt' ></i>
       </div>
+
       @error('message')
         <span class="text-red-600">{{ $message }}</span>
       @enderror
+
       <div class="remember-forgot">
         <label><input type="checkbox">Lembrar-me</label>
         <a href="{{route('password-recover')}}">Esqueceu a senha?</a>

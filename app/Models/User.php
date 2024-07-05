@@ -47,4 +47,12 @@ class User extends Authenticatable
     public function profile() {
         return $this->hasOne(Profile::class);
     }
+
+    public function friends()
+    {
+        return $this->hasMany(Friend::class, 'user1_id')->where('status', 'ACTIVE')
+            ->orWhere(function($query) {
+                $query->where('user2_id', $this->id)->where('status', 'ACTIVE');
+            });
+    }
 }
