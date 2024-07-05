@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Notification;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -44,6 +46,18 @@ class CommentController extends Controller
             ]);
 
             $comment->save();
+
+            $postOwnerId = $comment->post->user_id;
+            $userProfile = User::find(Auth::id())->profile;
+
+            if ($postOwnerId !== Auth::id()) {
+                Notification::createNotification($postOwnerId, 'comment', [
+                    'message' => $userProfile->name . ' comentou no seu post.',
+                    'post_id' => $comment->post_id,
+                    'comment_id' => $comment->id,
+                ]);
+            }
+
 
             return response()->json($comment, 201);
         } catch (\Exception $e) {

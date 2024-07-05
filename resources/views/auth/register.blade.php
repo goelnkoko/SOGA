@@ -9,41 +9,45 @@
 </head>
 <body>
   <div class="wrapper-2">
-    <form method="POST" action="{{route('register')}}">
-      @csrf
-      <h1>Criar sua conta</h1>
-      <div class="input-box-2">
-        <input name="name" type="text" placeholder="Nome" required>
-       
-   
-     
-        <input name="username" type="text" placeholder="Username" required>
-        
-    
-     
-        <input name="email" type="email" placeholder="Email" required>
-        
-        <input name="phone" type="tel" placeholder="Data de nascimento">
-        <input name="phone" type="tel" placeholder="Genero">
-      
-     
-        <input name="password" type="password" placeholder="Senha" required>
-        
-        <input name="confirm_password" type="password" placeholder=" Confirmar senha" required>
-       
-      </div>
 
-<div class="pp"> 
-    <p>Ao clicar em registar, voce aceita as nossas </p>
-</div>
+      <form method="POST" action="{{route('register')}}">
+          @csrf
+          <h1>Criar sua conta</h1>
 
-<div class="ppc">
-    <p>Politicas de Privacidade e a Politica de Cookies</p>
-</div>
-      
-<button type="submit" class="btn">Criar</button>
-      
-    </form>
+          <div class="input-box-2">
+              <input name="name" type="text" placeholder="Nome" required>
+
+              <input name="username" type="text" placeholder="Username" required>
+
+              <input name="email" type="email" placeholder="Email" required>
+
+              <select name="gender" required>
+                  <option value="" disabled selected>Gênero</option>
+                  <option value="Masculino">Masculino</option>
+                  <option value="Feminino">Feminino</option>
+                  <option value="Outro">Outro</option>
+              </select>
+
+              <input name="birthdate" type="date" placeholder="Data de Nascimento" required>
+
+              <input name="location" type="text" placeholder="Localização (opcional)">
+
+              <input name="password" type="password" placeholder="Senha" required>
+
+              <input name="password_confirmation" type="password" placeholder="Confirmar senha" required>
+          </div>
+
+          <div class="pp">
+              <p>Ao clicar em registrar, você aceita as nossas</p>
+          </div>
+
+          <div class="ppc">
+              <p>Políticas de Privacidade e a Política de Cookies</p>
+          </div>
+
+          <button type="submit" class="btn">Criar</button>
+      </form>
+
   </div>
 </body>
 </html>
