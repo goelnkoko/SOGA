@@ -111,8 +111,6 @@ const displayPost = (post, loggedUser) => {
     let mediaContent = '';
     let hiddenMediaContent = '';
 
-    console.log(post)
-
     if (post.media) {
         const mediaArray = JSON.parse(post.media);
         mediaArray.forEach((mediaPath, index) => {
@@ -198,44 +196,13 @@ const displayPost = (post, loggedUser) => {
                     </button>
                 </div>
                 ${commentArea(post, loggedUser)}
+                <div class="comment-container" id="comment-container-${post.id}"></div>
             </div>
         </div>
     `;
 
     postsContainer.insertAdjacentHTML('beforeend', postTemplate);
 };
-
-const commentArea = (post, user) => {
-    return `
-            <div class="comment-area" id="comment-area-${post.id}">
-                <div class="user-photo">
-                    <img src="/storage/${user.profile.photo}" alt="Foto do usuário">
-                </div>
-                <form id="post-form" class="comment-content">
-                    <textarea class="comment-text-area" name="content" id="post" cols="30" rows="1" oninput="adjustTextarea(this)"></textarea>
-                    <div class="icons comment-icons">
-                        <button id="upload-button" type="button">
-                            <span class="material-symbols-outlined">image</span>
-                        </button>
-                        <input type="file" id="file-input" multiple style="display:none;" accept="image/*,video/*">
-                        <button type="submit" id="send-button"><span class="material-symbols-outlined">send</span></button>
-                    </div>
-                </form>
-                <div id="thumbnails"></div>
-            </div>
-    `;
-}
-
-const postComment = (postId, user) => {
-
-    const commentAreaId = document.getElementById('comment-area-'+postId);
-
-    if (commentAreaId.style.display === 'flex') {
-        commentAreaId.style.display = 'none';
-    } else {
-        commentAreaId.style.display = 'flex';
-    }
-}
 
 const showHiddenMedia = (button) => {
     const hiddenMediaContainer = button.previousElementSibling;
@@ -302,6 +269,8 @@ const removePost = async (postId) => {
     }
 }
 
+
+//Like area
 const updateLikeStatus = async (postId) => {
     const like = document.getElementById(`like-${postId}`);
     const isLiked = like.classList.contains('liked');
@@ -343,6 +312,177 @@ const unlikePost = (like) => {
     like.innerHTML = `<span class="material-symbols-outlined material-style"> sentiment_sad</span>`;
 }
 
+
+//Comment Area
+const postComment = (postId, user) => {
+
+    const commentAreaId = document.getElementById('comment-area-'+postId);
+    const commentContainer = document.getElementById('comment-container-'+postId);
+
+    if (commentAreaId.style.display === 'flex') {
+        commentAreaId.style.display = 'none';
+        commentContainer.style.display = 'none';
+    } else {
+        commentAreaId.style.display = 'flex';
+        commentContainer.style.display = 'flex';
+    }
+}
+
+const commentArea = (post, user) => {
+    loadComments(post.id, user.id);
+    return `
+        <div class="comment-area" id="comment-area-${post.id}">
+            <div class="user-photo">
+                <img src="/storage/${user.profile.photo}" alt="Foto do usuário">
+            </div>
+            <form id="comment-form-${post.id}" class="comment-form-content" onsubmit="handleCommentSubmit(event, ${post.id})">
+                <div class="comment-content-area">
+                    <textarea class="comment-text-area" name="content" id="comment-text-${post.id}" cols="30" rows="1" oninput="adjustTextarea(this)"></textarea>
+                    <div class="icons comment-icons">
+                        <button id="upload-button-${post.id}" type="button" onclick="document.getElementById('file-input-${post.id}').click()">
+                            <span class="material-symbols-outlined">image</span>
+                        </button>
+                        <input type="file" id="file-input-${post.id}" multiple style="display:none;" accept="image/*,video/*" onchange="previewFiles(${post.id})">
+                        <button type="submit" id="send-comment-button-${post.id}"><span class="material-symbols-outlined">send</span></button>
+                    </div>
+                </div>
+                <div id="thumbnails-${post.id}" class="thumbnails"></div>
+            </form>
+        </div>
+    `;
+}
+
+const handleCommentSubmit = (event, postId) => {
+    event.preventDefault();
+
+    const form = document.getElementById(`comment-form-${postId}`);
+    const content = form.querySelector(`#comment-text-${postId}`).value;
+    const fileInput = form.querySelector(`#file-input-${postId}`);
+    const files = fileInput.files;
+
+    const media = [];
+    for (let i = 0; i < files.length; i++) {
+        media.push(files[i]);
+    }
+
+    saveComment(postId, content, media);
+}
+
+const previewFiles = (postId) => {
+    const fileInput = document.getElementById(`file-input-${postId}`);
+    const thumbnailsContainer = document.getElementById(`thumbnails-${postId}`);
+
+    const files = fileInput.files;
+    for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+            const type = file.type;
+            const src = e.target.result;
+            const thumbnail = createMediaThumbnail(src, type);
+            thumbnailsContainer.appendChild(thumbnail);
+        }
+
+        reader.readAsDataURL(file);
+    }
+}
+
+const loadComments = (postId, authUserId) => {
+    fetch(`/posts/${postId}/comments`)
+        .then(response => response.json())
+        .then(comments => {
+            comments.forEach(comment => displayComment(postId, comment, authUserId));
+        })
+        .catch(error => console.error('Erro ao carregar comentários:', error));
+};
+
+const displayComment = (postId, comment, authUserId) => {
+
+    let count = 0;
+    let mediaContent = '';
+    const commentsContainer = document.getElementById('comment-container-'+ postId);
+
+    if (comment.media) {
+        const mediaArray = JSON.parse(comment.media);
+        mediaArray.forEach(mediaPath => {
+            const mediaUrl = `/storage/${mediaPath}`;
+            const type = mediaPath.split('.').pop().toLowerCase();
+            mediaContent += ['jpeg', 'jpg', 'png', 'gif'].includes(type) ?
+                `<img src="${mediaUrl}" alt="Comment Image">` :
+                `<video controls src="${mediaUrl}"></video>`;
+
+            count++;
+        });
+    }
+
+    let mediaClass = '';
+    if (count === 1) {
+        mediaClass = 'single-media';
+    } else if (count === 2) {
+        mediaClass = 'double-media';
+    } else if (count === 4) {
+        mediaClass = 'four-media';
+    } else if (count >= 5) {
+        mediaClass = 'multi-media';
+    }
+
+    console.log(comment);
+
+    const commentTemplate = `
+        <div class="comment">
+            <div class="comment-left">
+                <a href="/profile?profile_id=${comment.user.id}"><img src="/storage/${comment.user.profile.photo}" alt="User Photo"></a>
+            </div>
+            <div class="comment-right">
+                <div class="comment-header">
+                    <a href="/profile?profile_id=${comment.user.id}">
+                        <div id="comment-header-info">
+                            <span>${comment.user.name}</span>
+                            <p>@${comment.user.username}</p>
+                            <p>·</p>
+                            <p>${timeAgo(comment.created_at)}</p>
+                        </div>
+                    </a>
+                    ${authUserId === comment.user.id ? `
+                        <button onclick="deleteComment(${comment.id})">Eliminar</button>
+                    ` : ''}
+                </div>
+                <div class="comment-content">
+                    <p>${comment.content || ''}</p>
+                    <div class="medias ${mediaClass}">
+                        ${mediaContent}
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    commentsContainer.insertAdjacentHTML('beforeend', commentTemplate);
+};
+
+const saveComment = (postId, content, media) => {
+    const formData = new FormData();
+    formData.append('post_id', postId);
+    formData.append('content', content);
+    media.forEach(file => formData.append('media[]', file));
+
+    fetch('/comments', {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+        },
+        body: formData
+    })
+        .then(response => response.json())
+        .then(comment => {
+            // displayComment(comment, authUserId);
+            document.getElementById(`comment-text-${postId}`).value = '';
+            document.getElementById(`file-input-${postId}`).value = '';
+            document.getElementById(`thumbnails-${postId}`).innerHTML = '';
+        })
+        .catch(error => console.error('Erro ao adicionar comentário:', error));
+};
 
 document.addEventListener("DOMContentLoaded", () => {
     loadPosts();

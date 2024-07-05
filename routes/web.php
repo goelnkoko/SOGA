@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
@@ -53,6 +54,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/posts/{post}', [PostController::class, 'removePost']);
     Route::post('/posts/{postId}/like', [PostController::class, 'likePost']);
     Route::post('/posts/{postId}/unlike', [PostController::class, 'unlikePost']);
+
+    // Rotas para Comentários
+    Route::get('/posts/{post}/comments', [CommentController::class, 'index']);
+    Route::post('/comments', [CommentController::class, 'store']);
+    Route::delete('/comments/{comment}', [CommentController::class, 'destroy']);
 
     // Rotas de Amigos
     Route::post('/friend-requests', [\App\Http\Controllers\FriendRequestController::class, 'sendRequest']);

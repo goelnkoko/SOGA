@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Friend;
 use App\Models\FriendRequest;
 use Illuminate\Http\Request;
@@ -52,7 +51,6 @@ class FriendRequestController extends Controller
 
             Log::info("Passou da cricação ".$friend);
 
-            // Verificar se a amizade foi criada com sucesso
             if ($friend) {
                 return response()->json(['message' => 'Friend request accepted successfully']);
             } else {
@@ -63,7 +61,6 @@ class FriendRequestController extends Controller
             return response()->json(['message' => 'An error occurred'], 500);
         }
     }
-
 
     public function rejectRequest($id)
     {
