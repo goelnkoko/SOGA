@@ -11,11 +11,22 @@ class FriendController extends Controller
 {
     public function getFriends()
     {
-        $friendships = Friend::where('user1_id', Auth::id())
-            ->orWhere('user2_id', Auth::id())
-            ->get();
-        return response()->json($friendships);
+        $friendships = Friend::where(function ($query) {
+            $query->where('user1_id', Auth::id())
+                ->orWhere('user2_id', Auth::id());
+        })->with(['user1.profile', 'user2.profile'])->get();
+
+        $friends = $friendships->map(function ($friendship) {
+            if ($friendship->user1_id === Auth::id()) {
+                return $friendship->user2;
+            } else {
+                return $friendship->user1;
+            }
+        });
+
+        return response()->json($friends);
     }
+
 
     public function updateStatus(Request $request, $id)
     {

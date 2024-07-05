@@ -1,6 +1,81 @@
+async function handleFetchResponse(response) {
+    if (!response.ok) {
+        const errorData = await response.json();
+        const errorMessage = errorData.message || errorData.error || `HTTP error! status: ${response.status}`;
+        throw new Error(errorMessage);
+    }
+    return response.json();
+}
+
+// Function to send a friend request
+const sendFriendRequest = async (recipientId, button) => {
+
+    fetch('/friend-requests', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+        },
+        body: JSON.stringify({ recipient_id: recipientId })
+    })
+        .then(response => response.json())
+        .then(data => {
+
+            if (data.error) {
+                alert(data.error);
+            }
+            else {
+                rightFetchNonFriends();
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
+// Function to accept a friend request
+const acceptFriendRequest = async (requestId) => {
+    try {
+        const response = await fetch(`/friend-requests/${requestId}/accept`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+            }
+        });
+
+        rightFetchFriendsRequest();
+
+        const data = await handleFetchResponse(response);
+    } catch (error) {
+        console.error('Error accepting friend request:', error);
+    }
+};
+
+// Function to reject a friend request
+const rejectFriendRequest = async (requestId) => {
+    try {
+        const response = await fetch(`/friend-requests/${requestId}/reject`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+            }
+        });
+
+        rightFetchFriendsRequest();
+
+        const data = await handleFetchResponse(response);
+    } catch (error) {
+        console.error('Error rejecting friend request:', error);
+    }
+};
 
 // Função para buscar e exibir usuários
-const fetchNonFriends = async () => {
+const rightFetchNonFriends = async () => {
 
     fetch('/non-friends')
         .then(response => response.json())
@@ -19,7 +94,6 @@ const fetchNonFriends = async () => {
 
             for (let i = 0; i < 3 && i < data.length; i++) {
                 const user = data[i];
-                console.log(user);
                 const userProfile = document.createElement('div');
                 userProfile.classList.add('user-profile');
 
@@ -43,7 +117,7 @@ const fetchNonFriends = async () => {
 }
 
 //Função para buscar requisições de amizade
-const fetchFriendsRequest = async () => {
+const rightFetchFriendsRequest = async () => {
 
     fetch('/friend-requests')
         .then(response => response.json())
@@ -64,20 +138,18 @@ const fetchFriendsRequest = async () => {
 
                 const request = data[i];
 
-                console.log(request);
-
                 const userProfile = document.createElement('div');
                 userProfile.classList.add('user-profile');
 
                 userProfile.innerHTML = `
                     <div class="user-profile-profile">
-                        <img src="/storage/${request.profile.photo}" alt="Foto da Mitsuri">
+                        <img src="/storage/${request.user.profile.photo}" alt="Foto da Mitsuri">
                         <div id="profile-content">
-                            <span>${request.profile.name}</span>
+                            <span>${request.user.profile.name}</span>
                             <p>@${request.username}</p>
                         </div>
                     </div>
-                    <button id="confirmar" onclick="acceptFriendRequest(${request.id})">Confirmar</button>
+                    <button id="confirmar" onclick="acceptFriendRequest(${request.id})">Aceitar</button>
                     <button id="rejeitar" onclick="rejectFriendRequest(${request.id})">Rejeitar</button>
                 `;
 
@@ -87,6 +159,6 @@ const fetchFriendsRequest = async () => {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    fetchNonFriends();
-    fetchFriendsRequest();
+    rightFetchNonFriends();
+    rightFetchFriendsRequest();
 });

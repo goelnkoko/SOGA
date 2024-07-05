@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const profileLeft = document.getElementById('profile-left');
 
+            console.log(data);
+
             profileLeft.innerHTML = `
                 <img src="/storage/${data.profile.photo}" alt="Foto do Gyomei">
                 <div id="profile-content">

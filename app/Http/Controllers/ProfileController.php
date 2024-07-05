@@ -107,8 +107,6 @@ class ProfileController extends Controller
             Log::info("Nenhum arquivo foi enviado.");
             return response()->json(['message' => 'Nenhum arquivo foi enviado']);
         }
-
-
     }
 
     public function removePhoto($id)

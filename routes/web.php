@@ -90,6 +90,10 @@ Route::middleware('auth')->group(function () {
         return view('chat.chat');
     })->name('chat');
 
+//    Route::get('/chat', 'App\Http\Controllers\PusherController@index');
+//    Route::post('/chat/broadcast', 'App\Http\Controllers\PusherController@broadcast');
+//    Route::post('/chat/receive', 'App\Http\Controllers\PusherController@receive');
+
     // Rotas de Perfis
     Route::get('profiles/{id}', [ProfileController::class, 'show']);
     Route::post('profiles/{id}/add-hobby', [ProfileController::class, 'addHobby']);
