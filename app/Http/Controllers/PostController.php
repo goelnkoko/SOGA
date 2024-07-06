@@ -47,15 +47,10 @@ class PostController extends Controller
 
     public function newPost(Request $request): \Illuminate\Http\JsonResponse
     {
-
-        Log::info("Loading post creating 2");
-
         $request->validate([
             'content' => 'string',
             'media.*' => 'file|mimes:jpeg,jpg,png,gif,mp4,avi,mkv|max:10240', // 10MB Max
         ]);
-
-        Log::info("Post request validated");
 
         try {
             $mediaPaths = [];
@@ -66,19 +61,28 @@ class PostController extends Controller
                 }
             }
 
-            Log::info("Added images to media path");
-
             $post = new Post([
                 'content' => $request->get('content'),
                 'user_id' => Auth::id(), // Associando o ID do usuário logado ao post
                 'media' => json_encode($mediaPaths),
             ]);
 
-            Log::info("Created post object");
-
             $post->save();
 
-            Log::info("Post saved");
+            // Buscar todos os amigos do usuário que criou o post
+            $friends = Auth::user()->friends;
+
+            Log::info($friends);
+
+            $userProfile = User::find(Auth::id())->profile;
+
+            foreach ($friends as $friend) {
+                $friendId = $friend->user1_id == Auth::id() ? $friend->user2_id : $friend->user1_id;
+                Notification::createNotification($friendId, 'post', [
+                    'message' => $userProfile->name . ' publicou um novo post.',
+                    'post_id' => $post->id,
+                ]);
+            }
 
             return response()->json($post, 201);
         } catch (Exception $e) {

@@ -68,7 +68,6 @@ const createPost = (text, files) => {
         alert('Por favor, adicione texto ou imagens ao post.');
         return;
     }
-
     const formData = new FormData();
     if (text.trim()) formData.append('content', text);
     Array.from(files).forEach(file => formData.append('media[]', file));
@@ -143,7 +142,9 @@ const displayPost = (post, loggedUser) => {
     const postTemplate = `
         <div class="post">
             <div class="post-left">
-                <a href="/profile?profile_id=${post.user.profile.id}"><img src="/storage/${post.user.profile.photo}" alt="Pessoa linda"></a>
+                <div class="user-photo">
+                    <a href="/profile?profile_id=${post.user.profile.id}"><img src="/storage/${post.user.profile.photo}" alt="Pessoa linda"></a>
+                </div>
             </div>
             <div class="post-right">
                 <div class="post-header">
@@ -427,18 +428,17 @@ const displayComment = (postId, comment, authUserId) => {
         mediaClass = 'multi-media';
     }
 
-    console.log(comment);
 
     const commentTemplate = `
         <div class="comment">
             <div class="comment-left">
-                <a href="/profile?profile_id=${comment.user.id}"><img src="/storage/${comment.user.profile.photo}" alt="User Photo"></a>
+                <a href="/profile?userId=${comment.user.id}"><img src="/storage/${comment.user.profile.photo}" alt="User Photo"></a>
             </div>
             <div class="comment-right">
                 <div class="comment-header">
                     <a href="/profile?profile_id=${comment.user.id}">
                         <div id="comment-header-info">
-                            <span>${comment.user.name}</span>
+                            <span>${comment.user.profile.name}</span>
                             <p>@${comment.user.username}</p>
                             <p>·</p>
                             <p>${timeAgo(comment.created_at)}</p>

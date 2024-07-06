@@ -1,7 +1,7 @@
 body{
     height: 100%;
 	margin: 0;
-	
+
 	 }
 
 .chat-user-friend{
@@ -86,6 +86,7 @@ body{
 }
 
 .input-form{
+    margin-left: 5%;
     position: absolute;
     bottom: 10px;
     width: 90%;
@@ -108,7 +109,7 @@ body{
 
 
 #btn-send{
-   
+
 	background-color: rgba(0, 0, 0, 0.3) !important;
 	border: 10px !important;
 	color: white !important;

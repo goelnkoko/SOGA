@@ -4,6 +4,7 @@
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
   }
+
   body{
     display: flex;
     justify-content: center;
@@ -24,15 +25,13 @@
     text-align: center;
     border: 2px  solid #00FFFF ;
     transition: border-color 0.3s, box-shadow 0.3s;
-  
-  
   }
 
 
 .wrapper-1{
   width: 420px;
   background: black;
-  
+
   backdrop-filter: blur(9px);
   color: #fff;
   border-radius: 12px;
@@ -45,7 +44,7 @@
 .wrapper-2{
   width: 420px;
   background: #000000;
-margin-left: 40%;
+  margin-left: 40%;
   backdrop-filter: blur(9px);
   color: #fff;
   border-radius: 10px;
@@ -58,38 +57,37 @@ margin-left: 40%;
     font-size: 30px;
     text-align: center;
   }
-  
+
   .wrapper-2 h1{
     font-size: 30px;
     text-align: center;
   }
-  
+
   .wrapper .input-box{
     position: relative;
     width: 100%;
-    height: 50px; 
+    height: 50px;
     margin: 30px 0;
   }
 
   .wrapper-2 .input-box{
     position: relative;
     width: 100%;
-    height: 50px; 
+    height: 50px;
     margin: 30px  ;
-   
+
   }
 
   .wrapper-1 .input-box{
     position: relative;
     width: 100%;
-    height: 50px; 
+    height: 50px;
     margin: 30px 0;
   }
   .input-box input{
     width: 100%;
     height: 100%;
     background: rgba(0, 213, 255, 0.507);
-    border: none;
     outline: none;
     border: 2px solid rgba(13, 183, 222, 0.2);
     border-radius: 10px;
@@ -102,7 +100,6 @@ margin-left: 40%;
     width: 100%;
     height: 100%;
     background: rgba(0, 213, 255, 0.507);
-    border: none;
     outline: none;
     border: 2px solid rgba(13, 183, 222, 0.2);
     border-radius: 10px;
@@ -114,7 +111,7 @@ margin-left: 40%;
     color: #faefef;
   }
 
-  .input-box-2 input{
+  .input-box-2 input, .input-box-2 select {
     width: 100%;
     height: 100%;
     background: rgba(0, 213, 255, 0.507);
@@ -122,10 +119,10 @@ margin-left: 40%;
     border-radius: 10px;
     font-size: 16px;
     color: #ffffff;
-    padding:  10px ; 
+    padding:  10px ;
      padding-block: 2%;
      margin: 1%;
-    
+
   }
   .input-box-2 input::placeholder{
     color: #faefef;
@@ -139,11 +136,11 @@ margin-left: 40%;
     top: 30%;
     transform: translate(-50%);
     font-size: 20px;
-  
+
   }
 
-  
- 
+
+
 
 
   .wrapper .remember-forgot{
@@ -153,16 +150,16 @@ margin-left: 40%;
     margin: -15px 0 15px;
   }
 
-  
+
   .remember-forgot label input{
     accent-color: #ffffff;
     margin-right: 3px;
-  
+
   }
   .remember-forgot a{
     color:#0911ed;
     text-decoration: none;
-  
+
   }
   .remember-forgot a:hover{
     text-decoration: underline;
@@ -179,7 +176,7 @@ margin-left: 40%;
     color: #e4dada;
     font-weight: 600;
     border: 2px solid rgba(8, 188, 238, 0.411);
-  
+
   }
 
   .wrapper-2 .btn{
@@ -194,10 +191,10 @@ margin-left: 40%;
     color: #e4dada;
     font-weight: 600;
     border: 2px solid rgba(8, 188, 238, 0.411);
-  
+
   }
- 
- 
+
+
 
 .wrapper-1 .btn{
   width: 50%;
@@ -219,7 +216,6 @@ margin-left: 40%;
   width: 50%;
   height: 40px;
   background: rgba(0, 213, 255, 0.507);
-  border: none;
   outline: none;
   border-radius: 10px;
   cursor: pointer;
@@ -227,22 +223,20 @@ margin-left: 40%;
   color: #e4dada;
   font-weight: 600;
   border: 2px solid rgba(8, 188, 238, 0.411);
-
 }
 
 
   .wrapper .register-link{
-    font-size: 14.5px;
+    font-size: 14px;
     text-align: center;
     margin: 20px 0 15px;
-  
   }
 
   .wrapper-1 .register-link{
-    font-size: 14.5px;
+    font-size: 14px;
     text-align: center;
     margin: 20px 0 15px;
-  
+
   }
   .register-link p a{
     color: #0911ed;
@@ -253,7 +247,7 @@ margin-left: 40%;
     text-decoration: underline;
   }
 
-  
+
   .ppc{
     color: #0911ed;
 text-align: center;
@@ -279,7 +273,7 @@ text-align: center;
 
 .btn:hover  {
   border-color: #00FFFF; /* Azul florescente */
-  box-shadow: 0 0 10px #00FFFF; 
+  box-shadow: 0 0 10px #00FFFF;
 
 }
 
@@ -287,9 +281,9 @@ text-align: center;
    .btn{
 
     border: 2px solid rgba(8, 188, 238, 0.411);
-   } 
+   }
 
-  
+
   .left-side {
     text-align: center;
     margin-right: 50px;

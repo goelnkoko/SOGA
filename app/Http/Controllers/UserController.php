@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -46,13 +48,25 @@ class UserController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
-        Profile::create([
+        // Criação do perfil
+        $profile = Profile::create([
             'user_id' => $user->id,
             'name' => $request->name,
             'birthdate' => $request->birthdate,
             'gender' => $request->gender,
             'location' => $request->location,
         ]);
+
+        $defaultImagePath = public_path('assets/img/user.png');
+        $newImagePath = 'photos/' . uniqid() . '.png';
+
+        try {
+            // Copiar a imagem padrão para o storage público
+            Storage::disk('public')->put($newImagePath, file_get_contents($defaultImagePath));
+            $profile->update(['photo' => $newImagePath]);
+        } catch (\Exception $e) {
+            Log::error("Erro ao copiar a imagem padrão: " . $e->getMessage());
+        }
 
         return redirect()->intended('login');
     }
@@ -97,7 +111,7 @@ class UserController extends Controller
             ->with('success', 'User updated successfully');
     }
 
-    public function destroy(string $id)
+    public function deleteAccount(string $id)
     {
         $user = User::findOrFail($id);
         $user->delete();
