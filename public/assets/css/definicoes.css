@@ -1,0 +1,79 @@
+body {
+    border-radius: 10%;
+    margin: 0;
+    padding: 5px;
+    background-color: #000000;
+    color: white;
+    font-family: 'Arial', sans-serif;
+    left: 50%;
+    cursor: pointer;
+
+}
+
+
+
+/*Estilizar o ícone do menu principal*/
+#settings span.material-style {
+    animation: none;
+    font-variation-settings: 'FILL' 1, 'wght' 700;
+    font-size: 25px;
+}
+
+#settings p {
+    font-weight: 70;
+}
+
+
+.menu {
+    width: 500px;
+    background-color: #000000;
+    padding: 10 px;
+    border-radius: 5%;
+    padding: 50px 100px;
+    margin: 100px auto;
+
+
+   
+}
+
+.menu-item  {
+    display: flex;
+    padding: 50px;
+    color: aliceblue;
+    border-radius: 10px;
+    transition: all .4s ease;
+}
+
+.menu-item :hover {
+    display: flex;
+    padding: 10px;
+    color: aliceblue;
+    border-radius: 1px;
+    background: #22b4ee;
+    border-radius: 34px;
+    color: #fff;
+    box-shadow: 0 0 60px #15a8b37c;
+    
+}
+
+.menu-item:last-child {
+    border-bottom: none;
+    
+}
+
+.menu-item i {
+    font-size: 24px;
+    margin-right: 15px;
+}
+
+.menu-item span {
+    font-size: 16px;
+}
+ .btn-1 {
+    background-color: #1c1c1c ;
+    color:white;
+    border: #1c1c1c;
+    font-size: 16px;
+    cursor: pointer
+ }
+

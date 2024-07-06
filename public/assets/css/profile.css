@@ -1,0 +1,424 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+DE+Grund:wght@100..400&display=swap');
+
+body {
+    position: relative;
+    height: 100vh;
+    margin: 0;
+    background-color: #000000;
+    color: #e6e6e6;
+    font-family: 'Open Sans', Helvetica, Cambria, sans-serif;
+}
+
+.header {
+    background-color: #2aa6c27d;
+    padding: 50px;
+    position: relative;
+    align-self: unset;
+}
+
+.profile-page {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+    gap: 0;
+}
+
+.profile-card {
+    width: 70%;
+    background-color: #020000;
+    position: relative;
+}
+
+.profile-right {
+    width: 30%;
+}
+
+.profile-photo {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 180px;
+    background-color: #12444F;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 80px;
+}
+
+.edit-button{
+    position:absolute;
+    top: 10px ;
+    right: 70px;
+}
+
+#back-profile {
+    right: 20px;
+}
+
+.profile-pic {
+    position: absolute;
+    top: 40%;
+    left: 5%;
+    width: 170px;
+    height: 170px;
+    background-color: #090101;
+    margin: 0 auto;
+    z-index: 2;
+    border-radius: 50%;
+}
+
+.profile-pic img {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    margin-right: 10%;
+    z-index: 2;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.edit-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color:#00fff78b;
+    padding: 10px;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.profile-info {
+    margin: 0 2.5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.profile-info #left-info {
+    width: 60%;
+}
+
+.profile-info #left-info #name {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+}
+
+.profile-info #left-info #name p {
+    color: #627983;
+    font-weight: 200;
+    font-size: 16px;
+}
+
+.profile-info #left-info #biography {
+    font-family: "Playwrite DE Grund", cursive;
+}
+
+.profile-info #left-info .left-bottom {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    color: #627983;
+    font-size: 12px;
+}
+
+.profile-info #left-info .left-bottom-items{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+
+.profile-info #left-info #ver-mais {
+    cursor: pointer;
+
+    &:hover {
+        color: #7e96a1;
+        cursor: pointer;
+    }
+}
+
+.profile-info #left-info #ver-mais:hover p {
+    text-decoration: underline;
+}
+
+
+
+.profile-info #right-info {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: right;
+}
+
+.profile-info .info-items {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: fit-content;
+    align-items: center;
+}
+
+.profile-info span {
+    font-size: 18px;
+    font-weight: 800;
+}
+
+
+.profile-info p {
+    padding-top: 5px;    /* Adiciona 10px de espaço no topo do parágrafo */
+    padding-bottom: 5px;
+    /*left: 10%;*/
+    margin: 0;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.profile-info p i {
+    margin-right: 10px;
+}
+
+.profile-info p span {
+    display: inline-block;
+    margin: 5px 0;
+}
+
+.edit-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color:#00fff78b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.profile-tabs {
+    margin-top: 10px;
+    background-color: #000000;
+    border-top: 1px solid #000000;
+    display: flex;
+    justify-content: center; /* Alinhamento horizontal */
+    align-items: center; /* Alinhamento vertical */
+
+}
+
+.tab {
+    flex: 1;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.tab:hover {
+    background-color: #00fff78b;
+    border-top: 1px solid #2fe9e9bd;
+}
+
+.tab i {
+    margin-right: 5px;
+}
+
+.profile-tabs{
+    border-top: 2px solid #11cdcdbd;
+    border-radius: 10%;
+    margin-top: 5%;
+}
+
+
+/*Parte direita*/
+.edit-profile {
+    display: none;
+    position: absolute;
+    width: 70%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background-color: #000000;
+    font-family: "Reddit Mono", monospace;
+}
+
+.edit-field {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #12444F;
+}
+
+
+.edit-profile-photo {
+    position: absolute;
+    z-index: 4;
+    left: 50px;
+    bottom: -50px;
+    background-color: rgba(7, 73, 70, 0.63);
+    padding: 10px;
+    border-radius: 100%;
+    color: white;
+    cursor: pointer;
+}
+
+.simple {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.simple-left, .simple-right {
+    width: 45%;
+}
+
+.item {
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 7px;
+}
+
+.item input, .item textarea, .item select {
+    padding: 7px 12px;
+    background-color: #12444F;
+    color: #ddd;
+    outline: none;
+    border: none;
+    margin-top: 5px;
+    border-radius: 15px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.item input:focus {
+    outline: none;
+    border: none;
+}
+
+.item label {
+    font-size: 13px;
+    color: #304660;
+    margin-left: 12px;
+}
+
+
+/*Área dos botões*/
+.simple .edit-btn {
+    padding: 7px 12px;
+    background-color: #ddd;
+    color: #12444F;
+    outline: none;
+    border: none;
+    border-radius: 15px;
+    float: right;
+    margin-right: 10px;
+}
+
+#simple-edit-btn {
+    margin-top: 10px;
+}
+
+.list-item {
+    width: 70%;
+}
+
+.list-item ul li {
+    gap: 3px;
+    margin-top: 10px;
+}
+
+.list-item .edit-btn, .add-education-header .edit-btn {
+    padding: 3px 12px;
+    background-color: #00000000;
+    color: #12444F;
+    outline: none;
+    border: none;
+    margin-top: 7px;
+}
+
+.list-item .edit-btn:hover, .add-education-header .edit-btn:hover {
+    background-color: rgba(18, 68, 79, 0.25);
+    color: #137e93;
+    border-radius: 15px;
+}
+
+/*Education Items*/
+.edit-education {
+    width: 80%;
+}
+
+.education-item {
+    padding: 20px;
+    font-size: 14px;
+    font-family: Cambria, serif;
+}
+
+.education-item p, .education-item span {
+    margin: 5px;
+    padding: 0;
+}
+
+.education-item span {
+    font-weight: 800;
+    font-size: 15px;
+}
+
+.education-dates, .edit-curso, .add-education-header {
+    display: flex;
+    flex-direction: row;
+}
+
+.add-education-header {
+    gap: 10px;
+}
+
+.add-education-header button, .add-education-header h4 {
+    padding: 7px 12px;
+    margin: 0;
+}
+
+.education-dates .dates {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+}
+
+.education-dates label, .education-dates p {
+    font-size: 14px;
+    color: #1b7487;
+}
+
+.profile-right{
+    border-left: 1px solid #3f4648;
+    
+}
+
+h3 {
+    position: relative;
+    display: inline-block;
+    margin: 20px;
+    cursor: pointer;
+     font-family: Cambria, serif;
+}
+
+h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #0ce8ef;
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.5s ease-out;
+}
+
+h3:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}

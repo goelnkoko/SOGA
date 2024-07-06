@@ -1,0 +1,295 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+  }
+
+  body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: black;
+    background-size: cover;
+    background-position: center;
+  }
+  .wrapper{
+    width: 420px;
+    background: black;
+    margin-left: 40%;
+    backdrop-filter: blur(9px);
+    color: #fff;
+    border-radius: 12px;
+    padding: 40px 30px;
+    text-align: center;
+    border: 2px  solid #00FFFF ;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+
+
+.wrapper-1{
+  width: 420px;
+  background: black;
+
+  backdrop-filter: blur(9px);
+  color: #fff;
+  border-radius: 12px;
+  padding: 40px 30px;
+  text-align: center;
+  border: 2px  solid #00FFFF ;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.wrapper-2{
+  width: 420px;
+  background: #000000;
+  margin-left: 40%;
+  backdrop-filter: blur(9px);
+  color: #fff;
+  border-radius: 10px;
+  padding: 40px 30px;
+  text-align: center;
+  border: 2px  solid #00FFFF ;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+  .wrapper h1{
+    font-size: 30px;
+    text-align: center;
+  }
+
+  .wrapper-2 h1{
+    font-size: 30px;
+    text-align: center;
+  }
+
+  .wrapper .input-box{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+  }
+
+  .wrapper-2 .input-box{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px  ;
+
+  }
+
+  .wrapper-1 .input-box{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+  }
+  .input-box input{
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 213, 255, 0.507);
+    outline: none;
+    border: 2px solid rgba(13, 183, 222, 0.2);
+    border-radius: 10px;
+    font-size: 16px;
+    color: #ffffff;
+    padding: 20px 45px 20px 20px;
+  }
+
+  .input-box-1 input{
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 213, 255, 0.507);
+    outline: none;
+    border: 2px solid rgba(13, 183, 222, 0.2);
+    border-radius: 10px;
+    font-size: 16px;
+    color: #ffffff;
+    padding: 20px 45px 20px 20px;
+  }
+  .input-box input::placeholder{
+    color: #faefef;
+  }
+
+  .input-box-2 input, .input-box-2 select {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 213, 255, 0.507);
+    border: 2px solid rgba(13, 183, 222, 0.2);
+    border-radius: 10px;
+    font-size: 16px;
+    color: #ffffff;
+    padding:  10px ;
+     padding-block: 2%;
+     margin: 1%;
+
+  }
+  .input-box-2 input::placeholder{
+    color: #faefef;
+  }
+  .input-box-1 input::placeholder{
+    color: #faefef;
+  }
+  .input-box i{
+    position: absolute;
+    right: 20px;
+    top: 30%;
+    transform: translate(-50%);
+    font-size: 20px;
+
+  }
+
+
+
+
+
+  .wrapper .remember-forgot{
+    display: flex;
+    justify-content: space-between;
+    font-size: 14.5px;
+    margin: -15px 0 15px;
+  }
+
+
+  .remember-forgot label input{
+    accent-color: #ffffff;
+    margin-right: 3px;
+
+  }
+  .remember-forgot a{
+    color:#0911ed;
+    text-decoration: none;
+
+  }
+  .remember-forgot a:hover{
+    text-decoration: underline;
+  }
+  .wrapper .btn{
+    width: 50%;
+    height: 40px;
+    background: rgba(0, 213, 255, 0.507);
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #e4dada;
+    font-weight: 600;
+    border: 2px solid rgba(8, 188, 238, 0.411);
+
+  }
+
+  .wrapper-2 .btn{
+    width: 50%;
+    height: 40px;
+    background: rgba(0, 213, 255, 0.507);
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #e4dada;
+    font-weight: 600;
+    border: 2px solid rgba(8, 188, 238, 0.411);
+
+  }
+
+
+
+.wrapper-1 .btn{
+  width: 50%;
+  height: 40px;
+  background: rgba(0, 213, 255, 0.507);
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #e4dada;
+  font-weight: 600;
+  border: 2px solid rgba(8, 188, 238, 0.411);
+  padding: 1%;
+
+}
+
+.wrapper-2 .btn{
+  width: 50%;
+  height: 40px;
+  background: rgba(0, 213, 255, 0.507);
+  outline: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #e4dada;
+  font-weight: 600;
+  border: 2px solid rgba(8, 188, 238, 0.411);
+}
+
+
+  .wrapper .register-link{
+    font-size: 14px;
+    text-align: center;
+    margin: 20px 0 15px;
+  }
+
+  .wrapper-1 .register-link{
+    font-size: 14px;
+    text-align: center;
+    margin: 20px 0 15px;
+
+  }
+  .register-link p a{
+    color: #0911ed;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .register-link p a:hover{
+    text-decoration: underline;
+  }
+
+
+  .ppc{
+    color: #0911ed;
+text-align: center;
+  }
+
+  .pp{
+    text-align: center;
+  }
+
+  .wrapper:hover {
+    border-color: #00FFFF; /* Azul florescente */
+    box-shadow: 0 0 40px #00FFFF; /* Sombra azul florescente */
+}
+
+.wrapper-1:hover {
+  border-color: #00FFFF; /* Azul florescente */
+  box-shadow: 0 0 40px #00FFFF; /* Sombra azul florescente */
+}
+.wrapper-2:hover {
+  border-color: #00FFFF; /* Azul florescente */
+  box-shadow: 0 0 40px #00FFFF; /* Sombra azul florescente */
+}
+
+.btn:hover  {
+  border-color: #00FFFF; /* Azul florescente */
+  box-shadow: 0 0 10px #00FFFF;
+
+}
+
+
+   .btn{
+
+    border: 2px solid rgba(8, 188, 238, 0.411);
+   }
+
+
+  .left-side {
+    text-align: center;
+    margin-right: 50px;
+    left: 50%;
+  }
+  .right-side {
+    max-width: 400px;
+    width: 100%;
+  }
